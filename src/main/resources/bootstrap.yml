@@ -1,0 +1,26 @@
+app:
+  port: 8180
+  logging: debug
+
+server:
+  port: ${app.port}
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://eureka:@eureka-service:8761/eureka
+
+spring:
+  application:
+    name: haberes-report-service
+
+logging:
+  level:
+    um.haberes.report: ${app.logging}
+    web: ${app.logging}
+    org:
+      springframework.cloud.config: ${app.logging}
