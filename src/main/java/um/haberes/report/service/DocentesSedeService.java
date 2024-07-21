@@ -10,14 +10,14 @@ import com.lowagie.text.pdf.PdfWriter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
-import um.haberes.report.client.CursoCargoClient;
-import um.haberes.report.client.CursoClient;
-import um.haberes.report.client.FacultadClient;
-import um.haberes.report.client.GeograficaClient;
-import um.haberes.report.kotlin.dto.CursoCargoDto;
-import um.haberes.report.kotlin.dto.CursoDto;
-import um.haberes.report.kotlin.dto.FacultadDto;
-import um.haberes.report.kotlin.dto.GeograficaDto;
+import um.haberes.report.client.haberes.core.*;
+import um.haberes.report.client.tesoreria.core.CursoCargoContratadoClient;
+import um.haberes.report.client.tesoreria.core.PersonaClient;
+import um.haberes.report.kotlin.dto.haberes.core.CursoCargoDto;
+import um.haberes.report.kotlin.dto.haberes.core.CursoDto;
+import um.haberes.report.kotlin.dto.haberes.core.FacultadDto;
+import um.haberes.report.kotlin.dto.haberes.core.GeograficaDto;
+import um.haberes.report.kotlin.dto.tesoreria.core.CursoCargoContratadoDto;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -31,16 +31,28 @@ public class DocentesSedeService {
     private final GeograficaClient geograficaClient;
     private final CursoClient cursoClient;
     private final CursoCargoClient cursoCargoClient;
+    private final CursoCargoContratadoClient cursoCargoContratadoClient;
+    private final CargoTipoClient cargoTipoClient;
+    private final DesignacionTipoClient designacionTipoClient;
+
+    // tesoreria-core-service/persona
+    private final PersonaClient personaClient;
 
     private FacultadDto facultad;
     private GeograficaDto geografica;
 
-    public DocentesSedeService(Environment environment, FacultadClient facultadClient, GeograficaClient geograficaClient, CursoClient cursoClient, CursoCargoClient cursoCargoClient) {
+    public DocentesSedeService(Environment environment, FacultadClient facultadClient, GeograficaClient geograficaClient, CursoClient cursoClient,
+                               CursoCargoClient cursoCargoClient, CursoCargoContratadoClient cursoCargoContratadoClient, CargoTipoClient cargoTipoClient,
+                               DesignacionTipoClient designacionTipoClient, PersonaClient personaClient) {
         this.environment = environment;
         this.facultadClient = facultadClient;
         this.geograficaClient = geograficaClient;
         this.cursoClient = cursoClient;
         this.cursoCargoClient = cursoCargoClient;
+        this.cursoCargoContratadoClient = cursoCargoContratadoClient;
+        this.cargoTipoClient = cargoTipoClient;
+        this.designacionTipoClient = designacionTipoClient;
+        this.personaClient = personaClient;
     }
 
     public String generate(Integer facultadId, Integer geograficaId, Integer anho, Integer mes) {
@@ -167,6 +179,52 @@ public class DocentesSedeService {
 
             paragraph = new Paragraph();
             paragraph.add(new Phrase(desarraigo, new Font(Font.HELVETICA, 8, Font.BOLD)));
+            cell = new PdfPCell(paragraph);
+            cell.setBorder(Rectangle.NO_BORDER);
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            detailTable.addCell(cell);
+        }
+
+        // Datos de los contratados
+        for (CursoCargoContratadoDto cursoCargoContratado : cursoCargoContratadoClient.findAllByCurso(curso.getCursoId(), anho, mes)) {
+            try {
+                log.debug("CursoCargoContratado -> {}", JsonMapper.builder().findAndAddModules().build().writerWithDefaultPrettyPrinter().writeValueAsString(cursoCargoContratado));
+            } catch (JsonProcessingException e) {
+                log.debug("cursoCargoContratado -> null");
+            }
+            var cargoTipo = cargoTipoClient.findByCargoTipoId(cursoCargoContratado.getCargoTipoId());
+            paragraph = new Paragraph();
+            paragraph.add(new Phrase(cargoTipo.getNombre(), new Font(Font.HELVETICA, 8)));
+            cell = new PdfPCell(paragraph);
+            cell.setBorder(Rectangle.NO_BORDER);
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            detailTable.addCell(cell);
+
+            var persona = personaClient.findByUnique(cursoCargoContratado.getContratadoPersona().getPersonaId(), cursoCargoContratado.getContratadoPersona().getDocumentoId());
+            paragraph = new Paragraph();
+            paragraph.add(new Phrase(persona.getApellidoNombre(), new Font(Font.HELVETICA, 8, Font.BOLD)));
+            cell = new PdfPCell(paragraph);
+            cell.setBorder(Rectangle.NO_BORDER);
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            detailTable.addCell(cell);
+
+            paragraph = new Paragraph();
+            paragraph.add(new Phrase("Contratado", new Font(Font.HELVETICA, 8)));
+            cell = new PdfPCell(paragraph);
+            cell.setBorder(Rectangle.NO_BORDER);
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            detailTable.addCell(cell);
+
+            paragraph = new Paragraph();
+            paragraph.add(new Phrase(cursoCargoContratado.getHorasSemanales().toString(), new Font(Font.HELVETICA, 8)));
+            cell = new PdfPCell(paragraph);
+            cell.setBorder(Rectangle.NO_BORDER);
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            detailTable.addCell(cell);
+
+            // Desarraigo
+            paragraph = new Paragraph();
+            paragraph.add(new Phrase("", new Font(Font.HELVETICA, 8, Font.BOLD)));
             cell = new PdfPCell(paragraph);
             cell.setBorder(Rectangle.NO_BORDER);
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);

@@ -10,12 +10,12 @@ import com.lowagie.text.pdf.PdfWriter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
-import um.haberes.report.client.CursoCargoNovedadClient;
-import um.haberes.report.client.FacultadClient;
-import um.haberes.report.client.GeograficaClient;
-import um.haberes.report.kotlin.dto.CursoCargoNovedadDto;
-import um.haberes.report.kotlin.dto.FacultadDto;
-import um.haberes.report.kotlin.dto.GeograficaDto;
+import um.haberes.report.client.haberes.core.CursoCargoNovedadClient;
+import um.haberes.report.client.haberes.core.FacultadClient;
+import um.haberes.report.client.haberes.core.GeograficaClient;
+import um.haberes.report.kotlin.dto.haberes.core.CursoCargoNovedadDto;
+import um.haberes.report.kotlin.dto.haberes.core.FacultadDto;
+import um.haberes.report.kotlin.dto.haberes.core.GeograficaDto;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
