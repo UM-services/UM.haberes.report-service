@@ -27,19 +27,16 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Build with Maven
-        run: mvn clean install -DskipTests
+        run: mvn clean verify install -DskipTests
 
-      - name: Build & push Docker image
+      - uses: mr-smithers-excellent/docker-build-push@v6
+        name: Build & push Docker image
         env:
-          VERSION: '2024.07.22+build335'
-          GITHUB_SHA_SHORT: $(git rev-parse --short ${GITHUB_SHA})
-          BRANCH_NAME: ${GITHUB_REF#refs/heads/}
-        run: |
-          docker build -f Dockerfile \
-            -t docker.io/dqmdz/um.haberes.report-service:${VERSION} \
-            -t docker.io/dqmdz/um.haberes.report-service:latest \
-            -t docker.io/dqmdz/um.haberes.report-service:${BRANCH_NAME}.${GITHUB_SHA_SHORT} .
-          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-          docker push docker.io/dqmdz/um.haberes.report-service:${VERSION}
-          docker push docker.io/dqmdz/um.haberes.report-service:latest
-          docker push docker.io/dqmdz/um.haberes.report-service:${BRANCH_NAME}.${GITHUB_SHA_SHORT}
+          VERSION: 'v2024.07.22+build336'
+        with:
+          image: dqmdz/um.haberes.core-service
+          tags: ${VERSION}, latest, "${GITHUB_REF#refs/heads/}.$(git rev-parse --short ${GITHUB_SHA})"
+          registry: docker.io
+          dockerfile: Dockerfile
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
