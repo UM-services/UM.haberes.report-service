@@ -34,7 +34,7 @@ jobs:
         env:
           VERSION: 3.2.3
         with:
-          image: dqmdz/um.tesoreria.report-service
+          image: dqmdz/um.haberes.report-service
           tags: ${VERSION}, latest, "${GITHUB_REF#refs/heads/}.$(git rev-parse --short ${GITHUB_SHA})"
           registry: docker.io
           dockerfile: Dockerfile
