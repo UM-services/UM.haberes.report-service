@@ -3,6 +3,7 @@
  */
 package um.haberes.report.controller;
 
+import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
@@ -51,10 +52,10 @@ public class BonoController {
                 ipAddress), "bonos.pdf");
     }
 
-//    @GetMapping("/sendBono/{legajoId}/{anho}/{mes}/{legajoIdSolicitud}/{ipAddress}")
-//    public String sendBono(@PathVariable Long legajoId, @PathVariable Integer anho, @PathVariable Integer mes,
-//                           @PathVariable Long legajoIdSolicitud, @PathVariable String ipAddress) throws MessagingException {
-//        return service.sendBono(legajoId, anho, mes, legajoIdSolicitud, ipAddress);
-//    }
+    @GetMapping("/sendBono/{legajoId}/{anho}/{mes}/{legajoIdSolicitud}/{ipAddress}")
+    public String sendBono(@PathVariable Long legajoId, @PathVariable Integer anho, @PathVariable Integer mes,
+                           @PathVariable Long legajoIdSolicitud, @PathVariable String ipAddress) throws MessagingException {
+        return service.sendBono(legajoId, anho, mes, legajoIdSolicitud, ipAddress);
+    }
 
 }

@@ -5,8 +5,13 @@ package um.haberes.report.service;
 
 import com.lowagie.text.*;
 import com.lowagie.text.pdf.*;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.env.Environment;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import um.haberes.report.client.haberes.core.*;
 import um.haberes.report.kotlin.dto.haberes.core.*;
@@ -57,13 +62,17 @@ public class BonoService {
     private final CodigoGrupoClient codigoGrupoClient;
     private final LetraClient letraClient;
     private final BonoImpresionClient bonoImpresionClient;
+    private final JavaMailSender javaMailSender;
+    private final ContactoClient contactoClient;
+    private final LegajoControlClient legajoControlClient;
 
     public BonoService(Environment environment, PersonaClient personaClient, FacultadClient facultadClient, CursoCargoClient cursoCargoClient,
                        ControlClient controlClient, LiquidacionClient liquidacionClient, AntiguedadClient antiguedadClient,
                        DesignacionToolClient designacionToolClient, CargoLiquidacionClient cargoLiquidacionClient,
                        CargoClaseDetalleClient cargoClaseDetalleClient, LegajoBancoClient legajoBancoClient, DependenciaClient dependenciaClient,
                        ItemClient itemClient, LiquidacionEtecClient liquidacionEtecClient, LiquidacionAdicionalClient liquidacionAdicionalClient,
-                       CodigoClient codigoClient, CodigoGrupoClient codigoGrupoClient, LetraClient letraClient, BonoImpresionClient bonoImpresionClient) {
+                       CodigoClient codigoClient, CodigoGrupoClient codigoGrupoClient, LetraClient letraClient, BonoImpresionClient bonoImpresionClient,
+                       JavaMailSender javaMailSender, ContactoClient contactoClient, LegajoControlClient legajoControlClient) {
         this.environment = environment;
         this.personaClient = personaClient;
         this.facultadClient = facultadClient;
@@ -83,6 +92,9 @@ public class BonoService {
         this.codigoGrupoClient = codigoGrupoClient;
         this.letraClient = letraClient;
         this.bonoImpresionClient = bonoImpresionClient;
+        this.javaMailSender = javaMailSender;
+        this.contactoClient = contactoClient;
+        this.legajoControlClient = legajoControlClient;
     }
 
     public String generatePdfDependencia(Integer anho, Integer mes, Integer dependenciaId, String salida,
@@ -1297,73 +1309,73 @@ public class BonoService {
         return filename;
     }
 
-//    public String sendBono(Long legajoId, Integer anho, Integer mes, Long legajoIdSolicitud, String ipAddress)
-//            throws MessagingException {
-//        // Genera PDF
-//        String filenameBono = this.generatePdf(legajoId, anho, mes, legajoIdSolicitud, ipAddress);
-//        log.info("Filename_bono -> " + filenameBono);
-//        if (filenameBono.isEmpty()) {
-//            return "ERROR: Sin Chequera para ENVIAR";
-//        }
-//
-//        String data = "";
-//
-//        Persona persona = personaService.findByLegajoId(legajoId);
-//
-//        Contacto contacto = null;
-//        try {
-//            contacto = contactoService.findByLegajoId(legajoId);
-//        } catch (ContactoException e) {
-//            return "ERROR: Sin correos para ENVIAR";
-//        }
-//
-//        data = "Estimad@ " + persona.getApellidoNombre() + ": " + (char) 10;
-//        data = data + (char) 10;
-//        data = data + "Le enviamos como archivo adjunto su bono de sueldo." + (char) 10;
-//        data = data + (char) 10;
-//        data = data + "Atentamente." + (char) 10;
-//        data = data + (char) 10;
-//        data = data + "Universidad de Mendoza" + (char) 10;
-//        data = data + (char) 10;
-//        data = data + (char) 10
-//                + "Por favor no responda este mail, fue generado automáticamente. Su respuesta no será leída."
-//                + (char) 10;
-//
-//        // Envia correo
-//        MimeMessage message = javaMailSender.createMimeMessage();
-//        MimeMessageHelper helper = new MimeMessageHelper(message, true);
-//        List<String> addresses = new ArrayList<String>();
-//
-//        if (!contacto.getMailInstitucional().isEmpty())
-//            addresses.add(contacto.getMailInstitucional());
-//
-//        try {
-//            helper.setTo(addresses.toArray(new String[addresses.size()]));
-//            helper.setText(data);
-//            helper.setReplyTo("no-reply@um.edu.ar");
-//            helper.setSubject("Envío Automático de Bono de Sueldo -> " + filenameBono);
-//
-//            FileSystemResource fileBono = new FileSystemResource(filenameBono);
-//            helper.addAttachment(filenameBono, fileBono);
-//
-//        } catch (MessagingException e) {
-//            e.printStackTrace();
-//            return "ERROR: No pudo ENVIARSE";
-//        }
-//
-//        javaMailSender.send(message);
-//
-//        LegajoControl legajoControl = null;
-//        try {
-//            legajoControl = legajoControlService.findByUnique(legajoId, anho, mes);
-//            legajoControl.setBonoEnviado((byte) 1);
-//            legajoControl = legajoControlService.update(legajoControl, legajoControl.getLegajoControlId());
-//        } catch (LegajoControlException e) {
-//            legajoControl = new LegajoControl(null, legajoId, anho, mes, (byte) 0, (byte) 0, (byte) 1, persona);
-//            legajoControl = legajoControlService.add(legajoControl);
-//        }
-//
-//        return "Envío de Correo Ok!!";
-//    }
+    public String sendBono(Long legajoId, Integer anho, Integer mes, Long legajoIdSolicitud, String ipAddress)
+            throws MessagingException {
+        // Genera PDF
+        String filenameBono = this.generatePdf(legajoId, anho, mes, legajoIdSolicitud, ipAddress);
+        log.info("Filename_bono -> " + filenameBono);
+        if (filenameBono.isEmpty()) {
+            return "ERROR: Sin Chequera para ENVIAR";
+        }
+
+        String data = "";
+
+        PersonaDto persona = personaClient.findByLegajoId(legajoId);
+
+        ContactoDto contacto = null;
+        try {
+            contacto = contactoClient.findByLegajoId(legajoId);
+        } catch (Exception e) {
+            return "ERROR: Sin correos para ENVIAR";
+        }
+
+        data = "Estimad@ " + persona.getApellidoNombre() + ": " + (char) 10;
+        data = data + (char) 10;
+        data = data + "Le enviamos como archivo adjunto su bono de sueldo." + (char) 10;
+        data = data + (char) 10;
+        data = data + "Atentamente." + (char) 10;
+        data = data + (char) 10;
+        data = data + "Universidad de Mendoza" + (char) 10;
+        data = data + (char) 10;
+        data = data + (char) 10
+                + "Por favor no responda este mail, fue generado automáticamente. Su respuesta no será leída."
+                + (char) 10;
+
+        // Envia correo
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+        List<String> addresses = new ArrayList<String>();
+
+        if (!contacto.getMailInstitucional().isEmpty())
+            addresses.add(contacto.getMailInstitucional());
+
+        try {
+            helper.setTo(addresses.toArray(new String[addresses.size()]));
+            helper.setText(data);
+            helper.setReplyTo("no-reply@um.edu.ar");
+            helper.setSubject("Envío Automático de Bono de Sueldo -> " + filenameBono);
+
+            FileSystemResource fileBono = new FileSystemResource(filenameBono);
+            helper.addAttachment(filenameBono, fileBono);
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            return "ERROR: No pudo ENVIARSE";
+        }
+
+        javaMailSender.send(message);
+
+        LegajoControlDto legajoControl = null;
+        try {
+            legajoControl = legajoControlClient.findByUnique(legajoId, anho, mes);
+            legajoControl.setBonoEnviado((byte) 1);
+            legajoControl = legajoControlClient.update(legajoControl, legajoControl.getLegajoControlId());
+        } catch (Exception e) {
+            legajoControl = new LegajoControlDto(null, legajoId, anho, mes, (byte) 0, (byte) 0, (byte) 1, persona);
+            legajoControl = legajoControlClient.add(legajoControl);
+        }
+
+        return "Envío de Correo Ok!!";
+    }
 
 }
