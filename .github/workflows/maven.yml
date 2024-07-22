@@ -32,9 +32,9 @@ jobs:
       - uses: mr-smithers-excellent/docker-build-push@v6
         name: Build & push Docker image
         env:
-          VERSION: 'v2024.07.22-build337'
+          VERSION: 'v2024.07.22-build338'
         with:
-          image: dqmdz/um.haberes.core-service
+          image: dqmdz/um.haberes.report-service
           tags: ${VERSION}, latest, "${GITHUB_REF#refs/heads/}.$(git rev-parse --short ${GITHUB_SHA})"
           registry: docker.io
           dockerfile: Dockerfile
