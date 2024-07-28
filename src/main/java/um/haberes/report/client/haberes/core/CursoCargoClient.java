@@ -34,6 +34,9 @@ public interface CursoCargoClient {
     List<CursoCargoDto> findAllByCursoAny(@PathVariable Long cursoId);
 
     @GetMapping("/periodoany/{anho}/{mes}")
+    List<CursoCargoDto> findAnyByPeriodo(@PathVariable Integer anho, @PathVariable Integer mes);
+
+    @GetMapping("/periodo/{anho}/{mes}")
     List<CursoCargoDto> findAllByPeriodo(@PathVariable Integer anho, @PathVariable Integer mes);
 
     @GetMapping("/{cursoCargoId}")
