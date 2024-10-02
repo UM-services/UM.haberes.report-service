@@ -2,8 +2,8 @@ app:
   port: ${APP_PORT:8180}
   logging: debug
   mail:
-    username: sueldos@um.edu.ar
-    password: Daniel22
+    username: uid
+    password: pwd
 
 server:
   port: ${app.port}
