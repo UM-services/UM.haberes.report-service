@@ -15,15 +15,15 @@ import java.io.FileNotFoundException;
 @RequestMapping("/api/haberes/report/novedades")
 public class NovedadesController {
 
-    private final NovedadesDocentesService novedadesDocentesService;
+    private final NovedadesDocentesService service;
 
-    public NovedadesController(NovedadesDocentesService novedadesService) {
-        this.novedadesDocentesService = novedadesService;
+    public NovedadesController(NovedadesDocentesService service) {
+        this.service = service;
     }
 
     @GetMapping("/novedadesDocentes/{facultadId}/{anho}/{mes}")
     public ResponseEntity<Resource> generateNovedadesDocentes(@PathVariable Integer facultadId, @PathVariable Integer anho, @PathVariable Integer mes) throws FileNotFoundException {
-        return Tool.generateFile(novedadesDocentesService.generate(facultadId, anho, mes), "novedadesDocentes.pdf");
+        return Tool.generateFile(service.generate(facultadId, anho, mes), "novedadesDocentes.pdf");
     }
 
 }
