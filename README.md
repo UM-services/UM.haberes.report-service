@@ -26,8 +26,8 @@ Servicio de generación y gestión de reportes que forma parte de la arquitectur
 
 ## Documentación
 
-- [Documentación del Proyecto](https://um-services.github.io/um.haberes.report-service)
-- [Wiki del Proyecto](https://github.com/UM-services/um.haberes.report-service/wiki)
+- [Documentación del Proyecto](https://um-services.github.io/UM.haberes.report-service)
+- [Wiki del Proyecto](https://github.com/UM-services/UM.haberes.report-service/wiki)
 
 ## Características Principales
 
