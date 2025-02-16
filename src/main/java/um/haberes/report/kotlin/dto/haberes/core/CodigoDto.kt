@@ -11,6 +11,6 @@ data class CodigoDto(
     var afipConceptoSueldoIdPrimerSemestre: Long? = null,
     var afipConceptoSueldoIdSegundoSemestre: Long? = null,
     var afipConceptoSueldoPrimerSemestre: AfipConceptoSueldoDto? = null,
-    var afipConceptoSueldoSegundoSemestre: AfipConceptoSueldoDto? = null
-
-)
+    var afipConceptoSueldoSegundoSemestre: AfipConceptoSueldoDto? = null,
+    ) {
+}
