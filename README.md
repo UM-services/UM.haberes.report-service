@@ -10,7 +10,7 @@ Servicio de generación y gestión de reportes que forma parte de la arquitectur
 
 - Java 21
 - Kotlin 2.1.10
-- Spring Boot 3.4.2
+- Spring Boot 3.4.3
 - Spring Cloud 2024.0.0
 - Maven
 
@@ -19,6 +19,7 @@ Servicio de generación y gestión de reportes que forma parte de la arquitectur
 - Spring Cloud Netflix Eureka Client
 - Spring Cloud OpenFeign
 - Spring Boot Actuator
+- Spring Boot Validation
 - OpenPDF 2.0.3
 - Apache POI 5.4.0
 - Caffeine Cache
