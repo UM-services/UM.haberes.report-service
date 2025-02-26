@@ -612,7 +612,7 @@ public class BonoService {
 
             //////////////
             paragraph.add(new Phrase("              Aporte Jubilatorio: ", new Font(Font.HELVETICA, 8)));
-            paragraph.add(new Phrase(control.getAporteJubilatorio(), new Font(Font.HELVETICA, 9, Font.BOLD)));
+            paragraph.add(new Phrase(control.getAporteJubilatorio(), new Font(Font.HELVETICA, 8)));
             //////////////
 
             paragraph.add(new Phrase("              Fecha Pago: ", new Font(Font.HELVETICA, 8)));
