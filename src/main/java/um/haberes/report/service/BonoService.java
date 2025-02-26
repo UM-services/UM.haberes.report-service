@@ -25,10 +25,8 @@ import java.text.DecimalFormat;
 import java.text.MessageFormat;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -194,7 +192,7 @@ public class BonoService {
             document.add(paragraph);
 
             paragraph = new Paragraph(new Phrase("Legajo: ", new Font(Font.HELVETICA, 8)));
-            paragraph.add(new Phrase(persona.getLegajoId().toString(), new Font(Font.HELVETICA, 9, Font.BOLD)));
+            paragraph.add(new Phrase(Objects.requireNonNull(persona.getLegajoId()).toString(), new Font(Font.HELVETICA, 9, Font.BOLD)));
             paragraph.add(new Phrase("         Antigüedad: ", new Font(Font.HELVETICA, 8)));
             paragraph.add(new Phrase(MessageFormat.format("{0}.{1}", mesesAntiguedad / 12, mesesAntiguedad % 12),
                     new Font(Font.HELVETICA, 9, Font.BOLD)));
@@ -237,12 +235,12 @@ public class BonoService {
                 cell.setHorizontalAlignment(Element.ALIGN_CENTER);
                 tableCurso.addCell(cell);
                 for (CursoCargoDto cursoCargo : cursos) {
-                    cell = new PdfPCell(new Paragraph(cursoCargo.getCargoTipo().getNombre(),
+                    cell = new PdfPCell(new Paragraph(Objects.requireNonNull(cursoCargo.getCargoTipo()).getNombre(),
                             new Font(Font.HELVETICA, 8, Font.BOLD)));
                     cell.setBorder(Rectangle.NO_BORDER);
                     cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
                     tableCurso.addCell(cell);
-                    cell = new PdfPCell(new Paragraph(cursoCargo.getCurso().getNombre(), new Font(Font.HELVETICA, 8)));
+                    cell = new PdfPCell(new Paragraph(Objects.requireNonNull(cursoCargo.getCurso()).getNombre(), new Font(Font.HELVETICA, 8)));
                     cell.setBorder(Rectangle.NO_BORDER);
                     cell.setHorizontalAlignment(Element.ALIGN_LEFT);
                     tableCurso.addCell(cell);
@@ -316,13 +314,13 @@ public class BonoService {
                     tableCargo = new PdfPTable(columnCargo);
                     tableCargo.setWidthPercentage(100);
                     tableCargo.setHorizontalAlignment(Element.ALIGN_CENTER);
-                    cell = new PdfPCell(new Paragraph(cargoLiquidacion.getDependencia().getAcronimo(),
+                    cell = new PdfPCell(new Paragraph(Objects.requireNonNull(cargoLiquidacion.getDependencia()).getAcronimo(),
                             new Font(Font.HELVETICA, 8)));
                     cell.setBorder(Rectangle.NO_BORDER);
                     cell.setHorizontalAlignment(Element.ALIGN_LEFT);
                     tableCargo.addCell(cell);
                     cell = new PdfPCell(
-                            new Paragraph(cargoLiquidacion.getCategoria().getNombre(), new Font(Font.HELVETICA, 8)));
+                            new Paragraph(Objects.requireNonNull(cargoLiquidacion.getCategoria()).getNombre(), new Font(Font.HELVETICA, 8)));
                     cell.setBorder(Rectangle.NO_BORDER);
                     cell.setHorizontalAlignment(Element.ALIGN_LEFT);
                     tableCargo.addCell(cell);
@@ -386,13 +384,13 @@ public class BonoService {
                     tableCargo = new PdfPTable(columnCargo);
                     tableCargo.setWidthPercentage(100);
                     tableCargo.setHorizontalAlignment(Element.ALIGN_CENTER);
-                    cell = new PdfPCell(new Paragraph(cargoLiquidacion.getDependencia().getAcronimo(),
+                    cell = new PdfPCell(new Paragraph(Objects.requireNonNull(cargoLiquidacion.getDependencia()).getAcronimo(),
                             new Font(Font.HELVETICA, 8)));
                     cell.setBorder(Rectangle.NO_BORDER);
                     cell.setHorizontalAlignment(Element.ALIGN_LEFT);
                     tableCargo.addCell(cell);
                     cell = new PdfPCell(
-                            new Paragraph(cargoLiquidacion.getCategoria().getNombre(), new Font(Font.HELVETICA, 8)));
+                            new Paragraph(Objects.requireNonNull(cargoLiquidacion.getCategoria()).getNombre(), new Font(Font.HELVETICA, 8)));
                     cell.setBorder(Rectangle.NO_BORDER);
                     cell.setHorizontalAlignment(Element.ALIGN_LEFT);
                     tableCargo.addCell(cell);
@@ -445,17 +443,17 @@ public class BonoService {
                 cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
                 tableCargo.addCell(cell);
                 for (CargoClaseDetalleDto cargoClaseDetalle : clases) {
-                    cell = new PdfPCell(new Paragraph(cargoClaseDetalle.getDependencia().getAcronimo(),
+                    cell = new PdfPCell(new Paragraph(Objects.requireNonNull(cargoClaseDetalle.getDependencia()).getAcronimo(),
                             new Font(Font.HELVETICA, 8)));
                     cell.setBorder(Rectangle.NO_BORDER);
                     cell.setHorizontalAlignment(Element.ALIGN_LEFT);
                     tableCargo.addCell(cell);
                     cell = new PdfPCell(new Paragraph(
                             MessageFormat.format("{0} / {1} / {2} / {3} / {4} {5}",
-                                    cargoClaseDetalle.getCargoClase().getClase().getNombre(),
+                                    Objects.requireNonNull(Objects.requireNonNull(Objects.requireNonNull(cargoClaseDetalle.getCargoClase()).getClase())).getNombre(),
                                     cargoClaseDetalle.getCargoClase().getNombre(),
-                                    cargoClaseDetalle.getCargoClasePeriodo().getDescripcion(),
-                                    cargoClaseDetalle.getCargoClasePeriodo().getGeografica().getNombre(),
+                                    Objects.requireNonNull(cargoClaseDetalle.getCargoClasePeriodo()).getDescripcion(),
+                                    Objects.requireNonNull(cargoClaseDetalle.getCargoClasePeriodo().getGeografica()).getNombre(),
                                     cargoClaseDetalle.getCargoClasePeriodo().getHoras(), "horas"),
                             new Font(Font.HELVETICA, 8)));
                     cell.setBorder(Rectangle.NO_BORDER);
@@ -464,7 +462,7 @@ public class BonoService {
                     cell = new PdfPCell(
                             new Paragraph(new DecimalFormat("#,###.00").format(
                                     cargoClaseDetalle.getValorHora()
-                                            .multiply(new BigDecimal(cargoClaseDetalle.getHoras()))).toString(),
+                                            .multiply(new BigDecimal(cargoClaseDetalle.getHoras()))),
                                     new Font(Font.HELVETICA, 8)));
                     cell.setBorder(Rectangle.NO_BORDER);
                     cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
@@ -579,7 +577,7 @@ public class BonoService {
                     horasETEC = horasETEC.add(cursoCargo.getHorasSemanales());
                 }
                 basicoETEC = basicoETEC.add(horasETEC.multiply(control.getHoraReferenciaEtec())).setScale(2, RoundingMode.HALF_UP);
-                antiguedadETEC = basicoETEC.multiply(indices.get(0)).setScale(2, RoundingMode.HALF_UP);
+                antiguedadETEC = basicoETEC.multiply(indices.getFirst()).setScale(2, RoundingMode.HALF_UP);
                 presentismoETEC = basicoETEC.multiply(porcentajeAntiguedadETEC).setScale(2, RoundingMode.HALF_UP);
                 adicionalETEC = totalETEC.subtract(basicoETEC).subtract(antiguedadETEC).subtract(presentismoETEC).setScale(2, RoundingMode.HALF_UP);
 
@@ -592,7 +590,7 @@ public class BonoService {
                 item = items.get(1);
             }
             paragraph = new Paragraph(new Phrase("Legajo: ", new Font(Font.HELVETICA, 8)));
-            paragraph.add(new Phrase(persona.getLegajoId().toString(), new Font(Font.HELVETICA, 9, Font.BOLD)));
+            paragraph.add(new Phrase(Objects.requireNonNull(persona.getLegajoId()).toString(), new Font(Font.HELVETICA, 9, Font.BOLD)));
             paragraph.add(new Phrase("         Dependencia: ", new Font(Font.HELVETICA, 8)));
             paragraph.add(new Phrase(dependencia.getAcronimo(), new Font(Font.HELVETICA, 9, Font.BOLD)));
             paragraph.add(new Phrase("         Sueldo Básico: ", new Font(Font.HELVETICA, 8)));
@@ -601,7 +599,7 @@ public class BonoService {
             paragraph.add(new Phrase("         Ingreso: ", new Font(Font.HELVETICA, 8)));
             paragraph.add(new Phrase(
                     DateTimeFormatter.ofPattern("dd/MM/yyyy")
-                            .format(persona.getAltaAdministrativa().withOffsetSameInstant(ZoneOffset.UTC)),
+                            .format(Objects.requireNonNull(persona.getAltaAdministrativa()).withOffsetSameInstant(ZoneOffset.UTC)),
                     new Font(Font.HELVETICA, 9, Font.BOLD)));
             paragraph.add(new Phrase("         Antigüedad: ", new Font(Font.HELVETICA, 8)));
             paragraph.add(new Phrase(MessageFormat.format("{0}.{1}", mesesAntiguedad / 12, mesesAntiguedad % 12),
@@ -611,30 +609,38 @@ public class BonoService {
             document.add(paragraph);
             paragraph = new Paragraph(new Phrase("CBU: ", new Font(Font.HELVETICA, 8)));
             paragraph.add(new Phrase(legajoBanco.getCbu(), new Font(Font.HELVETICA, 9, Font.BOLD)));
-            paragraph.add(new Phrase("              Período Liquidado: ", new Font(Font.HELVETICA, 8)));
-            paragraph.add(new Phrase(
-                    DateTimeFormatter.ofPattern("dd/MM/yyyy")
-                            .format(control.getFechaDesde().withOffsetSameInstant(ZoneOffset.UTC)),
-                    new Font(Font.HELVETICA, 9, Font.BOLD)));
-            paragraph.add(new Phrase("-", new Font(Font.HELVETICA, 9, Font.BOLD)));
-            paragraph.add(new Phrase(
-                    DateTimeFormatter.ofPattern("dd/MM/yyyy")
-                            .format(control.getFechaHasta().withOffsetSameInstant(ZoneOffset.UTC)),
-                    new Font(Font.HELVETICA, 9, Font.BOLD)));
+
+            //////////////
+            paragraph.add(new Phrase("              Aporte Jubilatorio: ", new Font(Font.HELVETICA, 8)));
+            paragraph.add(new Phrase(control.getAporteJubilatorio(), new Font(Font.HELVETICA, 9, Font.BOLD)));
+            //////////////
+
             paragraph.add(new Phrase("              Fecha Pago: ", new Font(Font.HELVETICA, 8)));
             paragraph.add(new Phrase(
                     DateTimeFormatter.ofPattern("dd/MM/yyyy")
-                            .format(control.getFechaPago().withOffsetSameInstant(ZoneOffset.UTC)),
+                            .format(Objects.requireNonNull(control.getFechaPago()).withOffsetSameInstant(ZoneOffset.UTC)),
                     new Font(Font.HELVETICA, 9, Font.BOLD)));
             paragraph.setAlignment(Element.ALIGN_CENTER);
             paragraph.setMultipliedLeading(2f);
             document.add(paragraph);
-            paragraph = new Paragraph(new Phrase("Aporte Jub: ", new Font(Font.HELVETICA, 8)));
-            paragraph.add(new Phrase(control.getAporteJubilatorio(), new Font(Font.HELVETICA, 9, Font.BOLD)));
+
+            //////////////
+            paragraph = new Paragraph(new Phrase("              Período Liquidado: ", new Font(Font.HELVETICA, 10)));
+            paragraph.add(new Phrase(
+                    DateTimeFormatter.ofPattern("dd/MM/yyyy")
+                            .format(Objects.requireNonNull(control.getFechaDesde()).withOffsetSameInstant(ZoneOffset.UTC)),
+                    new Font(Font.HELVETICA, 11, Font.BOLD)));
+            paragraph.add(new Phrase("-", new Font(Font.HELVETICA, 11, Font.BOLD)));
+            paragraph.add(new Phrase(
+                    DateTimeFormatter.ofPattern("dd/MM/yyyy")
+                            .format(Objects.requireNonNull(control.getFechaHasta()).withOffsetSameInstant(ZoneOffset.UTC)),
+                    new Font(Font.HELVETICA, 11, Font.BOLD)));
+            //////////////
+
             paragraph.add(new Phrase("              Fecha Depósito: ", new Font(Font.HELVETICA, 8)));
             paragraph.add(new Phrase(
                     DateTimeFormatter.ofPattern("dd/MM/yyyy")
-                            .format(control.getFechaDeposito().withOffsetSameInstant(ZoneOffset.UTC)),
+                            .format(Objects.requireNonNull(control.getFechaDeposito()).withOffsetSameInstant(ZoneOffset.UTC)),
                     new Font(Font.HELVETICA, 9, Font.BOLD)));
             paragraph.setAlignment(Element.ALIGN_CENTER);
             paragraph.setMultipliedLeading(2f);
@@ -754,13 +760,13 @@ public class BonoService {
                     tableCargo = new PdfPTable(columnCargo);
                     tableCargo.setWidthPercentage(100);
                     tableCargo.setHorizontalAlignment(Element.ALIGN_CENTER);
-                    cell = new PdfPCell(new Paragraph(cargoLiquidacion.getDependencia().getAcronimo(),
+                    cell = new PdfPCell(new Paragraph(Objects.requireNonNull(cargoLiquidacion.getDependencia()).getAcronimo(),
                             new Font(Font.HELVETICA, 8)));
                     cell.setBorder(Rectangle.NO_BORDER);
                     cell.setHorizontalAlignment(Element.ALIGN_LEFT);
                     tableCargo.addCell(cell);
                     cell = new PdfPCell(
-                            new Paragraph(cargoLiquidacion.getCategoria().getNombre(), new Font(Font.HELVETICA, 8)));
+                            new Paragraph(Objects.requireNonNull(cargoLiquidacion.getCategoria()).getNombre(), new Font(Font.HELVETICA, 8)));
                     cell.setBorder(Rectangle.NO_BORDER);
                     cell.setHorizontalAlignment(Element.ALIGN_LEFT);
                     tableCargo.addCell(cell);
@@ -861,13 +867,13 @@ public class BonoService {
                     tableCargo = new PdfPTable(columnCargo);
                     tableCargo.setWidthPercentage(100);
                     tableCargo.setHorizontalAlignment(Element.ALIGN_CENTER);
-                    cell = new PdfPCell(new Paragraph(cargoLiquidacion.getDependencia().getAcronimo(),
+                    cell = new PdfPCell(new Paragraph(Objects.requireNonNull(cargoLiquidacion.getDependencia()).getAcronimo(),
                             new Font(Font.HELVETICA, 8)));
                     cell.setBorder(Rectangle.NO_BORDER);
                     cell.setHorizontalAlignment(Element.ALIGN_LEFT);
                     tableCargo.addCell(cell);
                     cell = new PdfPCell(
-                            new Paragraph(cargoLiquidacion.getCategoria().getNombre(), new Font(Font.HELVETICA, 8)));
+                            new Paragraph(Objects.requireNonNull(cargoLiquidacion.getCategoria()).getNombre(), new Font(Font.HELVETICA, 8)));
                     cell.setBorder(Rectangle.NO_BORDER);
                     cell.setHorizontalAlignment(Element.ALIGN_LEFT);
                     tableCargo.addCell(cell);
@@ -920,17 +926,17 @@ public class BonoService {
                 cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
                 tableCargo.addCell(cell);
                 for (CargoClaseDetalleDto cargoClaseDetalle : clases) {
-                    cell = new PdfPCell(new Paragraph(cargoClaseDetalle.getDependencia().getAcronimo(),
+                    cell = new PdfPCell(new Paragraph(Objects.requireNonNull(cargoClaseDetalle.getDependencia()).getAcronimo(),
                             new Font(Font.HELVETICA, 8)));
                     cell.setBorder(Rectangle.NO_BORDER);
                     cell.setHorizontalAlignment(Element.ALIGN_LEFT);
                     tableCargo.addCell(cell);
                     cell = new PdfPCell(new Paragraph(
                             MessageFormat.format("{0} / {1} / {2} / {3} / {4} {5}",
-                                    cargoClaseDetalle.getCargoClase().getClase().getNombre(),
+                                    Objects.requireNonNull(Objects.requireNonNull(cargoClaseDetalle.getCargoClase().getClase())).getNombre(),
                                     cargoClaseDetalle.getCargoClase().getNombre(),
-                                    cargoClaseDetalle.getCargoClasePeriodo().getDescripcion(),
-                                    cargoClaseDetalle.getCargoClasePeriodo().getGeografica().getNombre(),
+                                    Objects.requireNonNull(cargoClaseDetalle.getCargoClasePeriodo()).getDescripcion(),
+                                    Objects.requireNonNull(cargoClaseDetalle.getCargoClasePeriodo().getGeografica()).getNombre(),
                                     cargoClaseDetalle.getCargoClasePeriodo().getHoras(), "horas"),
                             new Font(Font.HELVETICA, 8)));
                     cell.setBorder(Rectangle.NO_BORDER);
@@ -939,7 +945,7 @@ public class BonoService {
                     cell = new PdfPCell(
                             new Paragraph(new DecimalFormat("#,###.00").format(
                                     cargoClaseDetalle.getValorHora()
-                                            .multiply(new BigDecimal(cargoClaseDetalle.getHoras()))).toString(),
+                                            .multiply(new BigDecimal(cargoClaseDetalle.getHoras()))),
                                     new Font(Font.HELVETICA, 8)));
                     cell.setBorder(Rectangle.NO_BORDER);
                     cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
@@ -1008,7 +1014,7 @@ public class BonoService {
                     if (item.getCodigoId() == 29 && persona.getDirectivoEtec() == 0) {
                         // basico ETEC
                         cell = new PdfPCell(
-                                new Paragraph(codigoGrupo.getCodigoId().toString(), new Font(Font.HELVETICA, 8)));
+                                new Paragraph(Objects.requireNonNull(codigoGrupo.getCodigoId()).toString(), new Font(Font.HELVETICA, 8)));
                         cell.setBorder(Rectangle.NO_BORDER);
                         cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
                         tableCodigoRemun.addCell(cell);
@@ -1080,12 +1086,12 @@ public class BonoService {
                         count++;
                     } else {
                         cell = new PdfPCell(
-                                new Paragraph(codigoGrupo.getCodigoId().toString(), new Font(Font.HELVETICA, 8)));
+                                new Paragraph(Objects.requireNonNull(codigoGrupo.getCodigoId()).toString(), new Font(Font.HELVETICA, 8)));
                         cell.setBorder(Rectangle.NO_BORDER);
                         cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
                         tableCodigoRemun.addCell(cell);
                         cell = new PdfPCell(
-                                new Paragraph(codigoGrupo.getCodigo().getNombre(), new Font(Font.HELVETICA, 8)));
+                                new Paragraph(Objects.requireNonNull(codigoGrupo.getCodigo()).getNombre(), new Font(Font.HELVETICA, 8)));
                         cell.setBorder(Rectangle.NO_BORDER);
                         cell.setHorizontalAlignment(Element.ALIGN_LEFT);
                         tableCodigoRemun.addCell(cell);
@@ -1155,12 +1161,12 @@ public class BonoService {
                 if (items.containsKey(codigoGrupo.getCodigoId())) {
                     item = items.get(codigoGrupo.getCodigoId());
                     cell = new PdfPCell(
-                            new Paragraph(codigoGrupo.getCodigoId().toString(), new Font(Font.HELVETICA, 8)));
+                            new Paragraph(Objects.requireNonNull(codigoGrupo.getCodigoId()).toString(), new Font(Font.HELVETICA, 8)));
                     cell.setBorder(Rectangle.NO_BORDER);
                     cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
                     tableCodigoDeduc.addCell(cell);
                     cell = new PdfPCell(
-                            new Paragraph(codigoGrupo.getCodigo().getNombre(), new Font(Font.HELVETICA, 8)));
+                            new Paragraph(Objects.requireNonNull(codigoGrupo.getCodigo()).getNombre(), new Font(Font.HELVETICA, 8)));
                     cell.setBorder(Rectangle.NO_BORDER);
                     cell.setHorizontalAlignment(Element.ALIGN_LEFT);
                     tableCodigoDeduc.addCell(cell);
