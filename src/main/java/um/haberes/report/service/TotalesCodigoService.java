@@ -93,7 +93,7 @@ public class TotalesCodigoService {
             codigos = codigos.stream()
                     .filter(Objects::nonNull) // Asegurarse de no tener valores nulos
                     .sorted(Comparator.comparing(CodigoDto::getCodigoId)) // Ordenar por codigoId
-                    .collect(Collectors.toList());
+                    .toList();
 
             Map<Integer, TotalNovedadDto> totalesNovedad = totalNovedadList.stream()
                     .filter(Objects::nonNull)
@@ -113,7 +113,7 @@ public class TotalesCodigoService {
                     totalNovedad = totalesNovedad.get(codigo.getCodigoId()).getTotal();
                     }
                 // Verificar si el totalNovedad es nulo o cero antes de procesarlo
-                if (totalNovedad == null || totalNovedad.compareTo(BigDecimal.ZERO) == 0) {
+                if (totalNovedad.compareTo(BigDecimal.ZERO) == 0) {
                     continue;
                 }
                 if (totalesItem.containsKey(codigo.getCodigoId())) {
