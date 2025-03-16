@@ -20,7 +20,7 @@ public class CursoDocenteController {
         this.service = service;
     }
     @GetMapping("/pdf/{anho}/{mes}")
-    public ResponseEntity<Resource> generateCargosClasePeriodo(@PathVariable Integer anho, @PathVariable Integer mes) throws FileNotFoundException {
+    public ResponseEntity<Resource> generateCursoDocente(@PathVariable Integer anho, @PathVariable Integer mes) throws FileNotFoundException {
         return Tool.generateFile(service.generate(anho, mes), "curso-docente.pdf");
     }
 }
