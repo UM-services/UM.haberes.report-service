@@ -111,7 +111,7 @@ public class TotalesCodigoService {
                 var totalItem = BigDecimal.ZERO;
                 if (totalesNovedad.containsKey(codigo.getCodigoId())) {
                     totalNovedad = totalesNovedad.get(codigo.getCodigoId()).getTotal();
-                    }
+                }
                 // Verificar si el totalNovedad es nulo o cero antes de procesarlo
                 if (totalNovedad == null || totalNovedad.compareTo(BigDecimal.ZERO) == 0) {
                     continue;
@@ -296,7 +296,4 @@ public class TotalesCodigoService {
             }
         }
     }
-
-
-
 }
