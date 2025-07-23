@@ -127,6 +127,7 @@ public class AnotadorAutorizadosRechazadosService {
         return "Unknown";
     }
 
+    @Slf4j
     static class HeaderFooter extends PdfPageEventHelper {
         private final Integer anho;
         private final Integer mes;

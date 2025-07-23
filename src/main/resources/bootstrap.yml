@@ -1,6 +1,9 @@
 app:
   port: ${APP_PORT:8180}
   logging: debug
+  consul:
+    host: consul-service
+    port: 8500
   mail:
     username: uid
     password: pwd
@@ -8,18 +11,16 @@ app:
 server:
   port: ${app.port}
 
-eureka:
-  instance:
-    prefer-ip-address: true
-  client:
-    fetch-registry: true
-    register-with-eureka: true
-    service-url:
-      defaultZone: http://eureka:@eureka-service:8761/eureka
-
 spring:
   application:
     name: haberes-report-service
+  cloud:
+    consul:
+      host: ${app.consul.host}
+      port: ${app.consul.port}
+      discovery:
+        prefer-ip-address: true
+        tags: haberes,report
   mail:
     host: smtp.gmail.com
     port: 587

@@ -271,6 +271,7 @@ public class DocentesSedeService {
         document.add(Chunk.NEWLINE);
     }
 
+    @Slf4j
     static class HeaderFooter extends PdfPageEventHelper {
         private final FacultadDto facultad;
         private final GeograficaDto geografica;
