@@ -276,6 +276,7 @@ public class NovedadesDocentesService {
 //        document.add(Chunk.NEWLINE);
     }
 
+    @Slf4j
     static class HeaderFooter extends PdfPageEventHelper {
         private final Integer anho;
         private final Integer mes;

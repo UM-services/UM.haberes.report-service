@@ -204,6 +204,7 @@ public class TotalesGeneralesService {
         detailTable.addCell(cell);
     }
 
+    @Slf4j
     static class HeaderFooter extends PdfPageEventHelper {
         private final Integer anho;
         private final Integer mes;
