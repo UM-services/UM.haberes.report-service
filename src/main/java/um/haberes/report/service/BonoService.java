@@ -471,13 +471,7 @@ public class BonoService {
                 document.add(tableCargo);
             }
             document.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (BadElementException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (BadElementException | IOException e) {
             e.printStackTrace();
         }
 
@@ -521,7 +515,7 @@ public class BonoService {
             document.open();
 
             Image marca = Image.getInstance("marca_um.png");
-            Image firma = Image.getInstance("firma.png");
+            Image firma = Image.getInstance("firma_new.png");
 
             // Tabla logo y datos UM
             float[] columnHeader = {2, 8};
