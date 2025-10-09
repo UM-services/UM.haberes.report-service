@@ -1,10 +1,11 @@
 package um.haberes.report.service;
 
-import com.lowagie.text.*;
-import com.lowagie.text.pdf.PdfPCell;
-import com.lowagie.text.pdf.PdfPTable;
-import com.lowagie.text.pdf.PdfPageEventHelper;
-import com.lowagie.text.pdf.PdfWriter;
+import lombok.RequiredArgsConstructor;
+import org.openpdf.text.*;
+import org.openpdf.text.pdf.PdfPCell;
+import org.openpdf.text.pdf.PdfPTable;
+import org.openpdf.text.pdf.PdfPageEventHelper;
+import org.openpdf.text.pdf.PdfWriter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class HistoricoAsignacionCargosService {
     private final Environment environment;
     private final CategoriaClient categoriaClient;
@@ -30,17 +32,6 @@ public class HistoricoAsignacionCargosService {
     private final GeograficaClient geograficaClient;
     private final PersonaClient personaClient;
     private final FacultadClient facultadClient;
-
-    public HistoricoAsignacionCargosService(Environment environment, CategoriaClient categoriaClient, CargoClient cargoClient, DependenciaClient dependenciaClient, GeograficaClient geograficaClient, PersonaClient personaClient, FacultadClient facultadClient, LiquidacionClient liquidacionClient) {
-        this.environment = environment;
-        this.categoriaClient = categoriaClient;
-        this.cargoClient = cargoClient;
-        this.dependenciaClient = dependenciaClient;
-        this.geograficaClient = geograficaClient;
-        this.personaClient = personaClient;
-        this.facultadClient = facultadClient;
-        this.liquidacionClient = liquidacionClient;
-    }
 
     public String generate(Integer categoriaId) {
         log.debug("Starting categoriaId {}", categoriaId);

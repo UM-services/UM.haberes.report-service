@@ -1,5 +1,6 @@
 package um.haberes.report.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,12 +14,11 @@ import java.io.FileNotFoundException;
 
 @RestController
 @RequestMapping("/api/haberes/report/comparacionCodigos")
+@RequiredArgsConstructor
 public class ComparacionCodigosController {
+
     private final ComparacionCodigosService service;
 
-    public ComparacionCodigosController(ComparacionCodigosService service) {
-        this.service = service;
-    }
     @GetMapping("/comparacionCodigos/{anho}/{mes}")
     public ResponseEntity<Resource> generateComparacionCodigos(@PathVariable Integer anho, @PathVariable Integer mes) throws FileNotFoundException {
         return Tool.generateFile(service.generate(anho, mes), "comparacion_codigos.pdf");

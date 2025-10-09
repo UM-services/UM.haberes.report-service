@@ -2,12 +2,13 @@ package um.haberes.report.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.json.JsonMapper;
-import com.lowagie.text.*;
-import com.lowagie.text.pdf.PdfPCell;
-import com.lowagie.text.pdf.PdfPTable;
-import com.lowagie.text.pdf.PdfPageEventHelper;
-import com.lowagie.text.pdf.PdfWriter;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.openpdf.text.*;
+import org.openpdf.text.pdf.PdfPCell;
+import org.openpdf.text.pdf.PdfPTable;
+import org.openpdf.text.pdf.PdfPageEventHelper;
+import org.openpdf.text.pdf.PdfWriter;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import um.haberes.report.client.haberes.core.*;
@@ -24,6 +25,7 @@ import java.io.IOException;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class DocentesSedeService {
 
     private final Environment environment;
@@ -40,20 +42,6 @@ public class DocentesSedeService {
 
     private FacultadDto facultad;
     private GeograficaDto geografica;
-
-    public DocentesSedeService(Environment environment, FacultadClient facultadClient, GeograficaClient geograficaClient, CursoClient cursoClient,
-                               CursoCargoClient cursoCargoClient, CursoCargoContratadoClient cursoCargoContratadoClient, CargoTipoClient cargoTipoClient,
-                               DesignacionTipoClient designacionTipoClient, PersonaClient personaClient) {
-        this.environment = environment;
-        this.facultadClient = facultadClient;
-        this.geograficaClient = geograficaClient;
-        this.cursoClient = cursoClient;
-        this.cursoCargoClient = cursoCargoClient;
-        this.cursoCargoContratadoClient = cursoCargoContratadoClient;
-        this.cargoTipoClient = cargoTipoClient;
-        this.designacionTipoClient = designacionTipoClient;
-        this.personaClient = personaClient;
-    }
 
     public String generate(Integer facultadId, Integer geograficaId, Integer anho, Integer mes) {
         String path = environment.getProperty("path.files");

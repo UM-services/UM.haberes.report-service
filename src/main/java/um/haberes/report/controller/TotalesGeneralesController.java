@@ -1,5 +1,6 @@
 package um.haberes.report.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,14 +14,10 @@ import java.io.FileNotFoundException;
 
 @RestController
 @RequestMapping("/api/haberes/report/totalesGenerales")
+@RequiredArgsConstructor
 public class TotalesGeneralesController {
 
     private final TotalesGeneralesService service;
-
-    public TotalesGeneralesController(TotalesGeneralesService service) {
-        this.service = service;
-    }
-
 
     @GetMapping("/totalesGenerales/{anho}/{mes}")
     public ResponseEntity<Resource> generateTotalesGenerales(@PathVariable Integer anho, @PathVariable Integer mes) throws FileNotFoundException {

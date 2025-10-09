@@ -1,5 +1,6 @@
 package um.haberes.report.service;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class SheetService {
 
     private final Environment environment;
@@ -28,17 +30,6 @@ public class SheetService {
     private final CargoTipoClient cargoTipoClient;
     private final CursoCargoClient cursoCargoClient;
     private final PersonaClient personaClient;
-
-    public SheetService(Environment environment, FacultadClient facultadClient, GeograficaClient geograficaClient, CursoClient cursoClient,
-                        CargoTipoClient cargoTipoClient, CursoCargoClient cursoCargoClient, PersonaClient personaClient) {
-        this.environment = environment;
-        this.facultadClient = facultadClient;
-        this.geograficaClient = geograficaClient;
-        this.cursoClient = cursoClient;
-        this.cargoTipoClient = cargoTipoClient;
-        this.cursoCargoClient = cursoCargoClient;
-        this.personaClient = personaClient;
-    }
 
     public String generateCursos(Integer anho, Integer mes) {
         String path = environment.getProperty("path.files");

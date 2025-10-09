@@ -1,10 +1,11 @@
 package um.haberes.report.service;
 
-import com.lowagie.text.*;
-import com.lowagie.text.pdf.PdfPCell;
-import com.lowagie.text.pdf.PdfPTable;
-import com.lowagie.text.pdf.PdfPageEventHelper;
-import com.lowagie.text.pdf.PdfWriter;
+import org.openpdf.text.*;
+import org.openpdf.text.pdf.PdfPCell;
+import org.openpdf.text.pdf.PdfPTable;
+import org.openpdf.text.pdf.PdfPageEventHelper;
+import org.openpdf.text.pdf.PdfWriter;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,6 @@ import um.haberes.report.kotlin.dto.haberes.core.*;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.*;
 import java.util.List;
@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class FusionDocenteService {
 
     private final Environment environment;
@@ -29,15 +30,6 @@ public class FusionDocenteService {
     private final GeograficaClient geograficaClient;
     private final CategoriaClient categoriaClient;
     private final PersonaClient personaClient;
-
-    public FusionDocenteService(Environment environment, CursoFusionClient cursoFusionClient, FacultadClient facultadClient, GeograficaClient geograficaClient, CategoriaClient categoriaClient, PersonaClient personaClient) {
-        this.environment = environment;
-        this.cursoFusionClient = cursoFusionClient;
-        this.facultadClient = facultadClient;
-        this.geograficaClient = geograficaClient;
-        this.categoriaClient = categoriaClient;
-        this.personaClient = personaClient;
-    }
 
     public String generate(Integer anho, Integer mes) {
         String path = environment.getProperty("path.files");

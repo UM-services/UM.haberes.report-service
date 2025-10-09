@@ -1,5 +1,7 @@
 package um.haberes.report.kotlin.dto.haberes.core
 
+import um.haberes.report.util.Jsonifier
+
 data class CodigoDto(
 
     var codigoId: Int? = null,
@@ -13,4 +15,7 @@ data class CodigoDto(
     var afipConceptoSueldoPrimerSemestre: AfipConceptoSueldoDto? = null,
     var afipConceptoSueldoSegundoSemestre: AfipConceptoSueldoDto? = null,
     ) {
+    fun jsonify(): String {
+        return Jsonifier.builder(this).build();
+    }
 }

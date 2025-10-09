@@ -4,7 +4,7 @@
 package um.haberes.report.controller;
 
 import jakarta.mail.MessagingException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,14 +21,10 @@ import java.io.FileNotFoundException;
  */
 @RestController
 @RequestMapping("/api/haberes/report/bono")
+@RequiredArgsConstructor
 public class BonoController {
 
     private final BonoService service;
-
-    @Autowired
-    public BonoController(BonoService service) {
-        this.service = service;
-    }
 
     @GetMapping("/generatePdf/{legajoId}/{anho}/{mes}/{legajoIdSolicitud}/{ipAddress}")
     public ResponseEntity<Resource> generatePdf(@PathVariable Long legajoId, @PathVariable Integer anho,

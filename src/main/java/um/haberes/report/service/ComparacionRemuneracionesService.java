@@ -1,10 +1,11 @@
 package um.haberes.report.service;
 
-import com.lowagie.text.*;
-import com.lowagie.text.pdf.PdfPCell;
-import com.lowagie.text.pdf.PdfPTable;
-import com.lowagie.text.pdf.PdfPageEventHelper;
-import com.lowagie.text.pdf.PdfWriter;
+import lombok.RequiredArgsConstructor;
+import org.openpdf.text.*;
+import org.openpdf.text.pdf.PdfPCell;
+import org.openpdf.text.pdf.PdfPTable;
+import org.openpdf.text.pdf.PdfPageEventHelper;
+import org.openpdf.text.pdf.PdfWriter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
@@ -24,18 +25,12 @@ import java.util.stream.Collectors;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class ComparacionRemuneracionesService {
     private final Environment environment;
     private final LiquidacionClient liquidacionClient;
     private final PersonaClient personaClient;
     private final DependenciaClient dependenciaClient;
-
-    public ComparacionRemuneracionesService(Environment environment, LiquidacionClient liquidacionClient, PersonaClient personaClient, DependenciaClient dependenciaClient) {
-        this.environment = environment;
-        this.liquidacionClient = liquidacionClient;
-        this.personaClient = personaClient;
-        this.dependenciaClient = dependenciaClient;
-    }
 
     public String generate(Integer anho, Integer mes, Integer anho_anterior, Integer mes_anterior) {
         String path = environment.getProperty("path.files");

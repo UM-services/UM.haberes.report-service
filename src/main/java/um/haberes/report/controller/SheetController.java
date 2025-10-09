@@ -1,5 +1,6 @@
 package um.haberes.report.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -17,13 +18,10 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/haberes/report/sheet")
+@RequiredArgsConstructor
 public class SheetController {
 
     private final SheetService service;
-
-    public SheetController(SheetService service) {
-        this.service = service;
-    }
 
     @GetMapping("/generatecursos/{anho}/{mes}")
     public ResponseEntity<Resource> generatecursos(@PathVariable Integer anho, @PathVariable Integer mes)

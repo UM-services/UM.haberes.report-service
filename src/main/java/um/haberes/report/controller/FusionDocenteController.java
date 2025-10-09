@@ -1,5 +1,6 @@
 package um.haberes.report.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,16 +14,14 @@ import java.io.FileNotFoundException;
 
 @RestController
 @RequestMapping("/api/haberes/report/fusionDocente")
-
+@RequiredArgsConstructor
 public class FusionDocenteController {
-    private final FusionDocenteService service;
 
-    public FusionDocenteController(FusionDocenteService service) {
-        this.service = service;
-    }
+    private final FusionDocenteService service;
 
     @GetMapping("/fusionDocente/{anho}/{mes}")
     public ResponseEntity<Resource> generateFusionDocente(@PathVariable Integer anho, @PathVariable Integer mes) throws FileNotFoundException {
         return Tool.generateFile(service.generate(anho, mes), "fusion.docente.pdf");
     }
+
 }

@@ -1,10 +1,11 @@
 package um.haberes.report.service;
 
-import com.lowagie.text.*;
-import com.lowagie.text.pdf.PdfPCell;
-import com.lowagie.text.pdf.PdfPTable;
-import com.lowagie.text.pdf.PdfPageEventHelper;
-import com.lowagie.text.pdf.PdfWriter;
+import lombok.RequiredArgsConstructor;
+import org.openpdf.text.*;
+import org.openpdf.text.pdf.PdfPCell;
+import org.openpdf.text.pdf.PdfPTable;
+import org.openpdf.text.pdf.PdfPageEventHelper;
+import org.openpdf.text.pdf.PdfWriter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class CargosClasePeriodoService {
 
     private final Environment environment;
@@ -30,17 +32,6 @@ public class CargosClasePeriodoService {
     private final GeograficaClient geograficaClient;
     private final CargoClaseClient cargoClaseClient;
     private final ClaseClient claseClient;
-
-    public CargosClasePeriodoService(Environment environment, CargoClaseDetalleClient cargoClaseDetalleClient, CargoClasePeriodoClient cargoClasePeriodoClient, PersonaClient personaClient, FacultadClient facultadClient, GeograficaClient geograficaClient, CargoClaseClient cargoClaseClient, ClaseClient claseClient) {
-        this.environment = environment;
-        this.cargoClaseDetalleClient = cargoClaseDetalleClient;
-        this.cargoClasePeriodoClient = cargoClasePeriodoClient;
-        this.personaClient = personaClient;
-        this.facultadClient = facultadClient;
-        this.geograficaClient = geograficaClient;
-        this.cargoClaseClient = cargoClaseClient;
-        this.claseClient = claseClient;
-    }
 
     public String generate(Integer facultadId, Integer anho, Integer mes) {
         String path = environment.getProperty("path.files");
