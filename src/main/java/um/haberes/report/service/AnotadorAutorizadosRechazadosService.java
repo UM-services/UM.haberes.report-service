@@ -1,11 +1,12 @@
 package um.haberes.report.service;
 
-import com.lowagie.text.*;
-import com.lowagie.text.pdf.PdfPCell;
-import com.lowagie.text.pdf.PdfPTable;
-import com.lowagie.text.pdf.PdfPageEventHelper;
-import com.lowagie.text.pdf.PdfWriter;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.openpdf.text.*;
+import org.openpdf.text.pdf.PdfPCell;
+import org.openpdf.text.pdf.PdfPTable;
+import org.openpdf.text.pdf.PdfPageEventHelper;
+import org.openpdf.text.pdf.PdfWriter;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import um.haberes.report.client.haberes.core.AnotadorClient;
@@ -16,15 +17,11 @@ import java.io.IOException;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class AnotadorAutorizadosRechazadosService {
 
     private final Environment environment;
     private final AnotadorClient anotadorClient;
-
-    public AnotadorAutorizadosRechazadosService(Environment environment, AnotadorClient anotadorClient, AnotadorPendientesService anotadorPendientesService) {
-        this.environment = environment;
-        this.anotadorClient = anotadorClient;
-    }
 
     public String generate(Integer facultadId, Integer anho, Integer mes) {
         String path = environment.getProperty("path.files");

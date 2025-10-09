@@ -2,12 +2,13 @@ package um.haberes.report.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.json.JsonMapper;
-import com.lowagie.text.*;
-import com.lowagie.text.pdf.PdfPCell;
-import com.lowagie.text.pdf.PdfPTable;
-import com.lowagie.text.pdf.PdfPageEventHelper;
-import com.lowagie.text.pdf.PdfWriter;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.openpdf.text.*;
+import org.openpdf.text.pdf.PdfPCell;
+import org.openpdf.text.pdf.PdfPTable;
+import org.openpdf.text.pdf.PdfPageEventHelper;
+import org.openpdf.text.pdf.PdfWriter;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import um.haberes.report.client.haberes.core.CodigoClient;
@@ -27,18 +28,13 @@ import java.util.stream.Collectors;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class ComparacionCodigosService {
+
     private final Environment environment;
     private final CodigoClient codigoClient;
     private final TotalNovedadClient totalNovedadClient;
     private final TotalItemClient totalItemClient;
-
-    public ComparacionCodigosService(CodigoClient codigoClient, TotalNovedadClient totalNovedadClient, Environment environment, TotalItemClient totalItemClient) {
-        this.environment = environment;
-        this.codigoClient = codigoClient;
-        this.totalNovedadClient = totalNovedadClient;
-        this.totalItemClient = totalItemClient;
-    }
 
     public String generate(Integer anho, Integer mes) {
         String path = environment.getProperty("path.files");
@@ -105,7 +101,7 @@ public class ComparacionCodigosService {
                     .collect(Collectors.toMap(TotalItemDto::getCodigoId, total -> total));
 
             for (CodigoDto codigo : codigos) {
-                logCodigo(codigo);
+                log.debug("Codigo -> {}", codigo.jsonify());
                 var totalNovedad = BigDecimal.ZERO;
                 var totalItem = BigDecimal.ZERO;
                 if (totalesNovedad.containsKey(codigo.getCodigoId())) {
@@ -122,14 +118,6 @@ public class ComparacionCodigosService {
 
         } catch (DocumentException | IOException e) {
             log.debug("Error generating report {}", e.getMessage());
-        }
-    }
-
-    private void logCodigo(CodigoDto codigo) {
-        try {
-            log.debug("Codigo {}", JsonMapper.builder().findAndAddModules().build().writerWithDefaultPrettyPrinter().writeValueAsString(codigo));
-        } catch (JsonProcessingException e) {
-            log.debug("Error serializando el codigo {}", e.getMessage());
         }
     }
 

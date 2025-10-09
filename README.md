@@ -8,22 +8,22 @@ Servicio de generación y gestión de reportes que forma parte de la arquitectur
 
 ## Stack Tecnológico
 
-- Java 21
-- Kotlin 2.1.20
-- Spring Boot 3.4.4
-- Spring Cloud 2024.0.1
+- Java 24
+- Kotlin 2.2.20
+- Spring Boot 3.5.6
+- Spring Cloud 2025.0.0
 - Maven 3.8.8+
 
 ### Dependencias Principales
 - Spring Boot Starter Web
-- Spring Cloud Netflix Eureka Client
+- Spring Cloud Starter Consul Discovery
 - Spring Cloud OpenFeign
 - Spring Boot Actuator
 - Spring Boot Validation
 - Spring Boot Mail
-- SpringDoc OpenAPI 2.8.6
-- OpenPDF 2.0.3
-- Apache POI 5.4.0
+- SpringDoc OpenAPI 2.8.10
+- OpenPDF 3.0.0
+- Apache POI 5.4.1
 - Caffeine Cache
 - Lombok
 
@@ -38,7 +38,7 @@ Servicio de generación y gestión de reportes que forma parte de la arquitectur
 - Integración con el sistema de microservicios UM
 - Caché implementado con Caffeine
 - Monitoreo mediante Spring Actuator
-- Registro y descubrimiento de servicios con Eureka
+- Registro y descubrimiento de servicios con Consul
 - Documentación API con OpenAPI/Swagger
 - Envío de correos electrónicos
 - Validación de datos con Spring Validation
@@ -67,20 +67,20 @@ spring:
             required: true
           auth: true
 
-eureka:
-  instance:
-    prefer-ip-address: true
-  client:
-    fetch-registry: true
-    register-with-eureka: true
-    service-url:
-      defaultZone: http://eureka:@eureka-service:8761/eureka
+spring:
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        register: true
+        instance-id: ${spring.application.name}:${random.value}
 ```
 
 ## Desarrollo
 
 ### Requisitos Previos
-- JDK 21
+- JDK 24
 - Maven 3.8.8+
 - IDE con soporte para Kotlin (IntelliJ IDEA recomendado)
 

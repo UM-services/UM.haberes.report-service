@@ -1,10 +1,11 @@
 package um.haberes.report.service;
 
-import com.lowagie.text.*;
-import com.lowagie.text.pdf.PdfPCell;
-import com.lowagie.text.pdf.PdfPTable;
-import com.lowagie.text.pdf.PdfPageEventHelper;
-import com.lowagie.text.pdf.PdfWriter;
+import lombok.RequiredArgsConstructor;
+import org.openpdf.text.*;
+import org.openpdf.text.pdf.PdfPCell;
+import org.openpdf.text.pdf.PdfPTable;
+import org.openpdf.text.pdf.PdfPageEventHelper;
+import org.openpdf.text.pdf.PdfWriter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
@@ -25,19 +26,13 @@ import java.util.stream.Collectors;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class TotalesGeneralesService {
 
     private final Environment environment;
     private final CodigoClient codigoClient;
     private final CodigoGrupoClient codigoGrupoClient;
     private final TotalMensualClient totalMensualClient;
-
-    public TotalesGeneralesService(Environment environment, CodigoClient codigoClient, CodigoGrupoClient codigoGrupoClient, TotalMensualClient totalMensualClient) {
-        this.environment = environment;
-        this.codigoClient = codigoClient;
-        this.codigoGrupoClient = codigoGrupoClient;
-        this.totalMensualClient = totalMensualClient;
-    }
 
     public String generate(Integer anho, Integer mes) {
         String path = environment.getProperty("path.files");

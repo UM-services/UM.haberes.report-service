@@ -2,12 +2,13 @@ package um.haberes.report.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.json.JsonMapper;
-import com.lowagie.text.*;
-import com.lowagie.text.pdf.PdfPCell;
-import com.lowagie.text.pdf.PdfPTable;
-import com.lowagie.text.pdf.PdfPageEventHelper;
-import com.lowagie.text.pdf.PdfWriter;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.openpdf.text.*;
+import org.openpdf.text.pdf.PdfPCell;
+import org.openpdf.text.pdf.PdfPTable;
+import org.openpdf.text.pdf.PdfPageEventHelper;
+import org.openpdf.text.pdf.PdfWriter;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import um.haberes.report.client.haberes.core.CursoCargoNovedadClient;
@@ -23,19 +24,13 @@ import java.util.List;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class NovedadesDocentesService {
 
     private final Environment environment;
     private final CursoCargoNovedadClient cursoCargoNovedadClient;
     private final FacultadClient facultadClient;
     private final GeograficaClient geograficaClient;
-
-    public NovedadesDocentesService(Environment environment, CursoCargoNovedadClient cursoCargoNovedadClient, FacultadClient facultadClient, GeograficaClient geograficaClient) {
-        this.environment = environment;
-        this.cursoCargoNovedadClient = cursoCargoNovedadClient;
-        this.facultadClient = facultadClient;
-        this.geograficaClient = geograficaClient;
-    }
 
     public String generate(Integer facultadId, Integer anho, Integer mes) {
         log.debug("Starting facultadId {}, anho {}, mes {}", facultadId, anho, mes);

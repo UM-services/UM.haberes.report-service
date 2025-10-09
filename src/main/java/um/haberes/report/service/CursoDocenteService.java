@@ -1,10 +1,11 @@
 package um.haberes.report.service;
 
-import com.lowagie.text.*;
-import com.lowagie.text.pdf.PdfPCell;
-import com.lowagie.text.pdf.PdfPTable;
-import com.lowagie.text.pdf.PdfPageEventHelper;
-import com.lowagie.text.pdf.PdfWriter;
+import lombok.RequiredArgsConstructor;
+import org.openpdf.text.*;
+import org.openpdf.text.pdf.PdfPCell;
+import org.openpdf.text.pdf.PdfPTable;
+import org.openpdf.text.pdf.PdfPageEventHelper;
+import org.openpdf.text.pdf.PdfWriter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
@@ -13,8 +14,6 @@ import um.haberes.report.kotlin.dto.haberes.core.*;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.text.NumberFormat;
 import java.util.*;
 import java.util.List;
@@ -22,7 +21,9 @@ import java.util.stream.Collectors;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class CursoDocenteService {
+
     private final Environment environment;
     private final CursoCargoClient cursoCargoClient;
     private final PersonaClient personaClient;
@@ -30,16 +31,6 @@ public class CursoDocenteService {
     private final CategoriaClient categoriaClient;
     private final FacultadClient facultadClient;
     private final GeograficaClient geograficaClient;
-
-    public CursoDocenteService(Environment environment, CursoCargoClient cursoCargoClient, PersonaClient personaClient, CursoClient cursoClient, CategoriaClient categoriaClient, FacultadClient facultadClient, GeograficaClient geograficaClient) {
-        this.environment = environment;
-        this.cursoCargoClient = cursoCargoClient;
-        this.personaClient = personaClient;
-        this.cursoClient = cursoClient;
-        this.categoriaClient = categoriaClient;
-        this.facultadClient = facultadClient;
-        this.geograficaClient = geograficaClient;
-    }
 
     public String generate(Integer anho, Integer mes) {
         String path = environment.getProperty("path.files");

@@ -6,7 +6,7 @@ import um.haberes.report.kotlin.dto.haberes.core.ItemDto;
 
 import java.util.List;
 
-@FeignClient(name = "haberes-core-service/api/haberes/core/item")
+@FeignClient(name = "haberes-core-service", contextId = "itemClient", path = "/api/haberes/core/item")
 public interface ItemClient {
 
     @GetMapping("/legajo/{legajoId}/{anho}/{mes}")

@@ -3,10 +3,11 @@
  */
 package um.haberes.report.service;
 
-import com.lowagie.text.*;
-import com.lowagie.text.pdf.*;
+import org.openpdf.text.*;
+import org.openpdf.text.pdf.*;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.FileSystemResource;
@@ -35,6 +36,7 @@ import java.util.stream.Collectors;
  */
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class BonoService {
 
     static final Integer const_Nivel_Grado = 1;
@@ -64,37 +66,6 @@ public class BonoService {
     private final ContactoClient contactoClient;
     private final LegajoControlClient legajoControlClient;
 
-    public BonoService(Environment environment, PersonaClient personaClient, FacultadClient facultadClient, CursoCargoClient cursoCargoClient,
-                       ControlClient controlClient, LiquidacionClient liquidacionClient, AntiguedadClient antiguedadClient,
-                       DesignacionToolClient designacionToolClient, CargoLiquidacionClient cargoLiquidacionClient,
-                       CargoClaseDetalleClient cargoClaseDetalleClient, LegajoBancoClient legajoBancoClient, DependenciaClient dependenciaClient,
-                       ItemClient itemClient, LiquidacionEtecClient liquidacionEtecClient, LiquidacionAdicionalClient liquidacionAdicionalClient,
-                       CodigoClient codigoClient, CodigoGrupoClient codigoGrupoClient, LetraClient letraClient, BonoImpresionClient bonoImpresionClient,
-                       JavaMailSender javaMailSender, ContactoClient contactoClient, LegajoControlClient legajoControlClient) {
-        this.environment = environment;
-        this.personaClient = personaClient;
-        this.facultadClient = facultadClient;
-        this.cursoCargoClient = cursoCargoClient;
-        this.controlClient = controlClient;
-        this.liquidacionClient = liquidacionClient;
-        this.antiguedadClient = antiguedadClient;
-        this.designacionToolClient = designacionToolClient;
-        this.cargoLiquidacionClient = cargoLiquidacionClient;
-        this.cargoClaseDetalleClient = cargoClaseDetalleClient;
-        this.legajoBancoClient = legajoBancoClient;
-        this.dependenciaClient = dependenciaClient;
-        this.itemClient = itemClient;
-        this.liquidacionEtecClient = liquidacionEtecClient;
-        this.liquidacionAdicionalClient = liquidacionAdicionalClient;
-        this.codigoClient = codigoClient;
-        this.codigoGrupoClient = codigoGrupoClient;
-        this.letraClient = letraClient;
-        this.bonoImpresionClient = bonoImpresionClient;
-        this.javaMailSender = javaMailSender;
-        this.contactoClient = contactoClient;
-        this.legajoControlClient = legajoControlClient;
-    }
-
     public String generatePdfDependencia(Integer anho, Integer mes, Integer dependenciaId, String salida,
                                          Long legajoIdSolicitud, String ipAddress) {
         String path = environment.getProperty("path.files");
@@ -111,7 +82,7 @@ public class BonoService {
         try {
             mergePdf(filename = path + "dependencia." + dependenciaId + ".pdf", filenames);
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("Error al generar el archivo PDF: {}", e.getMessage());
         }
 
         return filename;
@@ -472,7 +443,7 @@ public class BonoService {
             }
             document.close();
         } catch (BadElementException | IOException e) {
-            e.printStackTrace();
+            log.debug("Error al generar el PDF", e);
         }
 
         return filename;
