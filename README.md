@@ -8,10 +8,10 @@ Servicio de generación y gestión de reportes que forma parte de la arquitectur
 
 ## Stack Tecnológico
 
-- Java 24
-- Kotlin 2.2.20
-- Spring Boot 3.5.6
-- Spring Cloud 2025.0.0
+- Java 25
+- Kotlin 2.3.0
+- Spring Boot 4.0.2
+- Spring Cloud 2025.1.0
 - Maven 3.8.8+
 
 ### Dependencias Principales
@@ -21,9 +21,9 @@ Servicio de generación y gestión de reportes que forma parte de la arquitectur
 - Spring Boot Actuator
 - Spring Boot Validation
 - Spring Boot Mail
-- SpringDoc OpenAPI 2.8.10
+- SpringDoc OpenAPI 3.0.1
 - OpenPDF 3.0.0
-- Apache POI 5.4.1
+- Apache POI 5.5.1
 - Caffeine Cache
 - Lombok
 

@@ -27,36 +27,18 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.h
 ### Fixed
 - Corrección en manejo de excepciones en generación de PDFs
 
-## [Unreleased]
-
-### Added
-- Integración con Spring Boot Validation para validación de datos
-- Soporte para generación de reportes en formato PDF usando OpenPDF
-- Soporte para generación de reportes en formato Excel usando Apache POI
-- Integración con Spring Cloud Netflix Eureka para registro de servicios
-- Implementación de caché usando Caffeine
-- Documentación API con OpenAPI/Swagger
-- Soporte para envío de correos electrónicos
-- Configuración de Docker para desarrollo y producción
+## [0.2.0] - 2026-02-02
 
 ### Changed
-- Actualización de Spring Boot a versión 3.4.4
-- Actualización de Spring Cloud a versión 2024.0.1
-- Actualización de Kotlin a versión 2.1.20
-- Actualización de SpringDoc OpenAPI a versión 2.8.6
-
-### Dependencies
-- Spring Boot Starter Web
-- Spring Cloud Netflix Eureka Client
-- Spring Cloud OpenFeign
-- Spring Boot Actuator
-- Spring Boot Validation
-- Spring Boot Mail
-- SpringDoc OpenAPI
-- OpenPDF 2.0.3
-- Apache POI 5.4.0
-- Caffeine Cache
-- Lombok
+- Actualización de Spring Boot a versión 4.0.2
+- Actualización de Java a versión 25
+- Actualización de Kotlin a versión 2.3.0
+- Actualización de Spring Cloud a versión 2025.1.0
+- Actualización de Apache POI a versión 5.5.1
+- Actualización de SpringDoc OpenAPI a versión 3.0.1
+- Actualización de Commons Lang3 a versión 3.20.0
+- Actualización de JDK en GitHub Actions workflow a 25
+- Actualización de Dockerfile para usar JDK 25
 
 ## [0.0.1-SNAPSHOT] - 2024-03-XX
 
