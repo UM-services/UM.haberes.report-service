@@ -27,6 +27,21 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.h
 ### Fixed
 - Corrección en manejo de excepciones en generación de PDFs
 
+## [0.3.0] - 2026-04-04
+
+### Changed
+- Actualización de Spring Boot a versión 4.0.5
+- Actualización de Kotlin a versión 2.3.20
+- Actualización de OpenPDF a versión 3.0.3
+- Actualización de SpringDoc OpenAPI a versión 3.0.2
+
+### Added
+- Nueva dependencia Commons FileUpload para gestión de archivos
+
+### Infrastructure
+- Actualización de GitHub Actions a versiones más recientes
+- Actualización de JDK a 25 en workflow de documentación
+
 ## [0.2.0] - 2026-02-02
 
 ### Changed
