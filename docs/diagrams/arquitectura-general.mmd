@@ -1,0 +1,37 @@
+graph TD
+    subgraph "Clients"
+        A[Web Browser / Mobile App]
+        B[External Systems]
+    end
+
+    subgraph "Service Mesh - Consul"
+        C[Consul Registry]
+        D[Consul Config]
+    end
+
+    subgraph "Microservices Ecosystem"
+        E[haberes-report-service]
+        F[haberes-core-service]
+        G[haberes-legajo-service]
+        H[haberes-libro-banco-service]
+    end
+
+    subgraph "Infrastructure"
+        I[(Database)]
+        J[SMTP Mail Server]
+        K[Caffeine Cache]
+    end
+
+    A -->|REST API| E
+    B -->|REST API| E
+    E -->|Service Discovery| C
+    E -->|Configuration| D
+    E -->|OpenFeign Client| F
+    E -->|OpenFeign Client| G
+    E -->|OpenFeign Client| H
+    E -->|Read/Write| I
+    E -->|Send Email| J
+    E -->|Cache| K
+    F --> I
+    G --> I
+    H --> I

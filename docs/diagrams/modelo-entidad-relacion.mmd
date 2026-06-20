@@ -1,0 +1,67 @@
+erDiagram
+    Persona {
+        long legajoId PK
+        string documento
+        string apellido
+        string nombre
+        datetime nacimiento
+        datetime altaDocente
+        datetime altaAdministrativa
+        string estadoCivil
+    }
+
+    Cargo {
+        long cargoId PK
+        long legajoId FK
+        datetime fechaAlta
+        datetime fechaBaja
+        int dependenciaId
+    }
+
+    CargoLiquidacion {
+        long cargoLiquidacionId PK
+        long legajoId FK
+        int anho
+        int mes
+        datetime fechaDesde
+        datetime fechaHasta
+        int categoriaId
+        string categoriaNombre
+    }
+
+    Liquidacion {
+        long liquidacionId PK
+        long legajoId FK
+        int anho
+        int mes
+        datetime fechaLiquidacion
+        datetime fechaAcreditacion
+        int dependenciaId
+        string salida
+    }
+
+    Control {
+        long controlId PK
+        int anho
+        int mes
+        datetime fechaDesde
+        datetime fechaHasta
+        datetime fechaPago
+        decimal doctorado
+        decimal maestria
+    }
+
+    BonoImpresion {
+        long bonoImpresionId PK
+        long legajoId FK
+        int anho
+        int mes
+        datetime fecha
+        string ipAddress
+    }
+
+    Persona ||--o{ Cargo : tiene
+    Persona ||--o{ CargoLiquidacion : posee
+    Persona ||--o{ Liquidacion : recibe
+    Persona ||--o{ BonoImpresion : genera
+    Control ||--o{ Liquidacion : gestiona

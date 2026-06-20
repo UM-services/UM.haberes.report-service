@@ -1,0 +1,23 @@
+sequenceDiagram
+    participant Client as Cliente
+    participant ReportService as Report Service
+    participant CoreService as Core Service
+    participant DB as Base de Datos
+    participant Mail as Servidor SMTP
+
+    Client->>+ReportService: Solicitar Reporte (PDF/Excel)
+    ReportService->>+CoreService: Obtener datos (OpenFeign)
+    CoreService->>+DB: Consultar información
+    DB-->>-CoreService: Datos solicitados
+    CoreService-->>-ReportService: Respuesta DTO
+    ReportService->>ReportService: Generar documento (OpenPDF / Apache POI)
+    alt Es Bono de Sueldo
+        ReportService->>ReportService: Aplicar firma digital
+    end
+    ReportService-->>-Client: Reporte generado
+    opt Envío por Email
+        Client->>ReportService: Enviar reporte por correo
+        ReportService->>+Mail: Enviar email con adjunto
+        Mail-->>-ReportService: Confirmación de envío
+        ReportService-->>Client: Resultado de envío
+    end

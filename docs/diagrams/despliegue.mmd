@@ -1,0 +1,40 @@
+graph TB
+    subgraph "CI/CD - GitHub Actions"
+        A[Push / PR a main]
+        B[Build & Test]
+        C[Generate Docs]
+        D[Deploy Pages]
+        E[Deploy Docker]
+    end
+
+    subgraph "Development"
+        F[Local Dev Machine]
+        G[IDE IntelliJ]
+    end
+
+    subgraph "Artifacts"
+        H[Docker Image]
+        I[GitHub Pages]
+        J[GitHub Wiki]
+    end
+
+    subgraph "Production Environment"
+        K[Docker Host]
+        L[Consul Cluster]
+        M[Database Server]
+        N[Mail Server]
+    end
+
+    A --> B
+    B --> C
+    C --> D
+    D --> I
+    B --> E
+    E --> H
+    F -->|mvn clean install| B
+    G -->|Develop| F
+    H -->|docker run| K
+    K --> L
+    K --> M
+    K --> N
+    C --> J
