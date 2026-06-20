@@ -9,9 +9,9 @@ Servicio de generación y gestión de reportes que forma parte de la arquitectur
 ## Stack Tecnológico
 
 - Java 25
-- Kotlin 2.3.20
-- Spring Boot 4.0.5
-- Spring Cloud 2025.1.0
+- Kotlin 2.4.0
+- Spring Boot 4.1.0
+- Spring Cloud 2025.1.2
 - Maven 3.8.8+
 
 ### Dependencias Principales
@@ -21,8 +21,8 @@ Servicio de generación y gestión de reportes que forma parte de la arquitectur
 - Spring Boot Actuator
 - Spring Boot Validation
 - Spring Boot Mail
-- SpringDoc OpenAPI 3.0.2
-- OpenPDF 3.0.3
+- SpringDoc OpenAPI 3.0.3
+- OpenPDF 3.0.5
 - Apache POI 5.5.1
 - Caffeine Cache
 - Lombok
@@ -52,8 +52,12 @@ spring:
   application:
     name: haberes-report-service
   cloud:
-    config:
-      enabled: true
+    consul:
+      host: consul-service
+      port: 8500
+      discovery:
+        prefer-ip-address: true
+        tags: haberes,report
   mail:
     host: smtp.gmail.com
     port: 587
@@ -66,21 +70,15 @@ spring:
             enable: true
             required: true
           auth: true
-
-spring:
-  cloud:
-    consul:
-      host: localhost
-      port: 8500
-      discovery:
-        register: true
-        instance-id: ${spring.application.name}:${random.value}
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
 ```
 
 ## Desarrollo
 
 ### Requisitos Previos
-- JDK 24
+- JDK 25
 - Maven 3.8.8+
 - IDE con soporte para Kotlin (IntelliJ IDEA recomendado)
 

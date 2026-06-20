@@ -11,9 +11,9 @@ data class CargoLiquidacionDto(
     var anho: Int? = null,
     var mes: Int? = null,
     var dependenciaId: Int? = null,
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ", timezone = "UTC")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssXX", timezone = "UTC")
     var fechaDesde: OffsetDateTime? = null,
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ", timezone = "UTC")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssXX", timezone = "UTC")
     var fechaHasta: OffsetDateTime? = null,
     var categoriaId: Int? = null,
     var categoriaNombre: String = "",

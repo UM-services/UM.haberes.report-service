@@ -49,7 +49,7 @@ jobs:
           <head>
               <meta charset="UTF-8">
               <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              <title>UM Tesorería Facturador Service - Documentación del Proyecto</title>
+              <title>UM Haberes Report Service - Documentación del Proyecto</title>
               <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
               <style>
                   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; max-width: 1200px; margin: 0 auto; padding: 20px; background-color: #f5f5f5; }
@@ -69,8 +69,8 @@ jobs:
           </head>
           <body>
               <div class="header">
-                  <h1>📋 UM Tesorería Facturador Service - Documentación del Proyecto</h1>
-                  <p>Servicio para la gestión y facturación electrónica de la Universidad.</p>
+                  <h1>📋 UM Haberes Report Service - Documentación del Proyecto</h1>
+                  <p>Servicio para la gestión y generación de reportes de haberes de la Universidad.</p>
                   <p>Última actualización: <span id="update-date"></span></p>
               </div>
               <div id="stats" class="stats"></div>
@@ -133,11 +133,11 @@ jobs:
                   });
 
               // --- Sequence Diagram ---
-              fetch('diagrams/flujo-facturacion.mmd')
+              fetch('diagrams/flujo-reportes.mmd')
                   .then(response => response.text())
                   .then(data => {
                       const sequenceContainer = document.getElementById('sequence-diagram');
-                      sequenceContainer.innerHTML = '<h2>🔄 Diagrama de Secuencia: Flujo de Facturación</h2><div class="mermaid">' + data + '</div>';
+                      sequenceContainer.innerHTML = '<h2>🔄 Diagrama de Secuencia: Flujo de Generación de Reportes</h2><div class="mermaid">' + data + '</div>';
                       mermaid.init(undefined, sequenceContainer.querySelector('.mermaid'));
                   });
 
@@ -220,7 +220,7 @@ jobs:
           
           # Create a simple Home.md as a portal
           cat > Home.md << EOF
-          # 📋 Wiki del Proyecto UM Tesorería Facturador Service
+          # 📋 Wiki del Proyecto UM Haberes Report Service
 
           Esta wiki sirve como un portal de acceso rápido a los recursos más importantes del proyecto.
 
