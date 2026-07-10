@@ -10,7 +10,7 @@
     </parent>
     <groupId>um.haberes</groupId>
     <artifactId>report-service</artifactId>
-    <version>0.3.0</version>
+    <version>0.4.0</version>
     <name>UM.haberes.report-service</name>
     <description>um.haberes.report-service</description>
     <url/>

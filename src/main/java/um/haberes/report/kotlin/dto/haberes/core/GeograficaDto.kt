@@ -1,5 +1,6 @@
 package um.haberes.report.kotlin.dto.haberes.core
 
+import um.haberes.report.util.Jsonifyable
 import java.math.BigDecimal
 
 data class GeograficaDto(
@@ -10,4 +11,4 @@ data class GeograficaDto(
     var desarraigo: BigDecimal = BigDecimal.ZERO,
     var geograficaIdReemplazo: Int? = null
 
-)
+) : Jsonifyable
