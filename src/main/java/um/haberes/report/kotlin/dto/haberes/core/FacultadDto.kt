@@ -1,5 +1,7 @@
 package um.haberes.report.kotlin.dto.haberes.core
 
+import um.haberes.report.util.Jsonifyable
+
 data class FacultadDto(
 
     var facultadId: Int? = null,
@@ -11,4 +13,4 @@ data class FacultadDto(
     var dbName: String = "",
     var dsn: String = ""
 
-)
+) : Jsonifyable

@@ -5,6 +5,18 @@ Todos los cambios notables en este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0] - 2026-07-10
+
+### Added
+- Nueva interfaz `Jsonifyable` con método `jsonify()` para serialización JSON simplificada de DTOs
+- Implementación de `Jsonifyable` en DTOs `FacultadDto` y `GeograficaDto`
+
+### Changed
+- Simplificado logging de DTOs en `DocentesSedeService` usando `jsonify()` en lugar de `JsonMapper` directo
+
+### Fixed
+- Corrección de potencial `NullPointerException` al acceder a `designacionTipo.getNombre()` en `DocentesSedeService`
+
 ## [0.3.0] - 2026-06-20
 
 ### Changed

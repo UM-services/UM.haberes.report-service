@@ -47,17 +47,9 @@ public class DocentesSedeService {
         String path = environment.getProperty("path.files");
         String filename = path + "docentes." + facultadId + "." + geograficaId + "." + anho + "." + mes + "." + facultadId + ".pdf";
         facultad = facultadClient.findByFacultadId(facultadId);
-        try {
-            log.debug("Facultad -> {}", JsonMapper.builder().findAndAddModules().build().writerWithDefaultPrettyPrinter().writeValueAsString(facultad));
-        } catch (JsonProcessingException e) {
-            log.debug("facultad -> null");
-        }
+        log.debug("Facultad -> {}", facultad.jsonify());
         geografica = geograficaClient.findByGeograficaId(geograficaId);
-        try {
-            log.debug("Geografica -> {}", JsonMapper.builder().findAndAddModules().build().writerWithDefaultPrettyPrinter().writeValueAsString(geografica));
-        } catch (JsonProcessingException e) {
-            log.debug("geografica -> null");
-        }
+        log.debug("Geografica -> {}", geografica.jsonify());
 
         generateReport(filename, facultadId, geograficaId, anho, mes);
         return filename;
@@ -147,7 +139,8 @@ public class DocentesSedeService {
             detailTable.addCell(cell);
 
             paragraph = new Paragraph();
-            paragraph.add(new Phrase(cursoCargo.getDesignacionTipo().getNombre(), new Font(Font.HELVETICA, 8)));
+            String designacionTipoNombre = cursoCargo.getDesignacionTipo() != null ? cursoCargo.getDesignacionTipo().getNombre() : "";
+            paragraph.add(new Phrase(designacionTipoNombre, new Font(Font.HELVETICA, 8)));
             cell = new PdfPCell(paragraph);
             cell.setBorder(Rectangle.NO_BORDER);
             cell.setHorizontalAlignment(Element.ALIGN_LEFT);
