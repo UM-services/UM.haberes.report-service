@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import um.haberes.report.client.haberes.core.*;
-import um.haberes.report.kotlin.dto.haberes.core.*;
+import um.haberes.report.model.haberes.core.*;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -134,7 +134,7 @@ public class CargosClasePeriodoService {
                     List<CargoClasePeriodoDto> periodos = cargoClasePeriodoClient.findAllByLegajo(persona.getLegajoId());
                     Map<Long, CargoClasePeriodoDto> periodoMap = periodos.stream()
                             .collect(Collectors.toMap(
-                                    p -> p.getCargoClaseId(),
+                                    CargoClasePeriodoDto::getCargoClaseId,
                                     Function.identity(),
                                     (p1, p2) -> p1));
                     CargoClasePeriodoDto cargoClasePeriodo = periodoMap.get(detalle.getCargoClaseId());
@@ -242,14 +242,14 @@ public class CargosClasePeriodoService {
         detailTable.addCell(cell);
 
         paragraph = new Paragraph();
-        paragraph.add(new Phrase(cargoClasePeriodo.getPeriodoDesde().toString(), new Font(Font.HELVETICA, 8)));
+        paragraph.add(new Phrase(Objects.requireNonNull(cargoClasePeriodo.getPeriodoDesde()).toString(), new Font(Font.HELVETICA, 8)));
         cell = new PdfPCell(paragraph);
         cell.setBorder(Rectangle.NO_BORDER);
         cell.setHorizontalAlignment(Element.ALIGN_LEFT);
         detailTable.addCell(cell);
 
         paragraph = new Paragraph();
-        paragraph.add(new Phrase(cargoClasePeriodo.getPeriodoHasta().toString(), new Font(Font.HELVETICA, 8)));
+        paragraph.add(new Phrase(Objects.requireNonNull(cargoClasePeriodo.getPeriodoHasta()).toString(), new Font(Font.HELVETICA, 8)));
         cell = new PdfPCell(paragraph);
         cell.setBorder(Rectangle.NO_BORDER);
         cell.setHorizontalAlignment(Element.ALIGN_LEFT);

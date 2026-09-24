@@ -179,4 +179,26 @@ public class Tool {
                 .contentType(MediaType.APPLICATION_OCTET_STREAM).body(resource);
     }
 
+    // Variante para el frontend: application/pdf + Content-Disposition: inline, de modo que el
+    // browser abra el bono en el visor en vez de descargarlo, conservando el nombre sugerido.
+    public static ResponseEntity<Resource> generateFileInline(String filename, String headerFilename) throws FileNotFoundException {
+        File file = new File(filename);
+        InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + headerFilename + "\"");
+        headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
+        headers.add("Pragma", "no-cache");
+        headers.add("Expires", "0");
+        return ResponseEntity.ok().headers(headers).contentLength(file.length())
+                .contentType(MediaType.APPLICATION_PDF).body(resource);
+    }
+
+    // Limpia caracteres invalidos/conflictivos en nombres de archivo para el Content-Disposition.
+    public static String sanitizarNombreArchivo(String valor) {
+        if (valor == null) {
+            return "";
+        }
+        return valor.replaceAll("[\\\\/:*?\"<>|\\r\\n\\t]", "-").trim();
+    }
+
 }

@@ -2,7 +2,7 @@ package um.haberes.report.client.tesoreria.core;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
-import um.haberes.report.kotlin.dto.tesoreria.core.CursoCargoContratadoDto;
+import um.haberes.report.model.tesoreria.core.CursoCargoContratadoDto;
 
 import java.util.List;
 
