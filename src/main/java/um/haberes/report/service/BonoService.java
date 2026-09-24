@@ -15,7 +15,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import um.haberes.report.client.haberes.core.*;
-import um.haberes.report.kotlin.dto.haberes.core.*;
+import um.haberes.report.model.haberes.core.*;
 import um.haberes.report.util.Tool;
 
 import java.io.*;
@@ -457,8 +457,33 @@ public class BonoService {
         return makePdfConFusion(filename, legajoId, anho, mes, legajoIdSolicitud, ipAddress, control);
     }
 
+    // Endpoint frontend-only: genera el PDF del bono SIN registrar auditoria.
+    // La auditoria con IP real del request la registra el core (POST .../auditoria).
+    public String generatePdfUi(Long legajoId, Integer anho, Integer mes) {
+        String path = environment.getProperty("path.files");
+        String filename = path + "bono." + legajoId + "." + anho + "." + mes + ".pdf";
+        ControlDto control = controlClient.findByPeriodo(anho, mes);
+
+        return makePdfConFusion(filename, legajoId, anho, mes, null, null, control, false);
+    }
+
+    // Nombre del archivo para el frontend, identico al que usaba VB6 (clsCtlPrint.cls):
+    // apellido.nombre.legajoId.anho.mes.pdf
+    public String nombreArchivoBono(Long legajoId, Integer anho, Integer mes) {
+        PersonaDto persona = personaClient.findByLegajoId(legajoId);
+        return Tool.sanitizarNombreArchivo(persona.getApellido()) + "."
+                + Tool.sanitizarNombreArchivo(persona.getNombre()) + "."
+                + legajoId + "." + anho + "." + mes + ".pdf";
+    }
+
     public String makePdfConFusion(String filename, Long legajoId, Integer anho, Integer mes, Long legajoIdSolicitud,
                                    String ipAddress, ControlDto control) {
+        // Contrato legacy (VB6): siempre registra la auditoria con la IP que llega en el path.
+        return makePdfConFusion(filename, legajoId, anho, mes, legajoIdSolicitud, ipAddress, control, true);
+    }
+
+    public String makePdfConFusion(String filename, Long legajoId, Integer anho, Integer mes, Long legajoIdSolicitud,
+                                   String ipAddress, ControlDto control, boolean registrarAuditoria) {
         PersonaDto persona = personaClient.findByLegajoId(legajoId);
         AntiguedadDto antiguedad = antiguedadClient.findByUnique(legajoId, anho, mes);
         int mesesAntiguedad = Math.max(antiguedad.getMesesDocentes(), antiguedad.getMesesAdministrativos());
@@ -1265,27 +1290,41 @@ public class BonoService {
             document.add(tableFirma);
             document.close();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            log.error("File not found: " + e.getMessage());
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            log.error("Malformed URL: " + e.getMessage());
         } catch (BadElementException e) {
-            e.printStackTrace();
+            log.error("Bad Element: " + e.getMessage());
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("IO Error: " + e.getMessage());
         }
 
-        bonoImpresionClient.add(new BonoImpresionDto(null, legajoId, anho, mes, legajoIdSolicitud,
-                Tool.hourAbsoluteArgentina(), ipAddress));
+        if (registrarAuditoria) {
+            bonoImpresionClient.add(new BonoImpresionDto(null, legajoId, anho, mes, legajoIdSolicitud,
+                    Tool.hourAbsoluteArgentina(), ipAddress));
+        }
 
         return filename;
     }
 
     public String sendBono(Long legajoId, Integer anho, Integer mes, Long legajoIdSolicitud, String ipAddress)
             throws MessagingException {
-        // Genera PDF
+        // Contrato legacy (VB6): genera el PDF y audita (generatePdf registra con la IP del path), luego envia.
         String filenameBono = this.generatePdf(legajoId, anho, mes, legajoIdSolicitud, ipAddress);
+        return enviarMailBono(legajoId, anho, mes, filenameBono);
+    }
+
+    // Endpoint frontend-only: genera el PDF SIN auditar y envia el correo.
+    // La auditoria con IP real la registra el core en send-prepare.
+    public String sendBonoUi(Long legajoId, Integer anho, Integer mes) throws MessagingException {
+        String filenameBono = this.generatePdfUi(legajoId, anho, mes);
+        return enviarMailBono(legajoId, anho, mes, filenameBono);
+    }
+
+    private String enviarMailBono(Long legajoId, Integer anho, Integer mes, String filenameBono)
+            throws MessagingException {
         log.info("Filename_bono -> " + filenameBono);
-        if (filenameBono.isEmpty()) {
+        if (filenameBono == null || filenameBono.isEmpty()) {
             return "ERROR: Sin Chequera para ENVIAR";
         }
 
@@ -1321,7 +1360,7 @@ public class BonoService {
             addresses.add(contacto.getMailInstitucional());
 
         try {
-            helper.setTo(addresses.toArray(new String[addresses.size()]));
+            helper.setTo(addresses.toArray(new String[0]));
             helper.setText(data);
             helper.setReplyTo("no-reply@um.edu.ar");
             helper.setSubject("Envío Automático de Bono de Sueldo -> " + filenameBono);
@@ -1330,7 +1369,7 @@ public class BonoService {
             helper.addAttachment(filenameBono, fileBono);
 
         } catch (MessagingException e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return "ERROR: No pudo ENVIARSE";
         }
 

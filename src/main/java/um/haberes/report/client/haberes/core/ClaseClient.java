@@ -1,11 +1,8 @@
 package um.haberes.report.client.haberes.core;
 
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
-import um.haberes.report.kotlin.dto.haberes.core.ClaseDto;
+import um.haberes.report.model.haberes.core.ClaseDto;
 
 import java.util.List;
 

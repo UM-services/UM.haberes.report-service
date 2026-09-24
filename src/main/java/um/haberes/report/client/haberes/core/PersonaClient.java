@@ -2,7 +2,7 @@ package um.haberes.report.client.haberes.core;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
-import um.haberes.report.kotlin.dto.haberes.core.PersonaDto;
+import um.haberes.report.model.haberes.core.PersonaDto;
 
 import java.math.BigDecimal;
 import java.util.List;

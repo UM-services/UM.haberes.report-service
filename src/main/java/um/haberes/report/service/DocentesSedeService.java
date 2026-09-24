@@ -14,14 +14,15 @@ import org.springframework.stereotype.Service;
 import um.haberes.report.client.haberes.core.*;
 import um.haberes.report.client.tesoreria.core.CursoCargoContratadoClient;
 import um.haberes.report.client.tesoreria.core.PersonaClient;
-import um.haberes.report.kotlin.dto.haberes.core.CursoCargoDto;
-import um.haberes.report.kotlin.dto.haberes.core.CursoDto;
-import um.haberes.report.kotlin.dto.haberes.core.FacultadDto;
-import um.haberes.report.kotlin.dto.haberes.core.GeograficaDto;
-import um.haberes.report.kotlin.dto.tesoreria.core.CursoCargoContratadoDto;
+import um.haberes.report.model.haberes.core.CursoCargoDto;
+import um.haberes.report.model.haberes.core.CursoDto;
+import um.haberes.report.model.haberes.core.FacultadDto;
+import um.haberes.report.model.haberes.core.GeograficaDto;
+import um.haberes.report.model.tesoreria.core.CursoCargoContratadoDto;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Objects;
 
 @Service
 @Slf4j
@@ -125,14 +126,14 @@ public class DocentesSedeService {
         // Datos de los detalles
         for (CursoCargoDto cursoCargo : cursoCargoClient.findAllByCurso(curso.getCursoId(), anho, mes)) {
             paragraph = new Paragraph();
-            paragraph.add(new Phrase(cursoCargo.getCargoTipo().getNombre(), new Font(Font.HELVETICA, 8)));
+            paragraph.add(new Phrase(Objects.requireNonNull(cursoCargo.getCargoTipo()).getNombre(), new Font(Font.HELVETICA, 8)));
             cell = new PdfPCell(paragraph);
             cell.setBorder(Rectangle.NO_BORDER);
             cell.setHorizontalAlignment(Element.ALIGN_LEFT);
             detailTable.addCell(cell);
 
             paragraph = new Paragraph();
-            paragraph.add(new Phrase(cursoCargo.getPersona().getApellidoNombre(), new Font(Font.HELVETICA, 8, Font.BOLD)));
+            paragraph.add(new Phrase(Objects.requireNonNull(cursoCargo.getPersona()).getApellidoNombre(), new Font(Font.HELVETICA, 8, Font.BOLD)));
             cell = new PdfPCell(paragraph);
             cell.setBorder(Rectangle.NO_BORDER);
             cell.setHorizontalAlignment(Element.ALIGN_LEFT);
@@ -181,7 +182,7 @@ public class DocentesSedeService {
             cell.setHorizontalAlignment(Element.ALIGN_LEFT);
             detailTable.addCell(cell);
 
-            var persona = personaClient.findByUnique(cursoCargoContratado.getContratadoPersona().getPersonaId(), cursoCargoContratado.getContratadoPersona().getDocumentoId());
+            var persona = personaClient.findByUnique(Objects.requireNonNull(cursoCargoContratado.getContratadoPersona()).getPersonaId(), cursoCargoContratado.getContratadoPersona().getDocumentoId());
             paragraph = new Paragraph();
             paragraph.add(new Phrase(persona.getApellidoNombre(), new Font(Font.HELVETICA, 8, Font.BOLD)));
             cell = new PdfPCell(paragraph);

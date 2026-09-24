@@ -10,14 +10,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import um.haberes.report.client.haberes.core.*;
-import um.haberes.report.kotlin.dto.haberes.core.*;
+import um.haberes.report.model.haberes.core.*;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -115,7 +113,7 @@ public class HistoricoAsignacionCargosService {
         }
     }
 
-    private void addHistoricoAsignacionCargosdetails(Document document, LiquidacionDto liquidacion,  GeograficaDto geografica, DependenciaDto dependencia, PersonaDto persona, FacultadDto facultad) throws DocumentException {
+    private void addHistoricoAsignacionCargosdetails(Document document, LiquidacionDto liquidacion, GeograficaDto geografica, DependenciaDto dependencia, PersonaDto persona, FacultadDto facultad) throws DocumentException {
 
         PdfPTable detailTable = new PdfPTable(1);
         detailTable.setWidthPercentage(100);

@@ -10,10 +10,11 @@ import org.openpdf.text.pdf.PdfWriter;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import um.haberes.report.client.haberes.core.AnotadorClient;
-import um.haberes.report.kotlin.dto.haberes.core.AnotadorDto;
+import um.haberes.report.model.haberes.core.AnotadorDto;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Objects;
 
 @Service
 @Slf4j
@@ -69,14 +70,14 @@ public class AnotadorAutorizadosRechazadosService {
         // Encabezado de anotador
         Paragraph paragraph = new Paragraph();
         paragraph.add(new Phrase("Legajo: ", new Font(Font.HELVETICA, 11)));
-        paragraph.add(new Phrase(anotador.getLegajoId() + " - " + anotador.getPersona().getDocumento() + " - " + anotador.getPersona().getApellidoNombre(), new Font(Font.HELVETICA, 11, Font.BOLD)));
+        paragraph.add(new Phrase(anotador.getLegajoId() + " - " + Objects.requireNonNull(anotador.getPersona()).getDocumento() + " - " + anotador.getPersona().getApellidoNombre(), new Font(Font.HELVETICA, 11, Font.BOLD)));
         PdfPCell cell = new PdfPCell(paragraph);
         cell.setBorder(Rectangle.NO_BORDER);
         detailTable.addCell(cell);
 
         // Detalles del anotador
         paragraph = new Paragraph();
-        paragraph.add(new Phrase("\t\t" + anotador.getFacultad().getNombre(), new Font(Font.HELVETICA, 10, Font.BOLD)));
+        paragraph.add(new Phrase("\t\t" + Objects.requireNonNull(anotador.getFacultad()).getNombre(), new Font(Font.HELVETICA, 10, Font.BOLD)));
         cell = new PdfPCell(paragraph);
         cell.setBorder(Rectangle.NO_BORDER);
         detailTable.addCell(cell);

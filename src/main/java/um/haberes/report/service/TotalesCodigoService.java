@@ -1,7 +1,5 @@
 package um.haberes.report.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.json.JsonMapper;
 import lombok.RequiredArgsConstructor;
 import org.openpdf.text.*;
 import org.openpdf.text.pdf.PdfPCell;
@@ -14,9 +12,9 @@ import org.springframework.stereotype.Service;
 import um.haberes.report.client.haberes.core.CodigoClient;
 import um.haberes.report.client.haberes.core.TotalItemClient;
 import um.haberes.report.client.haberes.core.TotalNovedadClient;
-import um.haberes.report.kotlin.dto.haberes.core.CodigoDto;
-import um.haberes.report.kotlin.dto.haberes.core.TotalItemDto;
-import um.haberes.report.kotlin.dto.haberes.core.TotalNovedadDto;
+import um.haberes.report.model.haberes.core.CodigoDto;
+import um.haberes.report.model.haberes.core.TotalItemDto;
+import um.haberes.report.model.haberes.core.TotalNovedadDto;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -179,21 +177,21 @@ public class TotalesCodigoService {
         detailTable.addCell(cell);
 
         paragraph = new Paragraph();
-        paragraph.add(new Phrase(formattedTotalNovedad.toString(), new Font(Font.HELVETICA, 8)));
+        paragraph.add(new Phrase(formattedTotalNovedad, new Font(Font.HELVETICA, 8)));
         cell = new PdfPCell(paragraph);
         cell.setBorder(Rectangle.NO_BORDER);
         cell.setHorizontalAlignment(Element.ALIGN_CENTER);
         detailTable.addCell(cell);
 
         paragraph = new Paragraph();
-        paragraph.add(new Phrase(formattedTotalItem.toString(), new Font(Font.HELVETICA, 8)));
+        paragraph.add(new Phrase(formattedTotalItem, new Font(Font.HELVETICA, 8)));
         cell = new PdfPCell(paragraph);
         cell.setBorder(Rectangle.NO_BORDER);
         cell.setHorizontalAlignment(Element.ALIGN_CENTER);
         detailTable.addCell(cell);
 
         paragraph = new Paragraph();
-        paragraph.add(new Phrase(formattedDiferencia.toString(), new Font(Font.HELVETICA, 8)));
+        paragraph.add(new Phrase(formattedDiferencia, new Font(Font.HELVETICA, 8)));
         cell = new PdfPCell(paragraph);
         cell.setBorder(Rectangle.NO_BORDER);
         cell.setHorizontalAlignment(Element.ALIGN_CENTER);

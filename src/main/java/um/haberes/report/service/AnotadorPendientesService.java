@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import um.haberes.report.client.haberes.core.AnotadorClient;
-import um.haberes.report.kotlin.dto.haberes.core.AnotadorDto;
+import um.haberes.report.model.haberes.core.AnotadorDto;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
