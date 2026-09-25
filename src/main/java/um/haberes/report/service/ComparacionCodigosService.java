@@ -1,7 +1,5 @@
 package um.haberes.report.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.json.JsonMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.openpdf.text.*;
@@ -14,9 +12,9 @@ import org.springframework.stereotype.Service;
 import um.haberes.report.client.haberes.core.CodigoClient;
 import um.haberes.report.client.haberes.core.TotalItemClient;
 import um.haberes.report.client.haberes.core.TotalNovedadClient;
-import um.haberes.report.kotlin.dto.haberes.core.CodigoDto;
-import um.haberes.report.kotlin.dto.haberes.core.TotalItemDto;
-import um.haberes.report.kotlin.dto.haberes.core.TotalNovedadDto;
+import um.haberes.report.model.haberes.core.CodigoDto;
+import um.haberes.report.model.haberes.core.TotalItemDto;
+import um.haberes.report.model.haberes.core.TotalNovedadDto;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -88,7 +86,7 @@ public class ComparacionCodigosService {
             codigos = codigos.stream()
                     .filter(Objects::nonNull) // Asegurarse de no tener valores nulos
                     .sorted(Comparator.comparing(CodigoDto::getCodigoId)) // Ordenar por codigoId
-                    .collect(Collectors.toList());
+                    .toList();
 
             Map<Integer, TotalNovedadDto> totalesNovedad = totalNovedadList.stream()
                     .filter(Objects::nonNull)

@@ -1,5 +1,6 @@
 package um.haberes.report.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,15 +15,11 @@ import java.io.FileNotFoundException;
 
 @RestController
 @RequestMapping("/api/haberes/report/anotador")
+@RequiredArgsConstructor
 public class AnotadorController {
 
     private final AnotadorPendientesService anotadorPendientesService;
     private final AnotadorAutorizadosRechazadosService anotadorAutorizadosRechazadosService;
-
-    public AnotadorController(AnotadorPendientesService anotadorPendientesService, AnotadorAutorizadosRechazadosService anotadorAutorizadosRechazadosService) {
-        this.anotadorPendientesService = anotadorPendientesService;
-        this.anotadorAutorizadosRechazadosService = anotadorAutorizadosRechazadosService;
-    }
 
     @GetMapping("/anotadorPendientes/{facultadId}/{anho}/{mes}")
     public ResponseEntity<Resource> generateAnotadorPendientes(@PathVariable Integer facultadId, @PathVariable Integer anho, @PathVariable Integer mes) throws FileNotFoundException {

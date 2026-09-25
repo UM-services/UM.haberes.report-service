@@ -1,9 +1,8 @@
 package um.haberes.report.client.haberes.core;
 
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import um.haberes.report.kotlin.dto.haberes.core.CategoriaDto;
+import um.haberes.report.model.haberes.core.CategoriaDto;
 
 import java.util.List;
 

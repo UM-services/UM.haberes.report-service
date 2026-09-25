@@ -7,7 +7,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import um.haberes.report.client.haberes.core.*;
-import um.haberes.report.kotlin.dto.haberes.core.*;
+import um.haberes.report.model.haberes.core.*;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -122,7 +122,7 @@ public class SheetService {
             log.debug(file.getAbsolutePath());
             book.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.debug("Error generando documentos " + e.getMessage());
         }
         return filename;
     }

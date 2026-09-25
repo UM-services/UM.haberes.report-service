@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import um.haberes.report.client.haberes.core.*;
-import um.haberes.report.kotlin.dto.haberes.core.*;
+import um.haberes.report.model.haberes.core.*;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -106,13 +106,14 @@ public class FusionDocenteService {
                 cursoFusions = cursoFusions.stream()
                         .filter(Objects::nonNull) // Asegurarse de no tener valores nulos
                         .sorted(Comparator.comparing(CursoFusionDto::getLegajoId)) // Ordenar por LegajoId
-                        .collect(Collectors.toList()); // Correcta ubicación del paréntesis
+                        .toList(); // Correcta ubicación del paréntesis
 
                 for (CursoFusionDto cursoFusion : cursoFusions) {
                     FacultadDto facultad = facultadMap.get(cursoFusion.getFacultadId());
                     GeograficaDto geografica = geograficaMap.get(cursoFusion.getGeograficaId());
                     CategoriaDto categoria = categoriaMap.get(cursoFusion.getCategoriaId());
-                    if (facultad != null && geografica != null && categoria != null && categoria.getBasico() != null) {
+                    if (facultad != null && geografica != null && categoria != null) {
+                        categoria.getBasico();
                         addFusionDetails(document, detailTable, cursoFusion, persona, facultad, geografica, categoria);
                     }
                 }

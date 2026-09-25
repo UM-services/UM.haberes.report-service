@@ -54,4 +54,22 @@ public class BonoController {
         return service.sendBono(legajoId, anho, mes, legajoIdSolicitud, ipAddress);
     }
 
+    // --- Endpoints exclusivos del frontend (um.haberes.frontend-client) ---
+    // NO registran auditoria ni aceptan IP: el browser no conoce la IP del puesto y el
+    // core la resuelve server-side (ClientIpResolver) al auditar. No usar desde el
+    // cliente VB6, que sigue consumiendo generatePdf/sendBono con {ipAddress} en el path.
+
+    @GetMapping("/ui/generatePdf/{legajoId}/{anho}/{mes}")
+    public ResponseEntity<Resource> generatePdfUi(@PathVariable Long legajoId, @PathVariable Integer anho,
+                                                  @PathVariable Integer mes) throws FileNotFoundException {
+        return Tool.generateFileInline(service.generatePdfUi(legajoId, anho, mes),
+                service.nombreArchivoBono(legajoId, anho, mes));
+    }
+
+    @GetMapping("/ui/sendBono/{legajoId}/{anho}/{mes}")
+    public String sendBonoUi(@PathVariable Long legajoId, @PathVariable Integer anho, @PathVariable Integer mes)
+            throws MessagingException {
+        return service.sendBonoUi(legajoId, anho, mes);
+    }
+
 }
