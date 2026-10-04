@@ -5,6 +5,25 @@ Todos los cambios notables en este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.0] - 2026-09-20
+
+### Added
+- Nuevos endpoints exclusivos del frontend en `BonoController`: `GET /ui/generatePdf/{legajoId}/{anho}/{mes}` y `GET /ui/sendBono/{legajoId}/{anho}/{mes}`, que generan/envían el bono sin registrar auditoría (la IP real la resuelve el core server-side); el contrato legacy VB6 con `{ipAddress}` en el path se mantiene intacto
+- Nuevos workflows de GitHub Actions `deploy-develop.yml` y `deploy-staging.yml` para verificación, build y publicación por rama
+
+### Changed
+- Migración completa de Kotlin a Java: los DTOs de `um.haberes.report.kotlin.dto.*` (haberes y tesoreria) se reescribieron como clases Java + Lombok bajo `um.haberes.report.model.*`, sin cambios en el contrato JSON expuesto
+- Eliminadas la dependencia Kotlin, `jackson-module-kotlin` y el `kotlin-maven-plugin` del build Maven
+- Actualización de Spring Boot a versión 4.1.1
+- Actualización de Spring Cloud a versión 2025.1.3
+- Actualización de SpringDoc OpenAPI a versión 3.1.0
+- Constructores explícitos de `AnotadorController` y `CargosClaseController` reemplazados por `@RequiredArgsConstructor` de Lombok
+- `e.printStackTrace()` en `BonoService` reemplazado por logging con `log.error`
+- Actualización del banner de arranque (`banner.txt`)
+
+### Fixed
+- `sendBono` ahora valida que el nombre del PDF generado no sea nulo o vacío antes de enviar el correo, evitando errores al procesar el adjunto
+
 ## [0.4.0] - 2026-07-10
 
 ### Added
@@ -22,7 +41,7 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.h
 ### Changed
 - Actualización de Spring Boot a versión 4.1.0
 - Actualización de Kotlin a versión 2.4.0
-- Actualización de Spring Cloud a versión 2025.1.2
+- Actualización de Spring Cloud a versión 2025.1.3
 - Actualización de OpenPDF a versión 3.0.5
 - Actualización de SpringDoc OpenAPI a versión 3.0.3
 - Cambio de formato de fecha ISO 8601 en DTOs: `Z` → `XX` para compatibilidad con Java 25

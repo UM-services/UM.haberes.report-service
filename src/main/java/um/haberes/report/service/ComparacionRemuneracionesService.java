@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 import um.haberes.report.client.haberes.core.DependenciaClient;
 import um.haberes.report.client.haberes.core.LiquidacionClient;
 import um.haberes.report.client.haberes.core.PersonaClient;
-import um.haberes.report.kotlin.dto.haberes.core.*;
+import um.haberes.report.model.haberes.core.DependenciaDto;
+import um.haberes.report.model.haberes.core.LiquidacionDto;
+import um.haberes.report.model.haberes.core.PersonaDto;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -234,10 +236,14 @@ public class ComparacionRemuneracionesService {
         NumberFormat nf = NumberFormat.getNumberInstance(new Locale("en", "ES"));
 
         // Asegurar que los valores nunca sean null
-        BigDecimal totalRemunerativoActual = actual.getTotalRemunerativo() != null ? actual.getTotalRemunerativo() : BigDecimal.ZERO;
-        BigDecimal totalRemunerativoAnterior = anterior.getTotalRemunerativo() != null ? anterior.getTotalRemunerativo() : BigDecimal.ZERO;
-        BigDecimal totalNetoActual = actual.getTotalNeto() != null ? actual.getTotalNeto() : BigDecimal.ZERO;
-        BigDecimal totalNetoAnterior = anterior.getTotalNeto() != null ? anterior.getTotalNeto() : BigDecimal.ZERO;
+        actual.getTotalRemunerativo();
+        BigDecimal totalRemunerativoActual = actual.getTotalRemunerativo();
+        anterior.getTotalRemunerativo();
+        BigDecimal totalRemunerativoAnterior = anterior.getTotalRemunerativo();
+        actual.getTotalNeto();
+        BigDecimal totalNetoActual = actual.getTotalNeto();
+        anterior.getTotalNeto();
+        BigDecimal totalNetoAnterior = anterior.getTotalNeto();
 
 // Calcular diferencia y porcentaje
         BigDecimal diferenciaBruto = totalRemunerativoActual.subtract(totalRemunerativoAnterior.abs());

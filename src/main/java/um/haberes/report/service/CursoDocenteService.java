@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import um.haberes.report.client.haberes.core.*;
-import um.haberes.report.kotlin.dto.haberes.core.*;
+import um.haberes.report.model.haberes.core.*;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -80,7 +80,7 @@ public class CursoDocenteService {
             docentesConCursos = docentesConCursos.stream()
                     .filter(p -> cursosPorLegajo.containsKey(p.getLegajoId()) && !cursosPorLegajo.get(p.getLegajoId()).isEmpty())
                     .sorted(Comparator.comparing(PersonaDto::getApellido)) // Orden por apellido
-                    .collect(Collectors.toList());
+                    .toList();
 
             if (docentesConCursos.isEmpty()) {
                 log.warn("No se encontraron docentes con cursos");
@@ -166,6 +166,8 @@ public class CursoDocenteService {
                         log.warn("Geográfica con ID {} no encontrada", curso.getGeograficaId());
                     }
 
+                    assert facultad != null;
+                    assert geografica != null;
                     addCursoDocenteDetails(document, detailTable, facultad, cursoCargo, persona, curso, categoria, geografica);
                 }
 

@@ -14,13 +14,14 @@ import org.springframework.stereotype.Service;
 import um.haberes.report.client.haberes.core.CursoCargoNovedadClient;
 import um.haberes.report.client.haberes.core.FacultadClient;
 import um.haberes.report.client.haberes.core.GeograficaClient;
-import um.haberes.report.kotlin.dto.haberes.core.CursoCargoNovedadDto;
-import um.haberes.report.kotlin.dto.haberes.core.FacultadDto;
-import um.haberes.report.kotlin.dto.haberes.core.GeograficaDto;
+import um.haberes.report.model.haberes.core.CursoCargoNovedadDto;
+import um.haberes.report.model.haberes.core.FacultadDto;
+import um.haberes.report.model.haberes.core.GeograficaDto;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Slf4j
@@ -204,14 +205,14 @@ public class NovedadesDocentesService {
 
         // Datos de la tabla
         paragraph = new Paragraph();
-        paragraph.add(new Phrase(novedad.getCargoTipo().getNombre(), new Font(Font.HELVETICA, 8)));
+        paragraph.add(new Phrase(Objects.requireNonNull(novedad.getCargoTipo()).getNombre(), new Font(Font.HELVETICA, 8)));
         cell = new PdfPCell(paragraph);
         cell.setBorder(Rectangle.NO_BORDER);
         cell.setHorizontalAlignment(Element.ALIGN_LEFT);
         cargoTable.addCell(cell);
 
         paragraph = new Paragraph();
-        paragraph.add(new Phrase(novedad.getPersona().getApellidoNombre(), new Font(Font.HELVETICA, 8, Font.BOLD)));
+        paragraph.add(new Phrase(Objects.requireNonNull(novedad.getPersona()).getApellidoNombre(), new Font(Font.HELVETICA, 8, Font.BOLD)));
         cell = new PdfPCell(paragraph);
         cell.setBorder(Rectangle.NO_BORDER);
         cell.setHorizontalAlignment(Element.ALIGN_LEFT);

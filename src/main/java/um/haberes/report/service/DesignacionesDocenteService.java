@@ -13,11 +13,13 @@ import um.haberes.report.client.haberes.core.DocenteDesignacionClient;
 import um.haberes.report.client.haberes.core.FacultadClient;
 import um.haberes.report.client.haberes.core.GeograficaClient;
 import um.haberes.report.client.haberes.core.PersonaClient;
-import um.haberes.report.kotlin.dto.haberes.core.*;
+import um.haberes.report.model.haberes.core.DocenteDesignacionDto;
+import um.haberes.report.model.haberes.core.FacultadDto;
+import um.haberes.report.model.haberes.core.GeograficaDto;
+import um.haberes.report.model.haberes.core.PersonaDto;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.NumberFormat;
 import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -86,7 +88,7 @@ public class DesignacionesDocenteService {
                     .filter(p -> p.getLegajoId() != null)
                     .filter(p -> designacionesPorLegajo.containsKey(p.getLegajoId()))
                     .sorted(Comparator.comparing(PersonaDto::getApellido))
-                    .collect(Collectors.toList());
+                    .toList();
 
             if (docentesConDesignaciones.isEmpty()) {
                 log.warn("No se encontraron docentes con designaciones");
@@ -114,7 +116,7 @@ public class DesignacionesDocenteService {
                 Long legajoId = docente.getLegajoId();
                 List<DocenteDesignacionDto> listaDesignaciones = designacionesPorLegajo.get(legajoId).stream()
                         .sorted(Comparator.comparing(DocenteDesignacionDto::getEspacio, Comparator.nullsLast(String::compareTo)))
-                        .collect(Collectors.toList());
+                        .toList();
 
 
                 // Agregar encabezado del docente
@@ -144,6 +146,8 @@ public class DesignacionesDocenteService {
                             d.getCargo()
                     );
 
+                    assert geografica != null;
+                    assert facultad != null;
                     addDesignacionesDocenteDetails(document, detailTable, d, geografica, facultad);
                 }
 

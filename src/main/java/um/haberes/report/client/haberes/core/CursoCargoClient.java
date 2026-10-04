@@ -2,7 +2,7 @@ package um.haberes.report.client.haberes.core;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
-import um.haberes.report.kotlin.dto.haberes.core.CursoCargoDto;
+import um.haberes.report.model.haberes.core.CursoCargoDto;
 
 import java.util.List;
 

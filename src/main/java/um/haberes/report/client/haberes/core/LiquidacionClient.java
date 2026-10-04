@@ -3,7 +3,7 @@ package um.haberes.report.client.haberes.core;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
-import um.haberes.report.kotlin.dto.haberes.core.LiquidacionDto;
+import um.haberes.report.model.haberes.core.LiquidacionDto;
 
 import java.time.OffsetDateTime;
 import java.util.List;

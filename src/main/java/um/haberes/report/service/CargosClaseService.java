@@ -11,15 +11,14 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import um.haberes.report.client.haberes.core.CargoClaseClient;
 import um.haberes.report.client.haberes.core.ClaseClient;
-import um.haberes.report.kotlin.dto.haberes.core.*;
+import um.haberes.report.model.haberes.core.CargoClaseDto;
+import um.haberes.report.model.haberes.core.ClaseDto;
 
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.NumberFormat;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 

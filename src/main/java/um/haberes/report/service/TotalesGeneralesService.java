@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
 import um.haberes.report.client.haberes.core.CodigoClient;
 import um.haberes.report.client.haberes.core.CodigoGrupoClient;
 import um.haberes.report.client.haberes.core.TotalMensualClient;
-import um.haberes.report.kotlin.dto.haberes.core.CodigoDto;
-import um.haberes.report.kotlin.dto.haberes.core.CodigoGrupoDto;
-import um.haberes.report.kotlin.dto.haberes.core.TotalMensualDto;
+import um.haberes.report.model.haberes.core.CodigoDto;
+import um.haberes.report.model.haberes.core.CodigoGrupoDto;
+import um.haberes.report.model.haberes.core.TotalMensualDto;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -73,7 +73,7 @@ public class TotalesGeneralesService {
                         .filter(codigo -> codigo.getCodigoId() != null && grupo.getCodigo() != null
                                 && codigo.getCodigoId().equals(grupo.getCodigo().getCodigoId()))
                         .sorted(Comparator.comparing(CodigoDto::getCodigoId)) // Ordenar por codigoId
-                        .collect(Collectors.toList());
+                        .toList();
 
                 if (grupo.getRemunerativo() == 1) {
                     codigosPorGrupo.computeIfAbsent("Remunerativo", k -> new ArrayList<>()).addAll(codigosGrupo);
