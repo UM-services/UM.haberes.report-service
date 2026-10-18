@@ -5,6 +5,18 @@ Todos los cambios notables en este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.0] - 2026-10-18
+
+### Added
+- Nuevo entorno de despliegue `staging-new` para el servicio de reportes de haberes
+
+### Changed
+- El job `deploy` de `deploy-staging.yml` ahora usa una matriz de GitHub Actions (`fail-fast: false`) sobre los entornos `[staging, staging-new]`; cada ejecución usa el runner y el GitHub Environment del entorno correspondiente (`runs-on: [self-hosted, linux, "<entorno>"]`, `environment.name: ${{ matrix.environment }}`)
+- El nombre del job de despliegue de staging se parametriza por entorno: `Deploy staging service (<entorno>)`
+
+### Documentation
+- Corregido en `README.md` el comando de construcción local de Docker, que referenciaba un `Dockerfile.local` inexistente en el repositorio
+
 ## [0.5.0] - 2026-09-20
 
 ### Added
