@@ -95,7 +95,7 @@ mvn spring-boot:run
 
 #### Construcción Local
 ```bash
-docker build -f Dockerfile.local -t um-haberes-report-service .
+docker build -t um-haberes-report-service .
 ```
 
 #### Construcción para Producción
