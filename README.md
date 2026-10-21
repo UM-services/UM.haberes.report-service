@@ -56,6 +56,8 @@ spring:
       port: 8500
       discovery:
         prefer-ip-address: true
+        health-check-path: /actuator/health/readiness
+        health-check-critical-timeout: 5m
         tags: haberes,report
   mail:
     host: smtp.gmail.com
