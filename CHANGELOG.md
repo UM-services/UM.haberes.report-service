@@ -5,6 +5,15 @@ Todos los cambios notables en este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.1] - 2026-10-21
+
+### Changed
+- El chequeo de salud que registra el servicio en Consul ahora consulta `/actuator/health/readiness` (`health-check-path`), el grupo de probes de disponibilidad de Spring Boot, que sólo refleja el estado de readiness de la aplicación y no el de dependencias externas
+- Consul poda la instancia del catálogo si el chequeo permanece crítico durante `5m` (`health-check-critical-timeout`)
+
+### Documentation
+- El generador de documentación (`.github/workflows/generate-docs.yml`) escapa el contenido de los diagramas Mermaid antes de insertarlo con `innerHTML`, evitando que anotaciones con `<<`/`>>` corrompan el render publicado en GitHub Pages
+
 ## [0.6.0] - 2026-10-18
 
 ### Added
