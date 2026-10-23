@@ -5,6 +5,22 @@ Todos los cambios notables en este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.2] - 2026-10-23
+
+### Changed
+- Actualización de Spring Boot a versión 4.1.2
+- Actualización de Spring Cloud a versión 2025.1.4
+- Actualización de Lombok a versión 1.18.48
+- Actualización de Apache POI (`poi` y `poi-ooxml`) a versión 6.0.0
+- Actualización de SpringDoc OpenAPI a versión 3.1.1
+- Actualización de `commons-lang3` a versión 3.21.0
+- Actualización de los plugins `maven-compiler-plugin` (3.16.0) y `jacoco-maven-plugin` (0.8.15)
+- El discovery de Consul resuelve únicamente instancias con sus checks en `passing` (`query-passing: true`), evitando que Feign/LoadBalancer enruten hacia instancias críticas
+- Se exponen explícitamente los grupos de probes de Spring Boot (`management.endpoint.health.probes.enabled`) y el endpoint `health` (`management.endpoints.web.exposure.include`), con `show-details: never`, para que Consul consulte `/actuator/health/readiness`
+
+### Tests
+- Nuevo `ConsulReadinessConfigTest`, que congela el contrato de readiness declarado en `bootstrap.yml` (`health-check-path`, `health-check-critical-timeout`, `query-passing`, exposición de probes y `show-details`)
+
 ## [0.6.1] - 2026-10-21
 
 ### Changed

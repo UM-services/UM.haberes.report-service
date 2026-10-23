@@ -9,8 +9,8 @@ Servicio de generación y gestión de reportes que forma parte de la arquitectur
 ## Stack Tecnológico
 
 - Java 25
-- Spring Boot 4.1.1
-- Spring Cloud 2025.1.3
+- Spring Boot 4.1.2
+- Spring Cloud 2025.1.4
 - Maven 3.8.8+
 
 ### Dependencias Principales
@@ -20,9 +20,9 @@ Servicio de generación y gestión de reportes que forma parte de la arquitectur
 - Spring Boot Actuator
 - Spring Boot Validation
 - Spring Boot Mail
-- SpringDoc OpenAPI 3.1.0
+- SpringDoc OpenAPI 3.1.1
 - OpenPDF 3.0.5
-- Apache POI 5.5.1
+- Apache POI 6.0.0
 - Caffeine Cache
 - Lombok
 
@@ -56,6 +56,7 @@ spring:
       port: 8500
       discovery:
         prefer-ip-address: true
+        query-passing: true
         health-check-path: /actuator/health/readiness
         health-check-critical-timeout: 5m
         tags: haberes,report
@@ -74,6 +75,16 @@ spring:
           connectiontimeout: 5000
           timeout: 5000
           writetimeout: 5000
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      show-details: never
 ```
 
 ## Desarrollo
