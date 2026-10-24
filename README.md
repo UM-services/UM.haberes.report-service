@@ -42,6 +42,39 @@ Servicio de generación y gestión de reportes que forma parte de la arquitectur
 - Envío de correos electrónicos
 - Validación de datos con Spring Validation
 
+## Arquitectura
+
+El servicio sigue **arquitectura hexagonal con vertical slicing**. Cada reporte es un slice
+independiente bajo `um.haberes.report.reports.<reporte>`:
+
+```
+reports/<reporte>/
+├── domain/{model, ports/{in,out}}     # sin Spring/OpenPDF/POI
+├── application/{usecases, service}    # orquesta puertos
+└── infrastructure/{client, render, web/controller, mail}
+```
+
+- `shared/` es el kernel: modelos de referencia, puertos de catálogos, clientes Feign y
+  `ReportStorage`.
+- `infrastructure/render/pdf` concentra `PdfHeaderFooter`, `PdfHeader`, `PdfTables` y
+  `PdfMerge`; los renderers de cada slice sólo construyen su layout.
+- `shared/infrastructure/web/ReportResponseBuilder` reproduce los headers legacy
+  (`attachment` e `inline`).
+- Los slices no se importan entre sí y la aplicación no importa infraestructura. Lo verifica
+  `HexagonalRulesTest` (`src/test/java/.../contract`).
+
+Los 17 reportes migrados son: `anotador`, `bono`, `cargosclase`, `cargosclaseperiodo`,
+`comparacioncodigos`, `comparacionremuneraciones`, `cursocargonovedad`, `cursodocente`,
+`designacionesdetalle`, `designacionesdocente`, `docentessede`, `fusiondocente`,
+`historicoasignacioncargos`, `novedadesdocentes`, `sheet`, `totalescodigo` y
+`totalesgenerales`. El detalle de la migración y el mapa bug→corrección están en
+[`REFACTOR_HEXAGONAL_PLAN.md`](REFACTOR_HEXAGONAL_PLAN.md) y
+[`REFACTOR_HEXAGONAL_NOTES.md`](REFACTOR_HEXAGONAL_NOTES.md).
+
+La suite de caracterización (`src/test/java/.../reports`) compara el PDF/XLSX generado
+contra un baseline legacy congelado; toda diferencia aprobada se declara en
+`src/test/resources/golden/expected-fixes.yml`.
+
 ## Configuración
 
 El servicio requiere las siguientes configuraciones:

@@ -1,0 +1,17 @@
+{
+  "persona": {
+    "legajoId": 120,
+    "documento": 30111222,
+    "apellido": "Gómez",
+    "nombre": "Ana"
+  },
+  "liquidadas": [],
+  "cursos": [],
+  "fusiones": [],
+  "facultades": [],
+  "geograficas": [],
+  "dependencias": [],
+  "categorias": [],
+  "cargoTipos": [],
+  "designacionTipos": []
+}

@@ -1,0 +1,21 @@
+spring:
+  cloud:
+    consul:
+      enabled: false
+      discovery:
+        enabled: false
+        catalog-services-watch:
+          enabled: false
+        register: false
+  main:
+    banner-mode: off
+
+# Los reportes escriben en target; los tests no deben tocar /tmp del host.
+path:
+  files: target/test-output/
+
+logging:
+  level:
+    um.haberes.report: warn
+    org.springframework: warn
+    com.netflix: warn
