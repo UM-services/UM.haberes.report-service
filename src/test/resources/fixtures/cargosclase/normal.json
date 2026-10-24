@@ -1,0 +1,13 @@
+{
+  "clases": [
+    { "claseId": 2, "nombre": "Segunda", "valorHora": 222.50 },
+    { "claseId": 1, "nombre": "Primera", "valorHora": 111.25 }
+  ],
+  "cargosClase": [
+    { "cargoClaseId": 12, "nombre": "Ayudante de Primera", "claseId": 1 },
+    { "cargoClaseId": 11, "nombre": "Jefe de Trabajos Prácticos", "claseId": 1 },
+    { "cargoClaseId": 21, "nombre": "Profesor Titular", "claseId": 2 },
+    { "cargoClaseId": 99, "nombre": "Cargo Huérfano", "claseId": 7 },
+    { "cargoClaseId": 22, "nombre": "Profesor Asociado", "claseId": 2 }
+  ]
+}

@@ -5,6 +5,46 @@ Todos los cambios notables en este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.0] - 2026-10-24
+
+### Changed
+- Refactor hexagonal completo del servicio: los 17 reportes viven en
+  `um.haberes.report.reports.<reporte>` con `domain/application/infrastructure`, sin
+  servicios ni controladores legacy. El detalle está en `REFACTOR_HEXAGONAL_PLAN.md` y
+  `REFACTOR_HEXAGONAL_NOTES.md`.
+- `shared/` concentra los modelos de referencia, puertos de catálogos y clientes Feign; los
+  componentes comunes de PDF quedaron en `infrastructure/render/pdf`.
+- `NumerosEnLetras` reemplaza a `Tool.number_2_text` e incorpora cero, negativos y miles de
+  millones (C6).
+- Se eliminaron `Tool`, `Jsonifier`, `Jsonifyable` y los paquetes legacy de nivel superior
+  (`service`, `controller`, `model`, `client` y `util`).
+
+### Fixed
+- Se corrigieron C1–C17 y C19–C20 del inventario aprobado (C18 queda documentado sin cambio):
+  cierre de documentos y PDF válido sin datos, null-safety, `toMap` con merge, orden
+  determinista de sedes, concurrencia en `docentessede`, nombres de archivo internos,
+  auditoría condicionada, cabecera duplicada del bono, formato/estado del anotador y
+  propagación de errores en `comparacionremuneraciones`.
+- Cada diferencia contra el baseline legacy está declarada en
+  `src/test/resources/golden/expected-fixes.yml`.
+
+### Tests
+- Suite de caracterización de los 26 endpoints (contract tests + goldens PDF/XLSX).
+- `HexagonalRulesTest` valida reglas de arquitectura escaneando las fuentes.
+- `NumerosEnLetrasTest` congela la tabla de conversión de importes a letras.
+- Nueva dependencia de test `spring-boot-starter-webmvc-test` (las anotaciones web de
+  MockMvc viven en un módulo propio en Spring Boot 4).
+
+### Documentation
+- `README.md` incorpora la sección de arquitectura hexagonal con vertical slicing y el
+  inventario de los 17 slices.
+- `docs/diagrams/arquitectura-general.mmd` y `docs/diagrams/flujo-reportes.mmd` se
+  reescribieron para describir las capas `domain`, `application` e `infrastructure`, los
+  puertos y el flujo caso de uso → adaptador → render, en lugar del controlador-servicio
+  monolítico anterior.
+- Se agregan `REFACTOR_HEXAGONAL_PLAN.md` y `REFACTOR_HEXAGONAL_NOTES.md` con el plan, las
+  decisiones y el mapa bug→corrección.
+
 ## [0.6.2] - 2026-10-23
 
 ### Changed

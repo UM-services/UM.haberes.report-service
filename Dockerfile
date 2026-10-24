@@ -13,6 +13,9 @@ RUN mvn dependency:go-offline
 # Copiamos el resto del código fuente
 COPY src ./src
 
+# Los tests y los renderers leen las imágenes desde el directorio de trabajo
+COPY marca_um.png firma.png firma_new.png ./
+
 # Compilamos la aplicación y generamos el JAR
 RUN mvn clean package
 
