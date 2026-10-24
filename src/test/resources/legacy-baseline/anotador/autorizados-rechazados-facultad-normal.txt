@@ -1,0 +1,21 @@
+Autorizados
+
+ Rechazados
+ UNIVERSIDAD DE MENDOZA
+ Anotador - Autorizados / Rechazados
+ Periodo: 9/2026
+ Legajo: 120 - 30111222 - Gómez, Ana
+ 		Facultad de Ingeniería
+ 				2026-09-05T10:15:30operador.fi
+ 						Autorizado
+ 				Solicita cambio de cargo
+ 				Respuesta:
+ 						Aprobado por decanato
+ Legajo: 121 - 27888999 - Pérez, Juan
+ 		Facultad de Ciencias Económicas
+ 				2026-09-07T16:45operador.fce
+ 						Rechazado
+ 				Solicita licencia sin goce de haberes
+ 				Respuesta:
+ 						Rechazado por falta de documentación
+ Página 1

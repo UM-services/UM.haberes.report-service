@@ -1,0 +1,64 @@
+{
+  "personas": [
+    { "legajoId": 1001, "apellido": "Gómez", "nombre": "Ana" },
+    { "legajoId": 1002, "apellido": "Pérez", "nombre": "Juan" },
+    { "legajoId": 1003, "apellido": "López", "nombre": "María" }
+  ],
+  "designaciones": [
+    {
+      "legajoId": 1001,
+      "anho": 2026,
+      "mes": 9,
+      "facultadId": 2,
+      "geograficaId": 1,
+      "espacio": "Análisis Matemático I",
+      "horasSemanales": 10.00,
+      "cargo": "Profesor Titular",
+      "designacion": "Ordinaria",
+      "horasDesignacion": 10.00,
+      "anual": 1,
+      "semestre1": 0,
+      "semestre2": 0
+    },
+    {
+      "legajoId": 1001,
+      "anho": 2026,
+      "mes": 9,
+      "facultadId": 2,
+      "geograficaId": 1,
+      "espacio": "Física II",
+      "horasSemanales": 6.00,
+      "cargo": "Jefe de Trabajos Prácticos",
+      "designacion": "Interina",
+      "horasDesignacion": 6.00,
+      "anual": 0,
+      "semestre1": 1,
+      "semestre2": 1
+    },
+    {
+      "legajoId": 1002,
+      "anho": 2026,
+      "mes": 9,
+      "facultadId": 3,
+      "geograficaId": 2,
+      "espacio": "Contabilidad General",
+      "horasSemanales": 4.50,
+      "cargo": "Ayudante de Primera",
+      "designacion": "Suplente",
+      "horasDesignacion": 4.50,
+      "anual": 0,
+      "semestre1": 0,
+      "semestre2": 1
+    }
+  ],
+  "facultades": [
+    { "facultadId": 2, "nombre": "Facultad de Ingeniería", "reducido": "FI" },
+    { "facultadId": 3, "nombre": "Facultad de Ciencias Económicas", "reducido": "FCE" },
+    { "facultadId": 4, "nombre": "Facultad de Derecho", "reducido": "FD" }
+  ],
+  "geograficas": [
+    { "geograficaId": 1, "nombre": "Campus Universitario", "reducido": "CU" },
+    { "geograficaId": 2, "nombre": "Sede San Rafael", "reducido": "SR" },
+    { "geograficaId": 3, "nombre": "Sede Centro", "reducido": "SC" }
+  ]
+}

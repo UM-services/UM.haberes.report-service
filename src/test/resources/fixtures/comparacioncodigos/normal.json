@@ -1,0 +1,19 @@
+{
+  "totalNovedades": [
+    { "uniqueId": "tn-10-2026-9", "anho": 2026, "mes": 9, "codigoId": 10, "total": 1500000.50 },
+    { "uniqueId": "tn-20-2026-9", "anho": 2026, "mes": 9, "codigoId": 20, "total": 250000.25 },
+    { "uniqueId": "tn-40-2026-9", "anho": 2026, "mes": 9, "codigoId": 40, "total": 1000.00 },
+    { "uniqueId": "tn-99-2026-9", "anho": 2026, "mes": 9, "codigoId": 99, "total": 777.00 }
+  ],
+  "totalItems": [
+    { "uniqueId": "ti-10-2026-9", "anho": 2026, "mes": 9, "codigoId": 10, "total": 1499999.50 },
+    { "uniqueId": "ti-20-2026-9", "anho": 2026, "mes": 9, "codigoId": 20, "total": 260000.00 },
+    { "uniqueId": "ti-30-2026-9", "anho": 2026, "mes": 9, "codigoId": 30, "total": 500.75 }
+  ],
+  "codigos": [
+    { "codigoId": 30, "nombre": "Sólo Liquidado", "docente": 1, "noDocente": 1 },
+    { "codigoId": 10, "nombre": "Sueldo Básico", "docente": 1, "noDocente": 1 },
+    { "codigoId": 40, "nombre": "Sólo Novedad", "docente": 1 },
+    { "codigoId": 20, "nombre": "Antigüedad", "docente": 1, "noDocente": 1 }
+  ]
+}

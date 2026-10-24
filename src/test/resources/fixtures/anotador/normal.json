@@ -1,0 +1,150 @@
+{
+  "pendientes": [
+    {
+      "anotadorId": 3,
+      "legajoId": 122,
+      "anho": 2026,
+      "mes": 9,
+      "facultadId": 2,
+      "anotacion": "Solicita regularización de cargo docente",
+      "visado": 0,
+      "ipVisado": "",
+      "user": "legajo.122",
+      "respuesta": null,
+      "autorizado": 0,
+      "rechazado": 0,
+      "rectorado": 0,
+      "transferido": 0,
+      "persona": {
+        "legajoId": 122,
+        "documento": 28999000,
+        "apellido": "López",
+        "nombre": "María"
+      },
+      "facultad": {
+        "facultadId": 2,
+        "nombre": "Facultad de Ingeniería",
+        "reducido": "FI"
+      },
+      "created": "2026-09-12T08:30:00"
+    }
+  ],
+  "autorizados": [
+    {
+      "anotadorId": 1,
+      "legajoId": 120,
+      "anho": 2026,
+      "mes": 9,
+      "facultadId": 2,
+      "anotacion": "Solicita cambio de cargo",
+      "visado": 1,
+      "ipVisado": "10.0.0.11",
+      "user": "operador.fi",
+      "respuesta": "Aprobado por decanato",
+      "autorizado": 1,
+      "rechazado": 0,
+      "rectorado": 1,
+      "transferido": 0,
+      "persona": {
+        "legajoId": 120,
+        "documento": 30111222,
+        "apellido": "Gómez",
+        "nombre": "Ana"
+      },
+      "facultad": {
+        "facultadId": 2,
+        "nombre": "Facultad de Ingeniería",
+        "reducido": "FI"
+      },
+      "created": "2026-09-05T10:15:30"
+    }
+  ],
+  "rechazados": [
+    {
+      "anotadorId": 2,
+      "legajoId": 121,
+      "anho": 2026,
+      "mes": 9,
+      "facultadId": 3,
+      "anotacion": "Solicita licencia sin goce de haberes",
+      "visado": 1,
+      "ipVisado": "10.0.0.12",
+      "user": "operador.fce",
+      "respuesta": "Rechazado por falta de documentación",
+      "autorizado": 0,
+      "rechazado": 1,
+      "rectorado": 0,
+      "transferido": 0,
+      "persona": {
+        "legajoId": 121,
+        "documento": 27888999,
+        "apellido": "Pérez",
+        "nombre": "Juan"
+      },
+      "facultad": {
+        "facultadId": 3,
+        "nombre": "Facultad de Ciencias Económicas",
+        "reducido": "FCE"
+      },
+      "created": "2026-09-07T16:45:00"
+    }
+  ],
+  "revisados": [
+    {
+      "anotadorId": 1,
+      "legajoId": 120,
+      "anho": 2026,
+      "mes": 9,
+      "facultadId": 2,
+      "anotacion": "Solicita cambio de cargo",
+      "visado": 1,
+      "ipVisado": "10.0.0.11",
+      "user": "operador.fi",
+      "respuesta": "Aprobado por decanato",
+      "autorizado": 1,
+      "rechazado": 0,
+      "rectorado": 1,
+      "transferido": 0,
+      "persona": {
+        "legajoId": 120,
+        "documento": 30111222,
+        "apellido": "Gómez",
+        "nombre": "Ana"
+      },
+      "facultad": {
+        "facultadId": 2,
+        "nombre": "Facultad de Ingeniería",
+        "reducido": "FI"
+      },
+      "created": "2026-09-05T10:15:30"
+    },
+    {
+      "anotadorId": 2,
+      "legajoId": 121,
+      "anho": 2026,
+      "mes": 9,
+      "facultadId": 3,
+      "anotacion": "Solicita licencia sin goce de haberes",
+      "visado": 1,
+      "ipVisado": "10.0.0.12",
+      "user": "operador.fce",
+      "respuesta": "Rechazado por falta de documentación",
+      "autorizado": 0,
+      "rechazado": 1,
+      "rectorado": 0,
+      "transferido": 0,
+      "persona": {
+        "legajoId": 121,
+        "documento": 27888999,
+        "apellido": "Pérez",
+        "nombre": "Juan"
+      },
+      "facultad": {
+        "facultadId": 3,
+        "nombre": "Facultad de Ciencias Económicas",
+        "reducido": "FCE"
+      },
+      "created": "2026-09-07T16:45:00"
+    }
+  ]
+}

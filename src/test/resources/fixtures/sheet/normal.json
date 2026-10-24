@@ -1,0 +1,67 @@
+{
+  "facultades": [
+    { "facultadId": 2, "nombre": "Facultad de Ingeniería", "reducido": "FI" },
+    { "facultadId": 3, "nombre": "Facultad de Ciencias Económicas", "reducido": "FCE" }
+  ],
+  "geograficas": [
+    { "geograficaId": 1, "nombre": "Campus Universitario", "reducido": "CU" },
+    { "geograficaId": 2, "nombre": "Sede San Rafael", "reducido": "SR" }
+  ],
+  "cursos": [
+    {
+      "cursoId": 301,
+      "nombre": "Análisis Matemático I",
+      "facultadId": 2,
+      "geograficaId": 1,
+      "anual": 1
+    },
+    {
+      "cursoId": 302,
+      "nombre": "Física II",
+      "facultadId": 3,
+      "geograficaId": 2,
+      "semestre1": 1
+    }
+  ],
+  "cargoTipos": [
+    { "cargoTipoId": 1, "acargo": 1, "nombre": "Profesor Titular", "precedencia": 1 },
+    { "cargoTipoId": 2, "acargo": 0, "nombre": "Jefe de Trabajos Prácticos", "precedencia": 2 },
+    { "cargoTipoId": 3, "acargo": 0, "nombre": "Ayudante de Primera", "precedencia": 3 }
+  ],
+  "cursoCargos": [
+    {
+      "cursoCargoId": 7001,
+      "cursoId": 301,
+      "anho": 2026,
+      "mes": 9,
+      "cargoTipoId": 1,
+      "legajoId": 1001,
+      "horasSemanales": 10.50,
+      "horasTotales": 42.00
+    },
+    {
+      "cursoCargoId": 7002,
+      "cursoId": 302,
+      "anho": 2026,
+      "mes": 9,
+      "cargoTipoId": 2,
+      "legajoId": 1001,
+      "horasSemanales": 6.50,
+      "horasTotales": 26.00
+    },
+    {
+      "cursoCargoId": 7003,
+      "cursoId": 301,
+      "anho": 2026,
+      "mes": 9,
+      "cargoTipoId": 3,
+      "legajoId": 1002,
+      "horasSemanales": 4.25,
+      "horasTotales": 17.00
+    }
+  ],
+  "personas": [
+    { "legajoId": 1001, "documento": 30111222, "apellido": "Gómez", "nombre": "Ana" },
+    { "legajoId": 1002, "documento": 27888999, "apellido": "Pérez", "nombre": "Juan" }
+  ]
+}

@@ -1,0 +1,16 @@
+UNIVERSIDAD DE MENDOZA
+ Periodo: 9/2026
+ Fusión por Docente
+ Legajo Apellido, NombreFacultadSedeCargoBásico
+ 1001 Gómez, AnaFacultad de IngenieríaCampus
+ Universitario
+ Profesor
+ Titular
+ 1.234.567,89
+ 1002 Pérez, JuanFacultad de Ciencias EconómicasSede San
+ Rafael
+ Jefe de
+ Trabajos
+ Prácticos
+ 987.654,32
+ Página 1
