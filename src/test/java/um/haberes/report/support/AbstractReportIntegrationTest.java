@@ -20,6 +20,7 @@ import um.haberes.report.shared.infrastructure.client.haberes.core.client.ClaseC
 import um.haberes.report.shared.infrastructure.client.haberes.core.client.CodigoClient;
 import um.haberes.report.shared.infrastructure.client.haberes.core.client.CodigoGrupoClient;
 import um.haberes.report.shared.infrastructure.client.haberes.core.client.ContactoClient;
+import um.haberes.report.shared.infrastructure.client.haberes.core.client.ContratadoPersonaClient;
 import um.haberes.report.shared.infrastructure.client.haberes.core.client.ControlClient;
 import um.haberes.report.shared.infrastructure.client.haberes.core.client.CursoCargoClient;
 import um.haberes.report.shared.infrastructure.client.haberes.core.client.CursoCargoNovedadClient;
@@ -30,15 +31,19 @@ import um.haberes.report.shared.infrastructure.client.haberes.core.client.Design
 import um.haberes.report.shared.infrastructure.client.haberes.core.client.DesignacionToolClient;
 import um.haberes.report.shared.infrastructure.client.haberes.core.client.DocenteDesignacionClient;
 import um.haberes.report.shared.infrastructure.client.haberes.core.client.FacultadClient;
+import um.haberes.report.shared.infrastructure.client.haberes.core.client.FormularioImprimirClient;
 import um.haberes.report.shared.infrastructure.client.haberes.core.client.GeograficaClient;
 import um.haberes.report.shared.infrastructure.client.haberes.core.client.ItemClient;
 import um.haberes.report.shared.infrastructure.client.haberes.core.client.LegajoBancoClient;
 import um.haberes.report.shared.infrastructure.client.haberes.core.client.LegajoControlClient;
+import um.haberes.report.shared.infrastructure.client.haberes.core.client.LegajoCursoCantidadClient;
 import um.haberes.report.shared.infrastructure.client.haberes.core.client.LetraClient;
+import um.haberes.report.shared.infrastructure.client.haberes.core.client.LibroSueldoClient;
 import um.haberes.report.shared.infrastructure.client.haberes.core.client.LiquidacionAdicionalClient;
 import um.haberes.report.shared.infrastructure.client.haberes.core.client.LiquidacionClient;
 import um.haberes.report.shared.infrastructure.client.haberes.core.client.LiquidacionEtecClient;
 import um.haberes.report.shared.infrastructure.client.haberes.core.client.NovedadClient;
+import um.haberes.report.shared.infrastructure.client.haberes.core.client.NovedadAcumuladoClient;
 import um.haberes.report.shared.infrastructure.client.haberes.core.client.PersonaClient;
 import um.haberes.report.shared.infrastructure.client.haberes.core.client.TotalItemClient;
 import um.haberes.report.shared.infrastructure.client.haberes.core.client.TotalMensualClient;
@@ -100,6 +105,8 @@ public abstract class AbstractReportIntegrationTest {
     @MockitoBean
     protected ContactoClient contactoClient;
     @MockitoBean
+    protected ContratadoPersonaClient contratadoPersonaClient;
+    @MockitoBean
     protected ControlClient controlClient;
     @MockitoBean
     protected CursoCargoClient cursoCargoClient;
@@ -120,6 +127,8 @@ public abstract class AbstractReportIntegrationTest {
     @MockitoBean
     protected FacultadClient facultadClient;
     @MockitoBean
+    protected FormularioImprimirClient formularioImprimirClient;
+    @MockitoBean
     protected GeograficaClient geograficaClient;
     @MockitoBean
     protected ItemClient itemClient;
@@ -128,7 +137,11 @@ public abstract class AbstractReportIntegrationTest {
     @MockitoBean
     protected LegajoControlClient legajoControlClient;
     @MockitoBean
+    protected LegajoCursoCantidadClient legajoCursoCantidadClient;
+    @MockitoBean
     protected LetraClient letraClient;
+    @MockitoBean
+    protected LibroSueldoClient libroSueldoClient;
     @MockitoBean
     protected LiquidacionAdicionalClient liquidacionAdicionalClient;
     @MockitoBean
@@ -137,6 +150,8 @@ public abstract class AbstractReportIntegrationTest {
     protected LiquidacionEtecClient liquidacionEtecClient;
     @MockitoBean
     protected NovedadClient novedadClient;
+    @MockitoBean
+    protected NovedadAcumuladoClient novedadAcumuladoClient;
     @MockitoBean
     protected PersonaClient personaClient;
     @MockitoBean

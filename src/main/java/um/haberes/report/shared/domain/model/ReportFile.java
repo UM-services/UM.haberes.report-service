@@ -6,6 +6,6 @@ import java.nio.file.Path;
 public record ReportFile(Path path, String displayName, Format format, long size) {
 
     public enum Format {
-        PDF, XLSX
+        PDF, XLSX, ZIP
     }
 }

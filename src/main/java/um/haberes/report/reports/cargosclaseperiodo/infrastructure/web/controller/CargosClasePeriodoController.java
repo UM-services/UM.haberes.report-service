@@ -22,6 +22,6 @@ public class CargosClasePeriodoController {
     public ResponseEntity<Resource> generateCargosClasePeriodo(@PathVariable Integer facultadId,
                                                                @PathVariable Integer anho,
                                                                @PathVariable Integer mes) {
-        return responseBuilder.attachment(service.generate(facultadId, anho, mes));
+        return responseBuilder.attachment(service.pdf(facultadId, anho, mes));
     }
 }

@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import um.haberes.report.reports.bono.application.service.BonoService;
-import um.haberes.report.shared.domain.model.ReportFile;
 import um.haberes.report.shared.infrastructure.web.ReportResponseBuilder;
 
 @RestController
@@ -54,20 +53,5 @@ public class BonoController {
                            @PathVariable Integer mes, @PathVariable Long legajoIdSolicitud,
                            @PathVariable String ipAddress) {
         return service.sendBono(legajoId, anho, mes, legajoIdSolicitud, ipAddress);
-    }
-
-    @GetMapping("/ui/generatePdf/{legajoId}/{anho}/{mes}")
-    public ResponseEntity<Resource> generatePdfUi(@PathVariable Long legajoId,
-                                                  @PathVariable Integer anho,
-                                                  @PathVariable Integer mes) {
-        ReportFile file = service.generatePdfUi(legajoId, anho, mes);
-        return responseBuilder.inlinePdf(new ReportFile(file.path(),
-                service.nombreArchivoBono(legajoId, anho, mes), file.format(), file.size()));
-    }
-
-    @GetMapping("/ui/sendBono/{legajoId}/{anho}/{mes}")
-    public String sendBonoUi(@PathVariable Long legajoId, @PathVariable Integer anho,
-                             @PathVariable Integer mes) {
-        return service.sendBonoUi(legajoId, anho, mes);
     }
 }

@@ -31,6 +31,9 @@ public interface PersonaClient {
     @GetMapping("/liquidables")
     List<PersonaDto> findAllLiquidables();
 
+    @GetMapping("/liquidado/{anho}/{mes}")
+    List<PersonaDto> findAllByLiquidado(@PathVariable Integer anho, @PathVariable Integer mes);
+
     @GetMapping("/facultad/{facultadId}")
     List<PersonaDto> findAllByFacultad(@PathVariable Integer facultadId);
 

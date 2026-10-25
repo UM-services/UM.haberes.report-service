@@ -1,0 +1,6 @@
+SHEET Contratados
+R0:[0|STRING|Cursos por Contratado]
+R1:[0|STRING|Período: 9/2026]
+R2:[0|STRING|CUIT][1|STRING|Apellido, Nombre][2|STRING|Período][3|STRING|Facultad][4|STRING|Sede][5|STRING|Curso][6|STRING|Cargo][7|STRING|Horas][8|STRING|Dictado]
+R3:[0|STRING|20-11111111-3][1|STRING|Sosa, Luis][2|STRING|9/2026][3|STRING|Facultad de Ingeniería][4|STRING|Campus Universitario][5|STRING|Análisis Matemático I][6|STRING|Jefe de Trabajos Prácticos][7|STRING|6.5][8|STRING|Anual]
+R4:[0|STRING|27-22222222-4][1|STRING|Ruiz, Eva][2|STRING|9/2026][3|STRING|Facultad de Ciencias Económicas][4|STRING|Sede San Rafael][5|STRING|Física II][6|STRING|Profesor Titular][7|STRING|4][8|STRING|2do Semestre]

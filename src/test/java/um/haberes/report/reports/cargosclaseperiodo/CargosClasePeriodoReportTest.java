@@ -15,6 +15,9 @@ import um.haberes.report.support.Fixtures;
 import um.haberes.report.support.GoldenFiles;
 import um.haberes.report.support.ReportHttp;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
@@ -66,13 +69,16 @@ class CargosClasePeriodoReportTest extends AbstractReportIntegrationTest {
         when(claseClient.findAll())
                 .thenReturn(Fixtures.list(fixture, "clases", ClaseDto.class));
 
+        // Una sola consulta por facultad/período (antes era una por legajo).
+        List<CargoClaseDetalleDto> detalles = new ArrayList<>();
+        List<CargoClasePeriodoDto> periodos = new ArrayList<>();
         for (PersonaDto persona : Fixtures.list(fixture, "personas", PersonaDto.class)) {
             Long legajoId = persona.getLegajoId();
-            when(cargoClaseDetalleClient.findAllByLegajo(legajoId, 2026, 9))
-                    .thenReturn(Fixtures.list(fixture, "detalles" + legajoId, CargoClaseDetalleDto.class));
-            when(cargoClasePeriodoClient.findAllByLegajo(legajoId))
-                    .thenReturn(Fixtures.list(fixture, "periodos" + legajoId, CargoClasePeriodoDto.class));
+            detalles.addAll(Fixtures.list(fixture, "detalles" + legajoId, CargoClaseDetalleDto.class));
+            periodos.addAll(Fixtures.list(fixture, "periodos" + legajoId, CargoClasePeriodoDto.class));
         }
+        when(cargoClaseDetalleClient.findAllByFacultad(2, 2026, 9)).thenReturn(detalles);
+        when(cargoClasePeriodoClient.findAllByFacultad(2)).thenReturn(periodos);
 
         for (CargoClaseDto cargoClase : Fixtures.list(fixture, "cargoClases", CargoClaseDto.class)) {
             when(cargoClaseClient.findByCargoClaseId(cargoClase.getCargoClaseId())).thenReturn(cargoClase);

@@ -20,6 +20,6 @@ public class TotalesCodigoController {
 
     @GetMapping("/totalesCodigo/{anho}/{mes}")
     public ResponseEntity<Resource> generateTotalesCodigo(@PathVariable Integer anho, @PathVariable Integer mes) {
-        return responseBuilder.attachment(service.generate(anho, mes));
+        return responseBuilder.attachment(service.pdf(anho, mes));
     }
 }

@@ -40,6 +40,16 @@ public class FeignPersonaCatalogAdapter implements PersonaCatalogPort {
     }
 
     @Override
+    public List<PersonaResumen> findAllLiquidables() {
+        return map(personaClient.findAllLiquidables());
+    }
+
+    @Override
+    public List<PersonaResumen> findAllByLiquidado(Integer anho, Integer mes) {
+        return map(personaClient.findAllByLiquidado(anho, mes));
+    }
+
+    @Override
     public List<PersonaResumen> findAllByLegajos(List<Long> legajoIds) {
         return map(personaClient.findAllLegajos(legajoIds));
     }

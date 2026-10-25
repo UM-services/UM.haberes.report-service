@@ -14,9 +14,8 @@ import um.haberes.report.support.GoldenFiles;
 import um.haberes.report.support.ReportHttp;
 
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
+import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
@@ -57,17 +56,14 @@ class FusionDocenteReportTest extends AbstractReportIntegrationTest {
     private void stub(JsonNode fixture) {
         when(categoriaClient.findAll())
                 .thenReturn(Fixtures.list(fixture, "categorias", CategoriaDto.class));
-        when(personaClient.findAll())
+        when(personaClient.findAllLegajos(anyList()))
                 .thenReturn(Fixtures.list(fixture, "personas", PersonaDto.class));
         when(facultadClient.findAll())
                 .thenReturn(Fixtures.list(fixture, "facultades", FacultadDto.class));
         when(geograficaClient.findAll())
                 .thenReturn(Fixtures.list(fixture, "geograficas", GeograficaDto.class));
-
-        Map<Long, List<CursoFusionDto>> fusionesPorLegajo = Fixtures.list(fixture, "fusiones", CursoFusionDto.class)
-                .stream()
-                .collect(Collectors.groupingBy(CursoFusionDto::getLegajoId));
-        fusionesPorLegajo.forEach((legajoId, fusiones) ->
-                when(cursoFusionClient.findAllByLegajoId(legajoId, 2026, 9)).thenReturn(fusiones));
+        // Una sola consulta al período (antes era una por legajo).
+        when(cursoFusionClient.findAllByPeriodo(2026, 9))
+                .thenReturn(Fixtures.list(fixture, "fusiones", CursoFusionDto.class));
     }
 }

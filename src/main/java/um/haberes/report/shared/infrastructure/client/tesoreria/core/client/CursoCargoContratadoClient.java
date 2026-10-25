@@ -9,6 +9,9 @@ import java.util.List;
 @FeignClient(name = "tesoreria-core-service/cursocargocontratado")
 public interface CursoCargoContratadoClient {
 
+    @GetMapping("/periodo/{anho}/{mes}")
+    List<CursoCargoContratadoDto> findAllByPeriodo(@PathVariable Integer anho, @PathVariable Integer mes);
+
     @GetMapping("/cursos/{contratadoId}/{anho}/{mes}/{contratoId}")
     List<CursoCargoContratadoDto> findAllByContratado(@PathVariable Long contratadoId, @PathVariable Integer anho, @PathVariable Integer mes, @PathVariable Long contratoId);
 

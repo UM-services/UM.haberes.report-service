@@ -17,7 +17,10 @@ public class PersonaMapper {
                 .apellido(dto.getApellido())
                 .nombre(dto.getNombre())
                 .cuil(dto.getCuil())
+                .estado(dto.getEstado())
                 .dependenciaId(dto.getDependenciaId())
+                .dependenciaNombre(dto.getDependencia() == null
+                        ? null : dto.getDependencia().getNombre())
                 .directivoEtec(dto.getDirectivoEtec())
                 .altaAdministrativa(dto.getAltaAdministrativa())
                 .build();

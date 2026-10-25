@@ -22,6 +22,6 @@ public class ComparacionRemuneracionesController {
     public ResponseEntity<Resource> generateComparacionRemuneraciones(
             @PathVariable Integer anho, @PathVariable Integer mes,
             @PathVariable Integer anho_anterior, @PathVariable Integer mes_anterior) {
-        return responseBuilder.attachment(service.generate(anho, mes, anho_anterior, mes_anterior));
+        return responseBuilder.attachment(service.pdf(anho, mes, anho_anterior, mes_anterior));
     }
 }

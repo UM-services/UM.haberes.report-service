@@ -22,7 +22,9 @@ public class PersonaResumen {
     private String apellido;
     private String nombre;
     private String cuil;
+    private Integer estado;
     private Integer dependenciaId;
+    private String dependenciaNombre;
     private byte directivoEtec;
     private OffsetDateTime altaAdministrativa;
 

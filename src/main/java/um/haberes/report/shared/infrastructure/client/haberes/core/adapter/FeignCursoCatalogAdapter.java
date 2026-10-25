@@ -1,6 +1,7 @@
 package um.haberes.report.shared.infrastructure.client.haberes.core.adapter;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 import um.haberes.report.shared.domain.model.CursoResumen;
 import um.haberes.report.shared.domain.ports.out.CursoCatalogPort;
@@ -13,6 +14,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Component
+@Cacheable("cursos")
 @RequiredArgsConstructor
 public class FeignCursoCatalogAdapter implements CursoCatalogPort {
 

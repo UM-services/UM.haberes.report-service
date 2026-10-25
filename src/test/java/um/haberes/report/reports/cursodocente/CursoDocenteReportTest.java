@@ -15,8 +15,6 @@ import um.haberes.report.support.GoldenFiles;
 import um.haberes.report.support.ReportHttp;
 
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.when;
@@ -57,7 +55,7 @@ class CursoDocenteReportTest extends AbstractReportIntegrationTest {
     }
 
     private void stub(JsonNode fixture) {
-        when(personaClient.findAll())
+        when(personaClient.findAllLegajos(anyList()))
                 .thenReturn(Fixtures.list(fixture, "personas", PersonaDto.class));
         when(cursoClient.findAll())
                 .thenReturn(Fixtures.list(fixture, "cursos", CursoDto.class));
@@ -69,11 +67,8 @@ class CursoDocenteReportTest extends AbstractReportIntegrationTest {
         // se matchea cualquier lista y el fixture define el contenido devuelto.
         when(geograficaClient.findAllByGeograficaIdIn(anyList()))
                 .thenReturn(Fixtures.list(fixture, "geograficas", GeograficaDto.class));
-
-        Map<Long, List<CursoCargoDto>> cursosPorLegajo = Fixtures.list(fixture, "cursosCargo", CursoCargoDto.class)
-                .stream()
-                .collect(Collectors.groupingBy(CursoCargoDto::getLegajoId));
-        cursosPorLegajo.forEach((legajoId, cursosCargo) ->
-                when(cursoCargoClient.findAllByLegajo(legajoId, 2026, 9)).thenReturn(cursosCargo));
+        // Una sola consulta al período (antes era una por legajo).
+        when(cursoCargoClient.findAllByPeriodo(2026, 9))
+                .thenReturn(Fixtures.list(fixture, "cursosCargo", CursoCargoDto.class));
     }
 }

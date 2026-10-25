@@ -15,8 +15,6 @@ import um.haberes.report.support.GoldenFiles;
 import um.haberes.report.support.ReportHttp;
 
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.when;
@@ -76,12 +74,7 @@ class SheetReportTest extends AbstractReportIntegrationTest {
                 .thenReturn(Fixtures.list(fixture, "personas", PersonaDto.class));
 
         List<CursoCargoDto> cursoCargos = Fixtures.list(fixture, "cursoCargos", CursoCargoDto.class);
+        // Una sola consulta al período: ya no se piden los cursos por legajo.
         when(cursoCargoClient.findAllByPeriodo(2026, 9)).thenReturn(cursoCargos);
-
-        // El service pide los cursos de cada persona ya resuelta por findAllLegajos.
-        Map<Long, List<CursoCargoDto>> porLegajo = cursoCargos.stream()
-                .collect(Collectors.groupingBy(CursoCargoDto::getLegajoId));
-        porLegajo.forEach((legajoId, cargos) ->
-                when(cursoCargoClient.findAllByLegajo(legajoId, 2026, 9)).thenReturn(cargos));
     }
 }

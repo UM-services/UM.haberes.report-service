@@ -23,6 +23,10 @@ public class CursoCargoContratadoDto {
 
     private Long contratoId;
 
+    private java.math.BigDecimal personaId;
+
+    private Integer documentoId;
+
     private Integer cargoTipoId;
 
     private BigDecimal horasSemanales = BigDecimal.ZERO;

@@ -12,6 +12,9 @@ public interface CargoClaseDetalleClient {
     @GetMapping("/legajo/{legajoId}/{anho}/{mes}")
     List<CargoClaseDetalleDto> findAllByLegajo(@PathVariable Long legajoId, @PathVariable Integer anho, @PathVariable Integer mes);
 
+    @GetMapping("/periodo/{anho}/{mes}")
+    List<CargoClaseDetalleDto> findAllByPeriodo(@PathVariable Integer anho, @PathVariable Integer mes);
+
     @GetMapping("/legajo/{legajoId}/{anho}/{mes}/facultad/{facultadId}")
     List<CargoClaseDetalleDto> findAllByLegajoAndFacultad(@PathVariable Long legajoId, @PathVariable Integer anho, @PathVariable Integer mes, @PathVariable Integer facultadId);
 

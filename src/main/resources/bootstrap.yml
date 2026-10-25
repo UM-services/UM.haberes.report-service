@@ -1,6 +1,9 @@
 app:
   port: ${APP_PORT:8180}
   logging: debug
+  # API key que inyecta el gateway en /api/haberes/report/ui/** (mismo esquema que compras).
+  # Las rutas legacy de VB6 no pasan por el filtro.
+  api-key: ${APP_API_KEY:default-secret-key}
   consul:
     host: consul-service
     port: 8500
@@ -14,6 +17,11 @@ server:
 spring:
   application:
     name: haberes-report-service
+  cache:
+    type: caffeine
+    caffeine:
+      # Catálogos casi estáticos: evita repetir llamadas a core dentro de la misma ventana.
+      spec: maximumSize=500,expireAfterWrite=30m
   cloud:
     consul:
       host: ${app.consul.host}

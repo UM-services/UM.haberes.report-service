@@ -5,6 +5,121 @@ Todos los cambios notables en este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.0] - 2026-10-25
+
+### Added
+- **F4 — especiales del menú Consultas.**
+  - `bonosDependencia` (C1): grilla de legajos de una dependencia (`FormularioImprimirClient`,
+    una sola llamada a `formularioImprimir`), PDF consolidado de los recibos y envío unitario
+    para el masivo. Endpoints `GET /ui/bonoDependencia/{data|pdf}/{anho}/{mes}/{dependenciaId}/{salida}`
+    y `GET /ui/bonoDependencia/sendBono/{legajoId}/{anho}/{mes}`. Las rutas `/ui/` no auditan ni
+    reciben IP: la preparación de actividad y la auditoría las resuelve el core en
+    `POST /bono/dependencia/.../print-prepare`.
+  - `historicoCargos` (C18): `BuildHistoricoAsignacionCargosContentUseCase` y
+    `GET /ui/historicoCargos/{data|pdf}/{categoriaId}`. `data` devuelve el aviso de que el
+    reporte no tiene cuerpo implementado; no hay XLSX. Se dejaron de consultar los cuatro
+    catálogos que el reporte pedía y no usaba (el PDF es idéntico).
+- **Namespace del bono individual unificado**: `/api/haberes/report/bono/ui/{generatePdf,sendBono}`
+  pasó a `/api/haberes/report/ui/bono/...` (`BonoUiController`), de modo que queda detrás de
+  `ApiKeyFilter`. Las rutas legacy con `{ipAddress}` siguen en `BonoController` sin cambios para
+  `bonos.vb6`.
+- Namespace nuevo para el frontend bajo `/api/haberes/report/ui/{reporte}/{data|pdf|xlsx}/...`,
+  con parámetros por path. Las rutas legacy que consume `bonos.vb6` quedan intactas.
+- `totalesGenerales`: `BuildTotalesGeneralesContentUseCase` (contenido compartido), DTO
+  `TotalesGeneralesResponse` + mapper, export XLSX (`TotalesGeneralesXlsxRendererImpl`) y los
+  endpoints `/ui/totalesGenerales/data|pdf|xlsx/{anho}/{mes}`. La tabla, el PDF y el XLSX salen
+  del mismo contenido.
+- `totalesCodigo`, `comparacionCodigos` y `comparacionRemuneraciones`: mismo patrón (builder +
+  `Response` + mapper + renderer XLSX) y endpoints `/ui/*/{data,pdf,xlsx}/...`. En comparación de
+  remuneraciones los parámetros incluyen el período anterior.
+- `designacionesdocente`, `cursodocente`, `fusiondocente`, `docentessede` y
+  `cargosclaseperiodo`: mismo patrón (contenido compartido + `Response` + mapper + XLSX) y
+  endpoints `/ui/*/{data,pdf,xlsx}/...`.
+- Eficiencia con core: `cursodocente` y `fusiondocente` consultan el período completo en lugar de
+  legajo por legajo (nuevo `GET /cursofusion/periodo/{anho}/{mes}` en core);
+  `cargosclaseperiodo` usa `cargoclaseperiodo/facultad/{id}` y `cargoclasedetalle/facultad/...` en
+  lugar de iterar por legajo, y memoiza la definición por cargoClaseId.
+- Caché Caffeine de catálogos casi estáticos (facultades, geográficas, dependencias, categorías,
+  clases, cargos, cursos y códigos) con TTL 30 min, desactivada en los tests
+  (`spring.cache.type=none`).
+- `infrastructure/render/xlsx/XlsxCells`: helpers compartidos para escribir celdas con estilo en
+  los XLSX nuevos.
+- Planillas de F3 (un contenido por reporte, con `data` + PDF + XLSX): `liquidables`,
+  `cantidadcargos`, `detallecodigo`, `cargosperiodo`, `basicosperiodo`, `librosueldos` y
+  `cursoscontratado` (7 slices nuevos), más la slice `sheet` extendida para `cursosPeriodo`
+  (contenido extraído a `BuildSheetCursosContentUseCase`, PDF nuevo y `SheetCursosUiController`;
+  el XLSX y la ruta legacy `/sheet/generatecursos` quedan iguales).
+  - `liquidables`: sin filtro de período (sale del flag vigente) y `Sin datos.` como leyenda;
+    `/ui/liquidables/{data,pdf,xlsx}`.
+  - `cantidadcargos`: vista `vw_legajo_curso_cantidad` + bruto del código 96;
+    `/ui/cantidadCargos/{data,pdf,xlsx}/{anho}/{mes}`.
+  - `detallecodigo`: importe liquidado y acumulado de novedades del código, con el código en el
+    título; `/ui/detalleCodigo/{data,pdf,xlsx}/{codigoId}/{anho}/{mes}`.
+  - `cargosperiodo`: cargos activos del período (sólo lectura, **no** replica el borrado de
+    cargos no liquidados del sistema previo); `/ui/cargosPeriodo/...`.
+  - `cursosperiodo`: `/ui/cursosPeriodo/{data,pdf,xlsx}/{anho}/{mes}`.
+  - `librosueldos`: tabla, PDF propio y XLSX (sin el PDF legal del Crystal, no migrado) más
+    `POST /ui/libroSueldos/lsd/{anho}/{mes}` que devuelve el ZIP del Libro de Sueldos Digital de
+    haberes-core para los legajos visibles.
+  - `basicosperiodo`: mezcla cargos, cargos con clase y adicionales del período;
+    `/ui/basicosPeriodo/...`.
+  - `cursoscontratado`: cursos de contratados del período (una consulta a tesoreria-core en lugar
+    del N+1 por contratado); `/ui/cursosContratado/...`.
+- `shared/domain/model/Importes`: formato único de importes de las planillas (dos decimales
+  fijos) y `ReportFile.Format.ZIP` para el archivo del LSD.
+- Puertos y adaptadores nuevos del kernel: `ItemCatalogPort`, `NovedadAcumuladoCatalogPort`,
+  `LegajoCursoCantidadCatalogPort`, `CargoClaseDetalleCatalogPort`,
+  `LiquidacionAdicionalCatalogPort`, `ContratadoPersonaCatalogPort`,
+  `CursoCargoContratadoCatalogPort` y `LibroSueldosZipPort`, más las consultas por período de
+  `CargoLiquidacionCatalogPort` y `LiquidacionCatalogPort`.
+
+### Fixed
+- Los errores de negocio de los reportes se devuelven como **400** con `ProblemDetail` en lugar
+  de 500 genérico (`ReportBusinessException` + `ReportExceptionHandler`), de modo que el frontend
+  muestre el mensaje real (p. ej. «No hay liquidaciones para la dependencia…»). Además, un 404
+  del servicio de origen (facultad/sede inexistente) se traduce a **404** y el resto de las
+  fallas de Feign a **502**, en vez de 500 sin detalle.
+
+### Security
+- `ApiKeyFilter`: la API key que inyecta el gateway se exige **sólo** en
+  `/api/haberes/report/ui/**`; actuator, springdoc y todo el namespace legacy quedan fuera del
+  filtro (mismo esquema que `compras-service`, sin romper la funcionalidad previa).
+- `app.api-key` en `bootstrap.yml` (`APP_API_KEY`, default `default-secret-key`).
+
+### Tests
+- `TotalesGeneralesUiTest` (JSON + PDF + XLSX con goldens nuevos `*-xlsx.txt`),
+  `ApiKeyFilterTest` (401 en `/ui/**`, 200 con clave y 200 sin clave en ruta legacy) y
+  `BuildTotalesGeneralesContentUseCaseTest`.
+- `TotalesCodigoUiTest`, `ComparacionCodigosUiTest` y `ComparacionRemuneracionesUiTest` con
+  goldens XLSX por reporte; `BuildComparacionRemuneracionesContentUseCaseTest` (el caso de uso de
+  PDF ahora sólo renderiza).
+- `DesignacionesDocenteUiTest`, `DocentesSedeUiTest`, `CursoDocenteUiTest`, `FusionDocenteUiTest`
+  y `CargosClasePeriodoUiTest` con goldens XLSX; `BuildCargosClasePeriodoContentUseCaseTest` y el
+  caso de uso de PDF reducido a render.
+- `HexagonalRulesTest`: la regla "una slice no importa controller/DTO de otra" ahora compara
+  slices; antes también marcaba los DTOs propios como violación.
+- Planillas de F3: `LiquidablesUiTest`, `CantidadCargosUiTest`, `DetalleCodigoUiTest`,
+  `CargosPeriodoUiTest`, `SheetCursosUiTest`, `LibroSueldosUiTest` (incluye el ZIP del LSD por
+  `POST`), `BasicosPeriodoUiTest` y `CursosContratadoUiTest`, con goldens nuevos
+  (`normal.txt`, `normal-xlsx.txt` y los escenarios vacíos). El XLSX de `sheet` conserva su
+  golden (`sheet/normal.txt`) y el PDF nuevo usa `cursosperiodo/normal.txt`. Además, los 24
+  endpoints nuevos quedaron en `endpoints.txt` y `coverage.txt`.
+- F4: `BonosDependenciaUiTest` (grilla, PDF consolidado sin auditar y envío sin auditar) e
+  `HistoricoAsignacionCargosUiTest` (aviso + PDF reutilizando el golden legacy).
+  `BonoReportTest` actualizado a las rutas `/ui/bono/*` con API key. Los stubs del fixture
+  `bono` se movieron a `support/BonoStubs` para compartirlos entre las dos suites.
+- F5: `ApiKeyFilterTest` suma un caso parametrizado por endpoint (recorre `endpoints.txt` y exige
+  401 sin clave en **todas** las rutas `/ui/**`, incluida la única `POST`) y `UiFormatMatrixTest`
+  congela la matriz de formatos por reporte con sus excepciones (C1 y C18 sin XLSX, LSD por POST).
+  Los errores de negocio se verifican con 400/404 en `BonosDependenciaUiTest` y `DocentesSedeUiTest`.
+
+### Documentation
+- `README.md` documenta el namespace `/ui/**` (los tres formatos salen del mismo `Content`), la
+  matriz de formatos congelada por `UiFormatMatrixTest` y el inventario de endpoints y
+  consumidores, incluida la deuda de retiro de las rutas legacy.
+- `docs/diagrams/arquitectura-general.mmd` incorpora el gateway que inyecta `X-API-Key` y
+  `docs/diagrams/flujo-reportes.mmd` refleja los formatos `data`/PDF/XLSX del namespace nuevo.
+
 ## [0.7.0] - 2026-10-24
 
 ### Changed

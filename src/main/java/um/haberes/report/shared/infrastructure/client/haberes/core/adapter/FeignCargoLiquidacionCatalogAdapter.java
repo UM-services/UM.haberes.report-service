@@ -19,6 +19,16 @@ public class FeignCargoLiquidacionCatalogAdapter implements CargoLiquidacionCata
     private final CargoLiquidacionMapper cargoLiquidacionMapper;
 
     @Override
+    public List<CargoLiquidacionResumen> findAllActivosByPeriodo(Integer anho, Integer mes) {
+        return map(cargoLiquidacionClient.findAllActivosByPeriodo(anho, mes));
+    }
+
+    @Override
+    public List<CargoLiquidacionResumen> findAllByPeriodo(Integer anho, Integer mes) {
+        return map(cargoLiquidacionClient.findAllByPeriodo(anho, mes));
+    }
+
+    @Override
     public List<CargoLiquidacionResumen> findAllDocenteByLegajo(Long legajoId, Integer anho, Integer mes) {
         return map(cargoLiquidacionClient.findAllDocenteByLegajo(legajoId, anho, mes));
     }

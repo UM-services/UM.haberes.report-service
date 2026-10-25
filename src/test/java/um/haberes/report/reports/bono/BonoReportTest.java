@@ -25,6 +25,7 @@ import um.haberes.report.shared.infrastructure.client.haberes.core.dto.Liquidaci
 import um.haberes.report.shared.infrastructure.client.haberes.core.dto.LiquidacionDto;
 import um.haberes.report.shared.infrastructure.client.haberes.core.dto.PersonaDto;
 import um.haberes.report.support.AbstractReportIntegrationTest;
+import um.haberes.report.support.BonoStubs;
 import um.haberes.report.support.Fixtures;
 import um.haberes.report.support.GoldenFiles;
 import um.haberes.report.support.ReportHttp;
@@ -50,7 +51,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
  *
  * <p>Contratos congelados:
  * <ul>
- *   <li>{@code /ui/generatePdf} devuelve el PDF <b>inline</b> con nombre
+ *   <li>{@code /ui/bono/generatePdf} devuelve el PDF <b>inline</b> con nombre
  *       {@code apellido.nombre.legajo.anho.mes.pdf} y <b>no</b> registra auditoria.</li>
  *   <li>{@code /generatePdf}, {@code /detalleCargos} y {@code /generatePdfDependencia}
  *       devuelven un attachment ({@code bono.pdf} / {@code bono.pdf} / {@code bonos.pdf}).</li>
@@ -65,7 +66,12 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
  */
 class BonoReportTest extends AbstractReportIntegrationTest {
 
+    private final BonoStubs stubs = new BonoStubs(this);
+
     private static final String BASE = "/api/haberes/report/bono";
+    private static final String BASE_UI = "/api/haberes/report/ui/bono";
+    private static final String API_KEY = "test-api-key";
+    private static final String HEADER = "X-API-Key";
     private static final int ANHO = 2026;
     private static final int MES = 9;
     private static final long LEGAJO = 120L;
@@ -80,10 +86,11 @@ class BonoReportTest extends AbstractReportIntegrationTest {
     @Test
     void generaPdfInlineParaFrontendSinAuditar() throws Exception {
         JsonNode fixture = Fixtures.node("bono", "normal");
-        stubComun(fixture);
-        stubLegajo(fixture, LEGAJO);
+        stubs.stubComun(fixture);
+        stubs.stubLegajo(fixture, LEGAJO);
 
-        MvcResult result = mockMvc.perform(get(BASE + "/ui/generatePdf/120/2026/9")).andReturn();
+        MvcResult result = mockMvc.perform(get(BASE_UI + "/generatePdf/120/2026/9")
+                .header(HEADER, API_KEY)).andReturn();
 
         byte[] pdf = ReportHttp.assertInlinePdf(result, "Gómez.Ana.120.2026.9.pdf");
         GoldenFiles.assertPdf("bono", "ui-generatePdf", pdf);
@@ -96,8 +103,8 @@ class BonoReportTest extends AbstractReportIntegrationTest {
     @Test
     void generaPdfConAuditoria() throws Exception {
         JsonNode fixture = Fixtures.node("bono", "normal");
-        stubComun(fixture);
-        stubLegajo(fixture, LEGAJO);
+        stubs.stubComun(fixture);
+        stubs.stubLegajo(fixture, LEGAJO);
 
         MvcResult result = mockMvc.perform(
                 get(BASE + "/generatePdf/120/2026/9/555/10.0.0.7")).andReturn();
@@ -126,18 +133,18 @@ class BonoReportTest extends AbstractReportIntegrationTest {
     @Test
     void generaDetalleDeCargos() throws Exception {
         JsonNode fixture = Fixtures.node("bono", "normal");
-        stubComun(fixture);
-        stubLegajo(fixture, LEGAJO);
+        stubs.stubComun(fixture);
+        stubs.stubLegajo(fixture, LEGAJO);
         when(facultadClient.findByFacultadId(FACULTAD))
                 .thenReturn(Fixtures.one(fixture.get("facultades"), "2", FacultadDto.class));
         when(cursoCargoClient.findAllByFacultad(LEGAJO, ANHO, MES, FACULTAD))
-                .thenReturn(list(fixture, "cursosCargo", "120", CursoCargoDto.class));
+                .thenReturn(Fixtures.list(fixture.get("cursosCargo"), "120", CursoCargoDto.class));
         when(cargoLiquidacionClient.findAllDocenteByLegajoAndFacultad(LEGAJO, ANHO, MES, FACULTAD))
-                .thenReturn(list(fixture, "cargosDocente", "120", CargoLiquidacionDto.class));
+                .thenReturn(Fixtures.list(fixture.get("cargosDocente"), "120", CargoLiquidacionDto.class));
         when(cargoLiquidacionClient.findAllNoDocenteByLegajoAndFacultad(LEGAJO, ANHO, MES, FACULTAD))
-                .thenReturn(list(fixture, "cargosNoDocente", "120", CargoLiquidacionDto.class));
+                .thenReturn(Fixtures.list(fixture.get("cargosNoDocente"), "120", CargoLiquidacionDto.class));
         when(cargoClaseDetalleClient.findAllByLegajoAndFacultad(LEGAJO, ANHO, MES, FACULTAD))
-                .thenReturn(list(fixture, "cargosClase", "120", CargoClaseDetalleDto.class));
+                .thenReturn(Fixtures.list(fixture.get("cargosClase"), "120", CargoClaseDetalleDto.class));
 
         MvcResult result = mockMvc.perform(
                 get(BASE + "/detalleCargos/120/2026/9/2")).andReturn();
@@ -151,9 +158,9 @@ class BonoReportTest extends AbstractReportIntegrationTest {
     @Test
     void generaPdfDeTodaUnaDependencia() throws Exception {
         JsonNode fixture = Fixtures.node("bono", "normal");
-        stubComun(fixture);
-        stubLegajo(fixture, LEGAJO);
-        stubLegajo(fixture, LEGAJO_DEPENDENCIA);
+        stubs.stubComun(fixture);
+        stubs.stubLegajo(fixture, LEGAJO);
+        stubs.stubLegajo(fixture, LEGAJO_DEPENDENCIA);
         when(liquidacionClient.findAllByDependencia(DEPENDENCIA, ANHO, MES, "docente"))
                 .thenReturn(Fixtures.list(fixture, "liquidaciones", LiquidacionDto.class));
 
@@ -171,9 +178,9 @@ class BonoReportTest extends AbstractReportIntegrationTest {
     @Test
     void enviaBonoYAudita() throws Exception {
         JsonNode fixture = Fixtures.node("bono", "normal");
-        stubComun(fixture);
-        stubLegajo(fixture, LEGAJO);
-        stubMail();
+        stubs.stubComun(fixture);
+        stubs.stubLegajo(fixture, LEGAJO);
+        stubs.stubMail();
 
         MvcResult result = mockMvc.perform(
                 get(BASE + "/sendBono/120/2026/9/555/10.0.0.7")).andReturn();
@@ -194,11 +201,12 @@ class BonoReportTest extends AbstractReportIntegrationTest {
     @Test
     void enviaBonoDesdeFrontendSinAuditar() throws Exception {
         JsonNode fixture = Fixtures.node("bono", "normal");
-        stubComun(fixture);
-        stubLegajo(fixture, LEGAJO);
-        stubMail();
+        stubs.stubComun(fixture);
+        stubs.stubLegajo(fixture, LEGAJO);
+        stubs.stubMail();
 
-        MvcResult result = mockMvc.perform(get(BASE + "/ui/sendBono/120/2026/9")).andReturn();
+        MvcResult result = mockMvc.perform(get(BASE_UI + "/sendBono/120/2026/9")
+                .header(HEADER, API_KEY)).andReturn();
 
         String body = result.getResponse().getContentAsString();
         assertThat(result.getResponse().getStatus()).isEqualTo(200);
@@ -214,8 +222,8 @@ class BonoReportTest extends AbstractReportIntegrationTest {
     @Test
     void generaPdfCuandoLaLetraNoExisteYRegistraUnaNueva() throws Exception {
         JsonNode fixture = Fixtures.node("bono", "normal");
-        stubComun(fixture);
-        stubLegajo(fixture, LEGAJO);
+        stubs.stubComun(fixture);
+        stubs.stubLegajo(fixture, LEGAJO);
         when(letraClient.findByUnique(LEGAJO, ANHO, MES))
                 .thenThrow(new RuntimeException("letra inexistente"));
         when(letraClient.add(any())).thenAnswer(invocation -> invocation.getArgument(0));
@@ -231,79 +239,4 @@ class BonoReportTest extends AbstractReportIntegrationTest {
         verify(bonoImpresionClient).add(any());
     }
 
-    // ---------------------------------------------------------------- stubs
-
-    /** Stubs compartidos por todos los endpoints: control, tablas maestras y grupos. */
-    private void stubComun(JsonNode fixture) {
-        when(controlClient.findByPeriodo(ANHO, MES))
-                .thenReturn(Fixtures.one(fixture, "control", ControlDto.class));
-        when(dependenciaClient.findAll())
-                .thenReturn(Fixtures.list(fixture, "dependencias", DependenciaDto.class));
-        when(dependenciaClient.findByDependenciaId(anyInt()))
-                .thenAnswer(invocation -> dependencia(fixture, invocation.getArgument(0)));
-        when(codigoClient.findByCodigoId(981))
-                .thenReturn(Fixtures.one(fixture.get("codigos"), "981", CodigoDto.class));
-        when(codigoGrupoClient.findAllByRemunerativo((byte) 1))
-                .thenReturn(Fixtures.list(fixture, "codigoGruposRemunerativo", CodigoGrupoDto.class));
-        when(codigoGrupoClient.findAllByNoRemunerativo((byte) 1))
-                .thenReturn(Fixtures.list(fixture, "codigoGruposNoRemunerativo", CodigoGrupoDto.class));
-        when(codigoGrupoClient.findAllByDeduccion((byte) 1))
-                .thenReturn(Fixtures.list(fixture, "codigoGruposDeduccion", CodigoGrupoDto.class));
-        // Solo se usa en la rama ETEC (codigo 29), que este fixture no ejercita.
-        when(liquidacionEtecClient.calcularPorcentajeAntiguedad(anyLong(), anyInt(), anyInt(), anyInt(), anyInt()))
-                .thenReturn(new BigDecimal("0.1000"));
-    }
-
-    /** Stubs de los agregados que el recibo pide por legajo. */
-    private void stubLegajo(JsonNode fixture, long legajoId) {
-        String key = Long.toString(legajoId);
-        when(personaClient.findByLegajoId(legajoId))
-                .thenReturn(Fixtures.one(fixture.get("personas"), key, PersonaDto.class));
-        when(antiguedadClient.findByUnique(legajoId, ANHO, MES))
-                .thenReturn(Fixtures.one(fixture.get("antiguedades"), key, AntiguedadDto.class));
-        when(designacionToolClient.indiceAntiguedad(legajoId, ANHO, MES))
-                .thenReturn(Fixtures.list(fixture.get("indices"), key, BigDecimal.class));
-        when(legajoBancoClient.findLegajoCbuPrincipal(legajoId, ANHO, MES))
-                .thenReturn(Fixtures.one(fixture.get("legajosBanco"), key, LegajoBancoDto.class));
-        when(itemClient.findAllByLegajo(legajoId, ANHO, MES))
-                .thenReturn(Fixtures.list(fixture.get("items"), key, ItemDto.class));
-        when(cursoCargoClient.findAllByLegajo(legajoId, ANHO, MES))
-                .thenReturn(Fixtures.list(fixture.get("cursosCargo"), key, CursoCargoDto.class));
-        when(cursoCargoClient.findAllByLegajoAndNivel(legajoId, ANHO, MES, 2))
-                .thenReturn(List.of());
-        when(cargoLiquidacionClient.findAllDocenteByLegajo(legajoId, ANHO, MES))
-                .thenReturn(Fixtures.list(fixture.get("cargosDocente"), key, CargoLiquidacionDto.class));
-        when(cargoLiquidacionClient.findAllNoDocenteByLegajo(legajoId, ANHO, MES))
-                .thenReturn(Fixtures.list(fixture.get("cargosNoDocente"), key, CargoLiquidacionDto.class));
-        when(cargoClaseDetalleClient.findAllByLegajo(legajoId, ANHO, MES))
-                .thenReturn(Fixtures.list(fixture.get("cargosClase"), key, CargoClaseDetalleDto.class));
-        when(liquidacionAdicionalClient.findAllByLegajo(legajoId, ANHO, MES))
-                .thenReturn(Fixtures.list(fixture.get("adicionales"), key, LiquidacionAdicionalDto.class));
-        when(letraClient.findByUnique(legajoId, ANHO, MES))
-                .thenReturn(Fixtures.one(fixture.get("letras"), key, LetraDto.class));
-        when(letraClient.update(any(), anyLong()))
-                .thenAnswer(invocation -> invocation.getArgument(0));
-        when(contactoClient.findByLegajoId(legajoId))
-                .thenReturn(Fixtures.one(fixture.get("contactos"), key, ContactoDto.class));
-        when(legajoControlClient.findByUnique(legajoId, ANHO, MES))
-                .thenReturn(Fixtures.one(fixture.get("legajosControl"), key, LegajoControlDto.class));
-        when(legajoControlClient.update(any(), anyLong()))
-                .thenAnswer(invocation -> invocation.getArgument(0));
-    }
-
-    private void stubMail() {
-        MimeMessage message = new MimeMessage(Session.getInstance(new Properties()));
-        when(javaMailSender.createMimeMessage()).thenReturn(message);
-    }
-
-    private static DependenciaDto dependencia(JsonNode fixture, int dependenciaId) {
-        return Fixtures.list(fixture, "dependencias", DependenciaDto.class).stream()
-                .filter(dependencia -> dependencia.getDependenciaId() == dependenciaId)
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("dependencia " + dependenciaId));
-    }
-
-    private static <T> List<T> list(JsonNode fixture, String group, String key, Class<T> type) {
-        return Fixtures.list(fixture.get(group), key, type);
-    }
 }

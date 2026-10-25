@@ -12,6 +12,9 @@ public interface CursoFusionClient {
     List<CursoFusionDto> findAllByLegajoId(@PathVariable Long legajoId, @PathVariable Integer anho,
                                                                @PathVariable Integer mes);
 
+    @GetMapping("/periodo/{anho}/{mes}")
+    List<CursoFusionDto> findAllByPeriodo(@PathVariable Integer anho, @PathVariable Integer mes);
+
     @GetMapping("/legajofacultad/{legajoId}/{anho}/{mes}/{facultadId}")
     List<CursoFusionDto> findAllByLegajoIdAndFacultadId(@PathVariable Long legajoId, @PathVariable Integer anho,
                                                         @PathVariable Integer mes, @PathVariable Integer facultadId);
