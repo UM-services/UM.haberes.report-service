@@ -1,0 +1,8 @@
+SHEET Básicos
+R0:[0|STRING|Básicos por Período]
+R1:[0|STRING|Período: 9/2026]
+R2:[0|STRING|Legajo][1|STRING|Apellido, Nombre][2|STRING|Dependencia][3|STRING|Clase / Código][4|STRING|Categoría / Cargo][5|STRING|Básico / Valor hora][6|STRING|Horas jornada][7|STRING|Jornada / Horas]
+R3:[0|STRING|1001][1|STRING|Gómez, Ana][2|STRING|Facultad de Ingeniería][3|STRING|1][4|STRING|Profesor Titular][5|STRING|1.234.567,89][6|STRING|][7|STRING|1]
+R4:[0|STRING|1001][1|STRING|Gómez, Ana][2|STRING|Facultad de Ingeniería][3|STRING|Clase A][4|STRING|Ayudante / Turno mañana][5|STRING|5.000,00][6|STRING|][7|STRING|10]
+R5:[0|STRING|1002][1|STRING|Pérez, Juan][2|STRING|Facultad de Ciencias Económicas][3|STRING|2][4|STRING|Jefe de Trabajos Prácticos][5|STRING|900.000,00][6|STRING|20][7|STRING|]
+R6:[0|STRING|1002][1|STRING|Pérez, Juan][2|STRING|Facultad de Ciencias Económicas][3|STRING|981][4|STRING|Adicional][5|STRING|2.500,00][6|STRING|][7|STRING|1]

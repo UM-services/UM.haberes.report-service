@@ -19,6 +19,11 @@ public class FeignLiquidacionCatalogAdapter implements LiquidacionCatalogPort {
     private final LiquidacionMapper liquidacionMapper;
 
     @Override
+    public List<LiquidacionResumen> findAllByPeriodo(Integer anho, Integer mes, Integer limit) {
+        return map(liquidacionClient.findAllByPeriodo(anho, mes, limit));
+    }
+
+    @Override
     public List<LiquidacionResumen> findAllByAcreditado(Integer anho, Integer mes) {
         return map(liquidacionClient.findAllByAcreditado(anho, mes));
     }

@@ -15,5 +15,9 @@ public interface PersonaCatalogPort {
 
     List<PersonaResumen> findAllDocente(Integer anho, Integer mes);
 
+    List<PersonaResumen> findAllLiquidables();
+
+    List<PersonaResumen> findAllByLiquidado(Integer anho, Integer mes);
+
     List<PersonaResumen> findAllByLegajos(List<Long> legajoIds);
 }

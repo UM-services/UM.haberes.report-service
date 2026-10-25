@@ -21,6 +21,6 @@ public class ComparacionCodigosController {
     @GetMapping("/comparacionCodigos/{anho}/{mes}")
     public ResponseEntity<Resource> generateComparacionCodigos(@PathVariable Integer anho,
                                                                @PathVariable Integer mes) {
-        return responseBuilder.attachment(service.generate(anho, mes));
+        return responseBuilder.attachment(service.pdf(anho, mes));
     }
 }

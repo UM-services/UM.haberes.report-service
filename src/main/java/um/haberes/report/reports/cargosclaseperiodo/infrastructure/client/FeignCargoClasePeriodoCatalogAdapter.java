@@ -19,7 +19,15 @@ public class FeignCargoClasePeriodoCatalogAdapter implements CargoClasePeriodoCa
 
     @Override
     public List<CargoClasePeriodoVigencia> findAllByLegajo(Long legajoId) {
-        List<CargoClasePeriodoDto> dtos = cargoClasePeriodoClient.findAllByLegajo(legajoId);
+        return map(cargoClasePeriodoClient.findAllByLegajo(legajoId));
+    }
+
+    @Override
+    public List<CargoClasePeriodoVigencia> findAllByFacultad(Integer facultadId) {
+        return map(cargoClasePeriodoClient.findAllByFacultad(facultadId));
+    }
+
+    private List<CargoClasePeriodoVigencia> map(List<CargoClasePeriodoDto> dtos) {
         if (dtos == null) {
             return List.of();
         }

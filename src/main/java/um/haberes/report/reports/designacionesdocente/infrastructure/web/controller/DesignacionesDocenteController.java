@@ -21,6 +21,6 @@ public class DesignacionesDocenteController {
     @GetMapping("/pdf/{anho}/{mes}")
     public ResponseEntity<Resource> generateDesignacionesDocente(@PathVariable Integer anho,
                                                                  @PathVariable Integer mes) {
-        return responseBuilder.attachment(service.generate(anho, mes));
+        return responseBuilder.attachment(service.pdf(anho, mes));
     }
 }

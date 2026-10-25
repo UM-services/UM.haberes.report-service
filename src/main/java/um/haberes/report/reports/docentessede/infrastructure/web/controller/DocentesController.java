@@ -24,6 +24,6 @@ public class DocentesController {
                                                          @PathVariable Integer anho,
                                                          @PathVariable Integer mes) {
         return responseBuilder.attachment(
-                service.generate(facultadId, geograficaId, anho, mes));
+                service.pdf(facultadId, geograficaId, anho, mes));
     }
 }

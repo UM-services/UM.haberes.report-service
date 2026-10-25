@@ -7,6 +7,7 @@ import um.haberes.report.reports.bono.domain.ports.in.GenerateBonoReportUseCase;
 import um.haberes.report.reports.bono.domain.ports.in.GenerateBonosDependenciaUseCase;
 import um.haberes.report.reports.bono.domain.ports.out.BonoDataPort;
 import um.haberes.report.reports.bono.domain.ports.out.PdfMergePort;
+import um.haberes.report.shared.application.exception.ReportBusinessException;
 import um.haberes.report.shared.application.exception.ReportException;
 import um.haberes.report.shared.domain.model.ReportFile;
 import um.haberes.report.shared.domain.ports.out.ReportStorage;
@@ -25,16 +26,16 @@ public class GenerateBonosDependenciaUseCaseImpl implements GenerateBonosDepende
 
     @Override
     public ReportFile generar(Integer anho, Integer mes, Integer dependenciaId, String salida,
-                              Long legajoIdSolicitud, String ipAddress) {
+                              Long legajoIdSolicitud, String ipAddress, boolean auditar) {
         List<BonoFuente.Liquidacion> liquidaciones = dataPort
                 .liquidacionesDependencia(dependenciaId, anho, mes, salida);
         if (liquidaciones.isEmpty()) {
-            throw new ReportException("No hay liquidaciones para la dependencia "
+            throw new ReportBusinessException("No hay liquidaciones para la dependencia "
                     + dependenciaId + " en " + mes + "/" + anho);
         }
         List<Path> bonos = liquidaciones.stream()
                 .map(liquidacion -> generateBono.generar(liquidacion.legajoId(), anho, mes,
-                        legajoIdSolicitud, ipAddress, true).path())
+                        legajoIdSolicitud, ipAddress, auditar).path())
                 .toList();
         Path target = storage.resolve("dependencia." + dependenciaId + ".pdf");
         pdfMerge.merge(target, bonos);

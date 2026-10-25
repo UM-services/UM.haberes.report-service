@@ -1,0 +1,9 @@
+UNIVERSIDAD DE MENDOZA
+ Periodo: 9/2026
+ Básicos por Período
+ Legajo Apellido, NombreDependenciaClase / CódigoCategoría / CargoBásico / Valor horaHoras jornadaJornada / Horas
+ 1001 Gómez, AnaFacultad de Ingeniería1Profesor Titular1.234.567,891
+ 1001 Gómez, AnaFacultad de IngenieríaClase AAyudante / Turno mañana5.000,0010
+ 1002 Pérez, JuanFacultad de Ciencias Económicas2Jefe de Trabajos Prácticos900.000,0020
+ 1002 Pérez, JuanFacultad de Ciencias Económicas981Adicional2.500,001
+ Página 1

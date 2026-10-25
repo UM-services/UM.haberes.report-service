@@ -1,0 +1,6 @@
+SHEET Cargos
+R0:[0|STRING|Cargos por Período]
+R1:[0|STRING|Período: 9/2026]
+R2:[0|STRING|Legajo][1|STRING|Apellido, Nombre][2|STRING|Período][3|STRING|#Dependencia][4|STRING|Dependencia][5|STRING|#Categoría][6|STRING|Categoría]
+R3:[0|STRING|1001][1|STRING|Gómez, Ana][2|STRING|9/2026][3|STRING|10][4|STRING|Facultad de Ingeniería][5|STRING|1][6|STRING|Profesor Titular]
+R4:[0|STRING|1002][1|STRING|Pérez, Juan][2|STRING|9/2026][3|STRING|20][4|STRING|Facultad de Ciencias Económicas][5|STRING|2][6|STRING|Jefe de Trabajos Prácticos]

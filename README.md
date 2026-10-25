@@ -63,17 +63,67 @@ reports/<reporte>/
 - Los slices no se importan entre sí y la aplicación no importa infraestructura. Lo verifica
   `HexagonalRulesTest` (`src/test/java/.../contract`).
 
-Los 17 reportes migrados son: `anotador`, `bono`, `cargosclase`, `cargosclaseperiodo`,
-`comparacioncodigos`, `comparacionremuneraciones`, `cursocargonovedad`, `cursodocente`,
-`designacionesdetalle`, `designacionesdocente`, `docentessede`, `fusiondocente`,
-`historicoasignacioncargos`, `novedadesdocentes`, `sheet`, `totalescodigo` y
-`totalesgenerales`. El detalle de la migración y el mapa bug→corrección están en
+Los 24 reportes migrados son: `anotador`, `basicosperiodo`, `bono`, `cantidadcargos`,
+`cargosclase`, `cargosclaseperiodo`, `cargosperiodo`, `comparacioncodigos`,
+`comparacionremuneraciones`, `cursocargonovedad`, `cursodocente`, `cursoscontratado`,
+`designacionesdetalle`, `designacionesdocente`, `detallecodigo`, `docentessede`, `fusiondocente`,
+`historicoasignacioncargos`, `librosueldos`, `liquidables`, `novedadesdocentes`, `sheet`,
+`totalescodigo` y `totalesgenerales`. El detalle de la migración y el mapa bug→corrección están en
 [`REFACTOR_HEXAGONAL_PLAN.md`](REFACTOR_HEXAGONAL_PLAN.md) y
 [`REFACTOR_HEXAGONAL_NOTES.md`](REFACTOR_HEXAGONAL_NOTES.md).
+
+### Namespace del frontend (`/ui/`) y seguridad
+
+Las pantallas nuevas consumen un namespace propio por reporte, con los parámetros por path:
+
+```
+GET /api/haberes/report/ui/{reporte}/data/{params}   -> DTO JSON (tabla)
+GET /api/haberes/report/ui/{reporte}/pdf/{params}    -> PDF
+GET /api/haberes/report/ui/{reporte}/xlsx/{params}   -> XLSX
+```
+
+Los tres formatos salen del mismo `Content` (un `Build<X>ContentUseCase` por slice): la tabla, el
+PDF y el XLSX muestran lo mismo. El gateway inyecta `X-API-Key` sólo en
+`/api/haberes/report/ui/**` y `ApiKeyFilter` la valida; las rutas legacy que consume `bonos.vb6`
+no pasan por el filtro, así que la funcionalidad previa no se altera.
 
 La suite de caracterización (`src/test/java/.../reports`) compara el PDF/XLSX generado
 contra un baseline legacy congelado; toda diferencia aprobada se declara en
 `src/test/resources/golden/expected-fixes.yml`.
+
+#### Matriz de formatos
+
+La matriz está congelada en `UiFormatMatrixTest` (`contract`): si una ruta se agrega, quita o
+renombra sin actualizarla, el build falla.
+
+| Recurso | `data` | PDF | XLSX | Extra |
+|---|---|---|---|---|
+| `totalesGenerales`, `totalesCodigo`, `comparacionCodigos`, `comparacionRemuneraciones` | ✓ | ✓ | ✓ | |
+| `detalleCodigo`, `docentesSede`, `designacionesDocente`, `cursoDocente`, `cursosContratado`, `fusionDocente`, `liquidables`, `cargosPeriodo`, `cursosPeriodo`, `basicosPeriodo`, `cantidadCargos`, `cargosClasePeriodo` | ✓ | ✓ | ✓ | |
+| `libroSueldos` | ✓ | ✓ (propio) | ✓ | `POST /lsd/{anho}/{mes}` → ZIP del Libro de Sueldos Digital (lo genera haberes-core) |
+| `bonoDependencia` | ✓ | ✓ (consolidado) | — | `sendBono/{legajoId}/{anho}/{mes}` (envío unitario del masivo) |
+| `historicoCargos` | ✓ (sólo aviso) | ✓ (sólo encabezado) | — | El cuerpo nunca se implementó en el sistema previo |
+| `bono` (individual) | — | ✓ inline | — | `sendBono/{legajoId}/{anho}/{mes}` |
+
+Excepciones justificadas: `bonoDependencia` entrega un PDF consolidado de recibos (el XLSX no
+aporta) y `historicoCargos` no tiene cuerpo hasta que exista una spec de producto.
+
+#### Endpoints y consumidores (deuda de retiro)
+
+| Grupo | Cantidad | Consumidor | Estado |
+|---|---|---|---|
+| Rutas legacy (`/api/haberes/report/<slice>/...`) | 24 | `bonos.vb6` (`Bonos.exe`) | Se mantienen intactas hasta dar de baja el cliente de escritorio |
+| Namespace `/ui/**` | 59 | `haberes-frontend` (`feature-consultas`, `feature-bonos`) | Detrás de la API key del gateway |
+| Endpoints de lectura agregados en `haberes-core` para reportes (`persona/liquidado`, `novedadacumulado/codigo`, `legajocursoCantidad/periodo`, `cargoliquidacion/periodo` y `/todos`, `cargoclasedetalle/periodo`, `liquidacion-adicional/periodo`, `bono/dependencia/.../print-prepare`) | 8 | Sólo este servicio (Feign) | Internos: no se exponen al navegador |
+| `cursocargocontratado/periodo/{anho}/{mes}` (tesoreria-core) | 1 | Sólo este servicio (Feign) | Interno |
+
+- La lógica legacy de planillas (`SheetService`, `ContratadoService`, `LibroSueldoService`) sigue
+  en `haberes-core` porque la usa `bonos.vb6`: la duplicación con los slices nuevos es deuda
+  deliberada hasta la baja del cliente de escritorio.
+- El navegador todavía llama directo a `haberes-core` para catálogos, `bono/{legajoId}/...`
+  (`prepare`, `auditoria`, `send-prepare`, `integridad`, `send-prepare`) y `tool/mailvalidate`.
+  Ese servicio **no** tiene API key; queda como deuda de seguridad conocida, fuera del alcance de
+  este namespace.
 
 ## Configuración
 

@@ -1,0 +1,8 @@
+UNIVERSIDAD DE MENDOZA
+ Periodo: 9/2026
+ Detalle por Código 31 · Antigüedad
+ Legajo Apellido, NombreLiquidadoNovedadCantidad
+ 1001 Gómez, Ana123.456,781.000,502
+ 1002 Pérez, Juan5.000,00
+ 1003 López, María250,001
+ Página 1

@@ -1,0 +1,11 @@
+SHEET Docentes por Sede
+R0:[0|STRING|Docentes por Sede]
+R1:[0|STRING|Facultad de Ingeniería · Sede San Rafael · 9/2026]
+R2:[0|STRING|Análisis Matemático I · Anual]
+R3:[0|STRING|Cargo][1|STRING|Docente][2|STRING|Designación][3|STRING|Horas][4|STRING|Desarraigo]
+R4:[0|STRING|Profesor Titular][1|STRING|Gómez, Ana][2|STRING|Ordinaria][3|STRING|10.0][4|STRING|*]
+R5:[0|STRING|Ayudante de Segunda][1|STRING|Díaz, Carlos][2|STRING|Contratado][3|STRING|5.0][4|STRING|]
+R7:[0|STRING|Física II · 2do Semestre]
+R8:[0|STRING|Cargo][1|STRING|Docente][2|STRING|Designación][3|STRING|Horas][4|STRING|Desarraigo]
+R9:[0|STRING|Jefe de Trabajos Prácticos][1|STRING|Pérez, Juan][2|STRING|Interina][3|STRING|6.0][4|STRING|]
+R10:[0|STRING|Profesor Adjunto][1|STRING|Ruiz, Lucía][2|STRING|Contratado][3|STRING|8.0][4|STRING|]

@@ -1,0 +1,4 @@
+SHEET Totales Generales
+R0:[0|STRING|Totales Generales]
+R1:[0|STRING|Período: 9/2026]
+R2:[0|STRING|Sin datos para el período.]

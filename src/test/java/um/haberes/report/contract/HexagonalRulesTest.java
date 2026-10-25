@@ -122,11 +122,18 @@ class HexagonalRulesTest {
             if (pkg == null || !pkg.startsWith(SLICE_PREFIX) || !pkg.contains(".infrastructure.web.")) {
                 continue;
             }
+            // El slice propio puede usar sus controllers/DTOs; lo prohibido es cruzarse de slice.
+            String slice = pkg.substring(SLICE_PREFIX.length()).split("\\.")[0];
             for (String imported : imports(source)) {
-                if (pkg.startsWith("um.haberes.report.reports.")
-                        && (imported.startsWith("um.haberes.report.reports.")
-                        && (imported.contains(".infrastructure.client")
-                        || imported.contains(".infrastructure.web.dto")))) {
+                if (!imported.startsWith(SLICE_PREFIX)) {
+                    continue;
+                }
+                String other = imported.substring(SLICE_PREFIX.length()).split("\\.")[0];
+                if (other.equals(slice)) {
+                    continue;
+                }
+                if (imported.contains(".infrastructure.client")
+                        || imported.contains(".infrastructure.web.dto")) {
                     violations.add(file + " importa " + imported);
                 }
             }

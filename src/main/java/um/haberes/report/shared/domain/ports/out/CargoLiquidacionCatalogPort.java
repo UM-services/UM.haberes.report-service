@@ -6,6 +6,10 @@ import java.util.List;
 
 public interface CargoLiquidacionCatalogPort {
 
+    List<CargoLiquidacionResumen> findAllActivosByPeriodo(Integer anho, Integer mes);
+
+    List<CargoLiquidacionResumen> findAllByPeriodo(Integer anho, Integer mes);
+
     List<CargoLiquidacionResumen> findAllDocenteByLegajo(Long legajoId, Integer anho, Integer mes);
 
     List<CargoLiquidacionResumen> findAllNoDocenteByLegajo(Long legajoId, Integer anho, Integer mes);

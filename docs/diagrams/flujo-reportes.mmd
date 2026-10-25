@@ -8,7 +8,7 @@ sequenceDiagram
     participant Render as infrastructure/render
     participant Mail as infrastructure/mail
 
-    Client->>+Web: Solicitar reporte (PDF/Excel)
+    Client->>+Web: GET /ui/... (data, pdf o xlsx)
     Web->>+UC: Ejecutar caso de uso
     UC->>+Port: cargar datos del período
     Port->>+Adapter: delegar
@@ -23,7 +23,7 @@ sequenceDiagram
     Port->>Adapter: delegar
     Adapter->>Core: POST/PUT
     UC-->>-Web: ReportFile
-    Web-->>-Client: attachment / inline
+    Web-->>-Client: JSON / attachment / inline
 
     opt Envío por email
         Client->>Web: sendBono

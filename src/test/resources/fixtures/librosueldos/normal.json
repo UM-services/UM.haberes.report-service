@@ -1,0 +1,44 @@
+{
+  "liquidaciones": [
+    {
+      "liquidacionId": 1,
+      "legajoId": 1001,
+      "anho": 2026,
+      "mes": 9,
+      "dependenciaId": 10,
+      "totalRemunerativo": 1500000.50,
+      "totalNoRemunerativo": 100000.00,
+      "totalDeduccion": 350000.25,
+      "totalNeto": 1250000.25
+    },
+    {
+      "liquidacionId": 2,
+      "legajoId": 1002,
+      "anho": 2026,
+      "mes": 9,
+      "dependenciaId": 20,
+      "totalRemunerativo": 900000.00,
+      "totalNoRemunerativo": 0.00,
+      "totalDeduccion": 180000.00,
+      "totalNeto": 720000.00
+    }
+  ],
+  "personas": [
+    {
+      "legajoId": 1001,
+      "apellido": "Gómez",
+      "nombre": "Ana",
+      "cuil": "27-20111222-4",
+      "dependenciaId": 10,
+      "dependencia": { "dependenciaId": 10, "nombre": "Facultad de Ingeniería" }
+    },
+    {
+      "legajoId": 1002,
+      "apellido": "Pérez",
+      "nombre": "Juan",
+      "cuil": "20-25333444-9",
+      "dependenciaId": null,
+      "dependencia": null
+    }
+  ]
+}

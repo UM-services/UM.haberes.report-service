@@ -1,0 +1,10 @@
+SHEET Cargos con Clase
+R0:[0|STRING|Cargos con Clase por Facultad]
+R1:[0|STRING|Facultad de Ingeniería · 9/2026]
+R2:[0|STRING|Sede: Campus Universitario]
+R3:[0|STRING|Legajo][1|STRING|Apellido, Nombre][2|STRING|Cargo][3|STRING|Descripción][4|STRING|Desde][5|STRING|Hasta][6|STRING|Horas][7|STRING|Clase]
+R4:[0|STRING|1001][1|STRING|Gómez, Ana][2|STRING|Profesor Titular][3|STRING|Cargo ordinario][4|STRING|202601][5|STRING|202612][6|STRING|10][7|STRING|Primera]
+R5:[0|STRING|1001][1|STRING|Gómez, Ana][2|STRING|Jefe de Trabajos Prácticos][3|STRING|Licencia parcial][4|STRING|202603][5|STRING|202609][6|STRING|6][7|STRING|Segunda]
+R7:[0|STRING|Sede: Sede San Rafael]
+R8:[0|STRING|Legajo][1|STRING|Apellido, Nombre][2|STRING|Cargo][3|STRING|Descripción][4|STRING|Desde][5|STRING|Hasta][6|STRING|Horas][7|STRING|Clase]
+R9:[0|STRING|1002][1|STRING|Pérez, Juan][2|STRING|Ayudante de Primera][3|STRING|Ayudante interino][4|STRING|202602][5|STRING|202612][6|STRING|4][7|STRING|Segunda]

@@ -12,6 +12,12 @@ public interface CargoLiquidacionClient {
     @GetMapping("/legajo/{legajoId}/{anho}/{mes}")
     List<CargoLiquidacionDto> findAllByLegajo(@PathVariable Long legajoId, @PathVariable Integer anho, @PathVariable Integer mes);
 
+    @GetMapping("/periodo/{anho}/{mes}")
+    List<CargoLiquidacionDto> findAllActivosByPeriodo(@PathVariable Integer anho, @PathVariable Integer mes);
+
+    @GetMapping("/periodo/{anho}/{mes}/todos")
+    List<CargoLiquidacionDto> findAllByPeriodo(@PathVariable Integer anho, @PathVariable Integer mes);
+
     @GetMapping("/legajodocente/{legajoId}/{anho}/{mes}")
     List<CargoLiquidacionDto> findAllDocenteByLegajo(@PathVariable Long legajoId, @PathVariable Integer anho, @PathVariable Integer mes);
 

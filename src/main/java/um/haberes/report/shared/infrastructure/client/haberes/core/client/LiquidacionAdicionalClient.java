@@ -12,6 +12,9 @@ public interface LiquidacionAdicionalClient {
     @GetMapping("/legajo/{legajoId}/{anho}/{mes}")
     List<LiquidacionAdicionalDto> findAllByLegajo(@PathVariable Long legajoId, @PathVariable Integer anho, @PathVariable Integer mes);
 
+    @GetMapping("/periodo/{anho}/{mes}")
+    List<LiquidacionAdicionalDto> findAllByPeriodo(@PathVariable Integer anho, @PathVariable Integer mes);
+
     @GetMapping("/dependencia/{legajoId}/{anho}/{mes}/{dependenciaId}")
     LiquidacionAdicionalDto findByDependencia(@PathVariable Long legajoId, @PathVariable Integer anho, @PathVariable Integer mes, @PathVariable Integer dependenciaId);
 

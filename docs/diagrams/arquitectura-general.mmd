@@ -4,12 +4,16 @@ graph TD
         B[External Systems - VB6]
     end
 
+    subgraph "Edge"
+        GW[Gateway<br/>inyecta X-API-Key sólo en /ui/]
+    end
+
     subgraph "Service Mesh - Consul"
         C[Consul Registry]
     end
 
     subgraph "haberes-report-service (hexagonal)"
-        WEB[infrastructure/web<br/>controllers + ReportResponseBuilder]
+        WEB[infrastructure/web<br/>controllers + ApiKeyFilter + ReportResponseBuilder]
         APP[application<br/>use cases + facades]
         DOM[domain<br/>models + ports]
         ACL[infrastructure/client<br/>Feign adapters + mappers]
@@ -24,8 +28,9 @@ graph TD
 
     J[SMTP Mail Server]
 
-    A -->|REST| WEB
-    B -->|REST| WEB
+    A -->|REST /ui/| GW
+    GW -->|X-API-Key| WEB
+    B -->|REST legacy| WEB
     WEB --> APP
     APP --> DOM
     APP --> REN

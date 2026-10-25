@@ -21,6 +21,6 @@ public class TotalesGeneralesController {
     @GetMapping("/totalesGenerales/{anho}/{mes}")
     public ResponseEntity<Resource> generateTotalesGenerales(@PathVariable Integer anho,
                                                              @PathVariable Integer mes) {
-        return responseBuilder.attachment(service.generate(anho, mes));
+        return responseBuilder.attachment(service.pdf(anho, mes));
     }
 }

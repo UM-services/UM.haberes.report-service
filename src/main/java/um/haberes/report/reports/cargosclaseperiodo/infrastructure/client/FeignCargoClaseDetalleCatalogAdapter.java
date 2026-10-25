@@ -19,8 +19,16 @@ public class FeignCargoClaseDetalleCatalogAdapter implements CargoClaseDetalleCa
 
     @Override
     public List<CargoClasePeriodoDetalle> findByLegajo(Long legajoId, Integer anho, Integer mes) {
-        List<CargoClaseDetalleDto> dtos =
-                cargoClaseDetalleClient.findAllByLegajo(legajoId, anho, mes);
+        return map(cargoClaseDetalleClient.findAllByLegajo(legajoId, anho, mes));
+    }
+
+    @Override
+    public List<CargoClasePeriodoDetalle> findAllByFacultad(Integer facultadId, Integer anho,
+                                                            Integer mes) {
+        return map(cargoClaseDetalleClient.findAllByFacultad(facultadId, anho, mes));
+    }
+
+    private List<CargoClasePeriodoDetalle> map(List<CargoClaseDetalleDto> dtos) {
         if (dtos == null) {
             return List.of();
         }

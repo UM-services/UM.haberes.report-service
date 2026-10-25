@@ -20,7 +20,15 @@ public class FeignCursoFusionCatalogAdapter implements CursoFusionCatalogPort {
 
     @Override
     public List<CursoFusionResumen> findAllByLegajoId(Long legajoId, Integer anho, Integer mes) {
-        List<CursoFusionDto> dtos = cursoFusionClient.findAllByLegajoId(legajoId, anho, mes);
+        return map(cursoFusionClient.findAllByLegajoId(legajoId, anho, mes));
+    }
+
+    @Override
+    public List<CursoFusionResumen> findAllByPeriodo(Integer anho, Integer mes) {
+        return map(cursoFusionClient.findAllByPeriodo(anho, mes));
+    }
+
+    private List<CursoFusionResumen> map(List<CursoFusionDto> dtos) {
         if (dtos == null) {
             return List.of();
         }

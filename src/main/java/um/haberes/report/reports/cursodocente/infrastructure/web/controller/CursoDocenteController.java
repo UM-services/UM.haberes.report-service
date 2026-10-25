@@ -21,6 +21,6 @@ public class CursoDocenteController {
     @GetMapping("/pdf/{anho}/{mes}")
     public ResponseEntity<Resource> generateCursoDocente(@PathVariable Integer anho,
                                                          @PathVariable Integer mes) {
-        return responseBuilder.attachment(service.generate(anho, mes));
+        return responseBuilder.attachment(service.pdf(anho, mes));
     }
 }

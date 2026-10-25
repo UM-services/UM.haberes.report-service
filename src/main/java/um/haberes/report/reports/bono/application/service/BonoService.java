@@ -2,6 +2,8 @@ package um.haberes.report.reports.bono.application.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import um.haberes.report.reports.bono.domain.model.BonosDependenciaContent;
+import um.haberes.report.reports.bono.domain.ports.in.BuildBonosDependenciaContentUseCase;
 import um.haberes.report.reports.bono.domain.ports.in.GenerateBonoReportUseCase;
 import um.haberes.report.reports.bono.domain.ports.in.GenerateBonosDependenciaUseCase;
 import um.haberes.report.reports.bono.domain.ports.in.GenerateDetalleCargosUseCase;
@@ -15,6 +17,7 @@ public class BonoService {
     private final GenerateBonoReportUseCase generateBono;
     private final GenerateDetalleCargosUseCase generateDetalle;
     private final GenerateBonosDependenciaUseCase generateDependencia;
+    private final BuildBonosDependenciaContentUseCase buildDependencia;
     private final SendBonoUseCase sendBono;
 
     public ReportFile generatePdf(Long legajoId, Integer anho, Integer mes,
@@ -39,7 +42,18 @@ public class BonoService {
                                              String salida, Long legajoIdSolicitud,
                                              String ipAddress) {
         return generateDependencia.generar(anho, mes, dependenciaId, salida, legajoIdSolicitud,
-                ipAddress);
+                ipAddress, true);
+    }
+
+    /** Variante del frontend: la auditoría la resuelve el core en {@code print-prepare}. */
+    public ReportFile generatePdfDependenciaUi(Integer anho, Integer mes, Integer dependenciaId,
+                                               String salida) {
+        return generateDependencia.generar(anho, mes, dependenciaId, salida, null, null, false);
+    }
+
+    public BonosDependenciaContent contenidoDependencia(Integer anho, Integer mes,
+                                                       Integer dependenciaId, String salida) {
+        return buildDependencia.build(anho, mes, dependenciaId, salida);
     }
 
     public String sendBono(Long legajoId, Integer anho, Integer mes, Long legajoIdSolicitud,
