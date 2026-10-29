@@ -1,0 +1,13 @@
+Clase 2 (222.5)
+
+ Clase 1 (111.25)
+
+ UNIVERSIDAD DE MENDOZA
+ Cargos con Clase
+ # Cargo
+ 22 Profesor Asociado
+ 21 Profesor Titular
+ # Cargo
+ 12 Ayudante de Primera
+ 11 Jefe de Trabajos Prácticos
+ Página 1

@@ -1,0 +1,60 @@
+Recibo por Pago de Remuneraciones
+ Apellido, Nombre: Gómez, Ana                   DU: 30111222                   CUIL: 27-30111222-4
+ Legajo: 120         Dependencia: FI         Sueldo Básico: 1,500,000.00         Ingreso: 01/03/2015         Antigüedad: 10.8
+ CBU: 0070111122223333444455              Aporte Jubilatorio: 11%              Fecha Pago: 05/10/2026
+              Período Liquidado: 01/09/2026-30/09/2026              Fecha Depósito: 06/10/2026
+ Actividad Docente
+ Actividad No Docente
+ Actividad Académica
+ Universidad de Mendoza
+ Boulogne Sur Mer 683 - 5500 - Mendoza
+ República Argentina
+ CUIT: 30-51859446-6
+ Cargo Curso Ds An S1 S2 Hr
+ Profesor
+ Titular
+ Análisis Matemático I**6
+ Dep Cargo Básico Dep Cargo Básico
+ FI Profesor Titular1,500,000.00FCEAdicionales25,000.00
+ Dep Cargo Básico Dep Cargo Básico
+ FI Administrativo Categoría 3900,000.00
+ Dep Cargo Básico
+ FI Primera / Jefe de Trabajos Prácticos / Primer Semestre / Mendoza / 12 horas150,000.00
+ Cód Concepto Remun
+ 1 Sueldo Básico1,500,000.00
+ 10 Antigüedad 300,000.00
+ Cód Concepto No Rem
+ 50 Asignación No Remunerativa100,000.00
+ Cód Concepto Deduc
+ 70 Jubilación 250,000.00
+ Remunerativos 1,800,000.00 No Remunerativos100,000.00Deducciones250,000.00
+ Neto: 1,650,000.00
+ son pesos: un millon seiscientos cincuenta mil con 00/100
+
+Recibo por Pago de Remuneraciones
+ Apellido, Nombre: Pérez, Juan                   DU: 27888999                   CUIL: 20-27888999-6
+ Legajo: 121         Dependencia: FI         Sueldo Básico: 1,200,000.00         Ingreso: 15/08/2012         Antigüedad: 5.0
+ CBU: 0070111122223333444466              Aporte Jubilatorio: 11%              Fecha Pago: 05/10/2026
+              Período Liquidado: 01/09/2026-30/09/2026              Fecha Depósito: 06/10/2026
+ Actividad Docente
+ Universidad de Mendoza
+ Boulogne Sur Mer 683 - 5500 - Mendoza
+ República Argentina
+ CUIT: 30-51859446-6
+ Cargo Curso Ds An S1 S2 Hr
+ Jefe de
+ Trabajos
+ Prácticos
+ Contabilidad Básica*4
+ Dep Cargo Básico Dep Cargo Básico
+ FI Profesor Adjunto1,200,000.00
+ Cód Concepto Remun
+ 1 Sueldo Básico1,200,000.00
+ 10 Antigüedad 240,000.00
+ Cód Concepto No Rem
+ 50 Asignación No Remunerativa80,000.00
+ Cód Concepto Deduc
+ 70 Jubilación 200,000.00
+ Remunerativos 1,440,000.00 No Remunerativos80,000.00Deducciones200,000.00
+ Neto: 1,320,000.00
+ son pesos: un millon trescientos veinte mil con 00/100

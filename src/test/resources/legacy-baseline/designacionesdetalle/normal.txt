@@ -1,0 +1,54 @@
+DESIGNACIONES
+ Universidad de Mendoza - Haberes
+
+ Legajo 120 - Gómez, Ana - Período 9/2026
+
+
+ Designaciones liquidadas - mes anterior (8/2026)
+
+
+ Total Designaciones: 2.100.000,50
+
+
+ Cursos asignados (9/2026)
+
+
+ Total Cursos: 1.250.000,00
+
+
+ Designaciones fusionadas (9/2026)
+
+
+ Total Fusión: 1.250.000,00
+
+
+ Resumen del control
+
+
+
+ Diferencia: novedad de código 27 registrada para el período.
+ Facultad Sede Designación Importe
+ Facultad de IngenieríaCampus UniversitarioProfesor Titular1.250.000,00
+ Facultad de Ciencias EconómicasSede San RafaelJefe de Trabajos Prácticos850.000,50
+ Facultad Sede Curso Horas Cargo Designación Importe Ds An S1 S2
+ Facultad de IngenieríaCampus
+ Universitario
+ Análisis Matemático I10.00Profesor
+ Titular
+ Ordinaria 1.250.000,0
+ 0
+ X
+ Facultad de Ciencias
+ Económicas
+ Sede San
+ Rafael
+ Física II6.50Jefe de
+ Trabajos
+ Prácticos
+ Interina 0,00 X X
+ Facultad Sede Cargo Designación Categoría Importe
+ Facultad de IngenieríaCampus
+ Universitario
+ Profesor TitularOrdinariaProfesor Titular1.250.000,00
+ Total DesignacionesTotal CursosTotal FusiónDif. Designaciones
+ 2.100.000,50 1.250.000,00 1.250.000,00 12.345,67

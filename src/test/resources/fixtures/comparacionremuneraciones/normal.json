@@ -1,0 +1,25 @@
+{
+  "liquidacionesActual": [
+    { "liquidacionId": 9101, "legajoId": 1001, "anho": 2026, "mes": 9, "dependenciaId": 10, "totalRemunerativo": 1500000.00, "totalNoRemunerativo": 50000.00, "totalDeduccion": 350000.00, "totalNeto": 1200000.00 },
+    { "liquidacionId": 9102, "legajoId": 1002, "anho": 2026, "mes": 9, "dependenciaId": 10, "totalRemunerativo": 800000.00, "totalDeduccion": 150000.00, "totalNeto": 650000.00 },
+    { "liquidacionId": 9103, "legajoId": 1003, "anho": 2026, "mes": 9, "dependenciaId": 20, "totalRemunerativo": 950000.50, "totalDeduccion": 250000.25, "totalNeto": 700000.25 },
+    { "liquidacionId": 9199, "legajoId": 9999, "anho": 2026, "mes": 9, "dependenciaId": 10, "totalRemunerativo": 111111.11, "totalNeto": 100000.00 }
+  ],
+  "liquidacionesAnterior": [
+    { "liquidacionId": 8101, "legajoId": 1001, "anho": 2026, "mes": 8, "dependenciaId": 10, "totalRemunerativo": 1400000.00, "totalNoRemunerativo": 40000.00, "totalDeduccion": 340000.00, "totalNeto": 1100000.00 },
+    { "liquidacionId": 8102, "legajoId": 1002, "anho": 2026, "mes": 8, "dependenciaId": 10, "totalRemunerativo": 780000.00, "totalDeduccion": 140000.00, "totalNeto": 640000.00 },
+    { "liquidacionId": 8199, "legajoId": 9999, "anho": 2026, "mes": 8, "dependenciaId": 10, "totalRemunerativo": 105000.00, "totalNeto": 95000.00 }
+  ],
+  "personas": [
+    { "legajoId": 1001, "apellido": "Gómez", "nombre": "Ana", "dependenciaId": 10, "estado": 1, "liquida": "S" },
+    { "legajoId": 1002, "apellido": "Pérez", "nombre": "Juan", "dependenciaId": 10, "estado": 1, "liquida": "S" },
+    { "legajoId": 1003, "apellido": "López", "nombre": "María", "dependenciaId": 20, "estado": 1, "liquida": "S" },
+    { "legajoId": 1004, "apellido": "Díaz", "nombre": "Carlos", "dependenciaId": 10, "estado": 1, "liquida": "S" },
+    { "legajoId": 1005, "apellido": "Ruiz", "nombre": "Elena", "estado": 1, "liquida": "S" },
+    { "legajoId": 1006, "apellido": "Sosa", "nombre": "Pedro", "dependenciaId": 30, "estado": 1, "liquida": "S" }
+  ],
+  "dependencias": [
+    { "dependenciaId": 20, "nombre": "Facultad de Ingeniería", "acronimo": "FI", "facultadId": 2, "geograficaId": 1 },
+    { "dependenciaId": 10, "nombre": "Rectorado", "acronimo": "REC", "facultadId": 1, "geograficaId": 1 }
+  ]
+}

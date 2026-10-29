@@ -1,37 +1,42 @@
 graph TD
     subgraph "Clients"
         A[Web Browser / Mobile App]
-        B[External Systems]
+        B[External Systems - VB6]
+    end
+
+    subgraph "Edge"
+        GW[Gateway<br/>inyecta X-API-Key sólo en /ui/]
     end
 
     subgraph "Service Mesh - Consul"
         C[Consul Registry]
-        D[Consul Config]
     end
 
-    subgraph "Microservices Ecosystem"
-        E[haberes-report-service]
+    subgraph "haberes-report-service (hexagonal)"
+        WEB[infrastructure/web<br/>controllers + ApiKeyFilter + ReportResponseBuilder]
+        APP[application<br/>use cases + facades]
+        DOM[domain<br/>models + ports]
+        ACL[infrastructure/client<br/>Feign adapters + mappers]
+        REN[infrastructure/render<br/>OpenPDF / POI]
+        MAIL[infrastructure/mail<br/>SMTP]
+    end
+
+    subgraph "Core"
         F[haberes-core-service]
-        G[haberes-legajo-service]
-        H[haberes-libro-banco-service]
+        T[tesoreria-core-service]
     end
 
-    subgraph "Infrastructure"
-        I[(Database)]
-        J[SMTP Mail Server]
-        K[Caffeine Cache]
-    end
+    J[SMTP Mail Server]
 
-    A -->|REST API| E
-    B -->|REST API| E
-    E -->|Service Discovery| C
-    E -->|Configuration| D
-    E -->|OpenFeign Client| F
-    E -->|OpenFeign Client| G
-    E -->|OpenFeign Client| H
-    E -->|Read/Write| I
-    E -->|Send Email| J
-    E -->|Cache| K
-    F --> I
-    G --> I
-    H --> I
+    A -->|REST /ui/| GW
+    GW -->|X-API-Key| WEB
+    B -->|REST legacy| WEB
+    WEB --> APP
+    APP --> DOM
+    APP --> REN
+    APP --> MAIL
+    ACL -.implementa puertos.-> DOM
+    ACL -->|Feign| F
+    ACL -->|Feign| T
+    MAIL --> J
+    WEB -.- C

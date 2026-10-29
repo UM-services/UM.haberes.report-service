@@ -1,6 +1,9 @@
 app:
   port: ${APP_PORT:8180}
   logging: debug
+  # API key que inyecta el gateway en /api/haberes/report/ui/** (mismo esquema que compras).
+  # Las rutas legacy de VB6 no pasan por el filtro.
+  api-key: ${APP_API_KEY:default-secret-key}
   consul:
     host: consul-service
     port: 8500
@@ -14,12 +17,19 @@ server:
 spring:
   application:
     name: haberes-report-service
+  cache:
+    type: caffeine
+    caffeine:
+      # Catálogos casi estáticos: evita repetir llamadas a core dentro de la misma ventana.
+      spec: maximumSize=500,expireAfterWrite=30m
   cloud:
     consul:
       host: ${app.consul.host}
       port: ${app.consul.port}
       discovery:
         prefer-ip-address: true
+        # Solo resolver instancias con los checks en passing (Feign/LoadBalancer).
+        query-passing: true
         # Consul: readiness (sin dependencias) + poda si queda critico.
         health-check-path: /actuator/health/readiness
         health-check-critical-timeout: 5m
@@ -47,6 +57,17 @@ logging:
     org:
       springframework.cloud.config: ${app.logging}
 management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      # readiness/liveness explicitos: Consul consulta /actuator/health/readiness.
+      probes:
+        enabled: true
+      show-details: never
   health:
     mail:
       enabled: false
+

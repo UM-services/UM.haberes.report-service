@@ -1,0 +1,7 @@
+UNIVERSIDAD DE MENDOZA
+ Periodo: 9/2026
+ Cargos por Período
+ Legajo Apellido, NombrePeríodo#Dep.Dependencia#Cat.Categoría
+ 1001 Gómez, Ana9/202610Facultad de Ingeniería1Profesor Titular
+ 1002 Pérez, Juan9/202620Facultad de Ciencias Económicas2Jefe de Trabajos Prácticos
+ Página 1

@@ -1,0 +1,228 @@
+{
+  "control": {
+    "controlId": 9,
+    "anho": 2026,
+    "mes": 9,
+    "fechaDesde": "2026-09-01T00:00:00Z",
+    "fechaHasta": "2026-09-30T00:00:00Z",
+    "fechaPago": "2026-10-05T00:00:00Z",
+    "fechaDeposito": "2026-10-06T00:00:00Z",
+    "aporteJubilatorio": "11%",
+    "horaReferenciaEtec": 12500.00
+  },
+  "dependencias": [
+    { "dependenciaId": 4, "nombre": "Facultad de Ingeniería", "acronimo": "FI" },
+    { "dependenciaId": 5, "nombre": "Facultad de Ciencias Económicas", "acronimo": "FCE" }
+  ],
+  "facultades": {
+    "2": { "facultadId": 2, "nombre": "Facultad de Ingeniería", "reducido": "FI" }
+  },
+  "personas": {
+    "120": {
+      "legajoId": 120,
+      "documento": 30111222,
+      "apellido": "Gómez",
+      "nombre": "Ana",
+      "cuil": "27-30111222-4",
+      "altaAdministrativa": "2015-03-01T00:00:00Z",
+      "dependenciaId": 4,
+      "directivoEtec": 0
+    },
+    "121": {
+      "legajoId": 121,
+      "documento": 27888999,
+      "apellido": "Pérez",
+      "nombre": "Juan",
+      "cuil": "20-27888999-6",
+      "altaAdministrativa": "2012-08-15T00:00:00Z",
+      "dependenciaId": 4,
+      "directivoEtec": 0
+    }
+  },
+  "antiguedades": {
+    "120": { "antiguedadId": 401, "legajoId": 120, "anho": 2026, "mes": 9, "mesesDocentes": 128, "mesesAdministrativos": 12 },
+    "121": { "antiguedadId": 402, "legajoId": 121, "anho": 2026, "mes": 9, "mesesDocentes": 60, "mesesAdministrativos": 0 }
+  },
+  "indices": {
+    "120": [0.2000, 0.1500],
+    "121": [0.1000, 0.0500]
+  },
+  "legajosBanco": {
+    "120": { "legajoBancoId": 601, "legajoId": 120, "anho": 2026, "mes": 9, "cbu": "0070111122223333444455", "resto": 1 },
+    "121": { "legajoBancoId": 602, "legajoId": 121, "anho": 2026, "mes": 9, "cbu": "0070111122223333444466", "resto": 1 }
+  },
+  "items": {
+    "120": [
+      { "itemId": 1201, "legajoId": 120, "anho": 2026, "mes": 9, "codigoId": 1, "codigoNombre": "Sueldo Básico", "importe": 1500000.00 },
+      { "itemId": 1202, "legajoId": 120, "anho": 2026, "mes": 9, "codigoId": 10, "codigoNombre": "Antigüedad", "importe": 300000.00 },
+      { "itemId": 1203, "legajoId": 120, "anho": 2026, "mes": 9, "codigoId": 50, "codigoNombre": "Asignación No Remunerativa", "importe": 100000.00 },
+      { "itemId": 1204, "legajoId": 120, "anho": 2026, "mes": 9, "codigoId": 70, "codigoNombre": "Jubilación", "importe": 250000.00 },
+      { "itemId": 1205, "legajoId": 120, "anho": 2026, "mes": 9, "codigoId": 99, "codigoNombre": "Neto", "importe": 1650000.00 }
+    ],
+    "121": [
+      { "itemId": 1211, "legajoId": 121, "anho": 2026, "mes": 9, "codigoId": 1, "codigoNombre": "Sueldo Básico", "importe": 1200000.00 },
+      { "itemId": 1212, "legajoId": 121, "anho": 2026, "mes": 9, "codigoId": 10, "codigoNombre": "Antigüedad", "importe": 240000.00 },
+      { "itemId": 1213, "legajoId": 121, "anho": 2026, "mes": 9, "codigoId": 50, "codigoNombre": "Asignación No Remunerativa", "importe": 80000.00 },
+      { "itemId": 1214, "legajoId": 121, "anho": 2026, "mes": 9, "codigoId": 70, "codigoNombre": "Jubilación", "importe": 200000.00 },
+      { "itemId": 1215, "legajoId": 121, "anho": 2026, "mes": 9, "codigoId": 99, "codigoNombre": "Neto", "importe": 1320000.00 }
+    ]
+  },
+  "cursosCargo": {
+    "120": [
+      {
+        "cursoCargoId": 9001,
+        "cursoId": 300,
+        "anho": 2026,
+        "mes": 9,
+        "cargoTipoId": 1,
+        "legajoId": 120,
+        "horasSemanales": 6,
+        "desarraigo": 1,
+        "curso": { "cursoId": 300, "nombre": "Análisis Matemático I", "facultadId": 2, "geograficaId": 1, "anual": 1, "semestre1": 0, "semestre2": 0, "nivelId": 1 },
+        "cargoTipo": { "cargoTipoId": 1, "acargo": 1, "nombre": "Profesor Titular", "precedencia": 1 }
+      }
+    ],
+    "121": [
+      {
+        "cursoCargoId": 9002,
+        "cursoId": 301,
+        "anho": 2026,
+        "mes": 9,
+        "cargoTipoId": 3,
+        "legajoId": 121,
+        "horasSemanales": 4,
+        "desarraigo": 0,
+        "curso": { "cursoId": 301, "nombre": "Contabilidad Básica", "facultadId": 2, "geograficaId": 1, "anual": 0, "semestre1": 1, "semestre2": 0, "nivelId": 1 },
+        "cargoTipo": { "cargoTipoId": 3, "acargo": 0, "nombre": "Jefe de Trabajos Prácticos", "precedencia": 2 }
+      }
+    ]
+  },
+  "cargosDocente": {
+    "120": [
+      {
+        "cargoLiquidacionId": 7001,
+        "legajoId": 120,
+        "anho": 2026,
+        "mes": 9,
+        "dependenciaId": 4,
+        "categoriaId": 11,
+        "categoriaNombre": "Profesor Titular",
+        "categoriaBasico": 1500000.00,
+        "horasJornada": 0,
+        "jornada": 1,
+        "presentismo": 1,
+        "dependencia": { "dependenciaId": 4, "nombre": "Facultad de Ingeniería", "acronimo": "FI" },
+        "categoria": { "categoriaId": 11, "nombre": "Profesor Titular", "basico": 1500000.00, "docente": 1 }
+      }
+    ],
+    "121": [
+      {
+        "cargoLiquidacionId": 7003,
+        "legajoId": 121,
+        "anho": 2026,
+        "mes": 9,
+        "dependenciaId": 4,
+        "categoriaId": 12,
+        "categoriaNombre": "Profesor Adjunto",
+        "categoriaBasico": 1200000.00,
+        "horasJornada": 0,
+        "jornada": 1,
+        "presentismo": 1,
+        "dependencia": { "dependenciaId": 4, "nombre": "Facultad de Ingeniería", "acronimo": "FI" },
+        "categoria": { "categoriaId": 12, "nombre": "Profesor Adjunto", "basico": 1200000.00, "docente": 1 }
+      }
+    ]
+  },
+  "cargosNoDocente": {
+    "120": [
+      {
+        "cargoLiquidacionId": 7002,
+        "legajoId": 120,
+        "anho": 2026,
+        "mes": 9,
+        "dependenciaId": 4,
+        "categoriaId": 21,
+        "categoriaNombre": "Administrativo Categoría 3",
+        "categoriaBasico": 900000.00,
+        "horasJornada": 0,
+        "jornada": 1,
+        "dependencia": { "dependenciaId": 4, "nombre": "Facultad de Ingeniería", "acronimo": "FI" },
+        "categoria": { "categoriaId": 21, "nombre": "Administrativo Categoría 3", "basico": 900000.00, "noDocente": 1 }
+      }
+    ],
+    "121": []
+  },
+  "cargosClase": {
+    "120": [
+      {
+        "cargoClaseDetalleId": 8001,
+        "legajoId": 120,
+        "anho": 2026,
+        "mes": 9,
+        "cargoClaseId": 11,
+        "dependenciaId": 4,
+        "facultadId": 2,
+        "geograficaId": 1,
+        "horas": 12,
+        "valorHora": 12500.00,
+        "cargoClasePeriodoId": 6001,
+        "liquidado": 1,
+        "cargoClase": {
+          "cargoClaseId": 11,
+          "nombre": "Jefe de Trabajos Prácticos",
+          "claseId": 1,
+          "clase": { "claseId": 1, "nombre": "Primera", "valorHora": 111.25 }
+        },
+        "dependencia": { "dependenciaId": 4, "nombre": "Facultad de Ingeniería", "acronimo": "FI" },
+        "cargoClasePeriodo": {
+          "cargoClasePeriodoId": 6001,
+          "legajoId": 120,
+          "cargoClaseId": 11,
+          "dependenciaId": 4,
+          "facultadId": 2,
+          "geograficaId": 1,
+          "horas": 12,
+          "valorHora": 12500.00,
+          "descripcion": "Primer Semestre",
+          "geografica": { "geograficaId": 1, "nombre": "Mendoza", "reducido": "MZ" }
+        }
+      }
+    ],
+    "121": []
+  },
+  "adicionales": {
+    "120": [
+      { "liquidacionAdicionalId": 5001, "legajoId": 120, "anho": 2026, "mes": 9, "dependenciaId": 5, "adicional": 25000.00 }
+    ],
+    "121": []
+  },
+  "letras": {
+    "120": { "letraId": 7, "legajoId": 120, "anho": 2026, "mes": 9, "neto": 0, "cadena": "" },
+    "121": { "letraId": 8, "legajoId": 121, "anho": 2026, "mes": 9, "neto": 0, "cadena": "" }
+  },
+  "contactos": {
+    "120": { "legajoId": 120, "fijo": "2615550001", "movil": "2615550002", "mailPersonal": "ana.gomez@example.com", "mailInstitucional": "ana.gomez@um.edu.ar" },
+    "121": { "legajoId": 121, "fijo": "2615550003", "movil": "2615550004", "mailPersonal": "juan.perez@example.com", "mailInstitucional": "juan.perez@um.edu.ar" }
+  },
+  "legajosControl": {
+    "120": { "legajoControlId": 301, "legajoId": 120, "anho": 2026, "mes": 9, "liquidado": 1, "fusionado": 0, "bonoEnviado": 0 },
+    "121": { "legajoControlId": 302, "legajoId": 121, "anho": 2026, "mes": 9, "liquidado": 1, "fusionado": 0, "bonoEnviado": 0 }
+  },
+  "liquidaciones": [
+    { "liquidacionId": 101, "legajoId": 120, "anho": 2026, "mes": 9, "dependenciaId": 4, "salida": "docente" },
+    { "liquidacionId": 102, "legajoId": 121, "anho": 2026, "mes": 9, "dependenciaId": 4, "salida": "docente" }
+  ],
+  "codigos": {
+    "981": { "codigoId": 981, "nombre": "Adicionales", "docente": 1, "noDocente": 1 }
+  },
+  "codigoGruposRemunerativo": [
+    { "codigoId": 1, "remunerativo": 1, "codigo": { "codigoId": 1, "nombre": "Sueldo Básico" } },
+    { "codigoId": 10, "remunerativo": 1, "codigo": { "codigoId": 10, "nombre": "Antigüedad" } }
+  ],
+  "codigoGruposNoRemunerativo": [
+    { "codigoId": 50, "noRemunerativo": 1, "codigo": { "codigoId": 50, "nombre": "Asignación No Remunerativa" } }
+  ],
+  "codigoGruposDeduccion": [
+    { "codigoId": 70, "deduccion": 1, "codigo": { "codigoId": 70, "nombre": "Jubilación" } }
+  ]
+}

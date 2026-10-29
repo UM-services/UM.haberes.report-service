@@ -1,0 +1,6 @@
+SHEET Fusión por Docente
+R0:[0|STRING|Fusión por Docente]
+R1:[0|STRING|Período: 9/2026]
+R2:[0|STRING|Legajo][1|STRING|Apellido, Nombre][2|STRING|Facultad][3|STRING|Sede][4|STRING|Cargo][5|STRING|Básico]
+R3:[0|STRING|1001][1|STRING|Gómez, Ana][2|STRING|Facultad de Ingeniería][3|STRING|Campus Universitario][4|STRING|Profesor Titular][5|STRING|1.234.567,89]
+R4:[0|STRING|1002][1|STRING|Pérez, Juan][2|STRING|Facultad de Ciencias Económicas][3|STRING|Sede San Rafael][4|STRING|Jefe de Trabajos Prácticos][5|STRING|987.654,32]
