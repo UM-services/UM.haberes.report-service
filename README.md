@@ -1,8 +1,16 @@
 # UM.haberes.report-service
 
-## Estado de Integración Continua
-
 [![UM.haberes.report-service CI](https://github.com/UM-services/UM.haberes.report-service/actions/workflows/maven.yml/badge.svg)](https://github.com/UM-services/UM.haberes.report-service/actions/workflows/maven.yml)
+![Java](https://img.shields.io/badge/Java-25-ED8B00?logo=openjdk&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.1.2-6DB33F?logo=springboot&logoColor=white)
+![Spring Cloud](https://img.shields.io/badge/Spring%20Cloud-2025.1.4-6DB33F?logo=spring&logoColor=white)
+![Consul](https://img.shields.io/badge/Consul-Service%20Discovery-blue?logo=consul)
+![Apache Maven](https://img.shields.io/badge/Apache%20Maven-3.8.8%2B-C71A36?logo=apachemaven&logoColor=white)
+![Apache POI](https://img.shields.io/badge/Apache%20POI-6.0.0-D22128?logo=apache&logoColor=white)
+![OpenPDF](https://img.shields.io/badge/OpenPDF-3.0.5-blue)
+![Caffeine](https://img.shields.io/badge/Caffeine-Cache-blue)
+![JUnit](https://img.shields.io/badge/JUnit-5-25A162?logo=junit5&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-Container-2496ED?logo=docker&logoColor=white)
 
 Servicio de generación y gestión de reportes que forma parte de la arquitectura de microservicios de UM. Proporciona funcionalidades para la generación y procesamiento de reportes en diferentes formatos.
 

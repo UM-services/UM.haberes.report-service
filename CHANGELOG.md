@@ -5,6 +5,13 @@ Todos los cambios notables en este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.1] - 2026-10-29
+
+### Fixed
+- Se elimina una línea sobrante con un `_|` residual del banner ASCII de arranque
+  (`src/main/resources/banner.txt`), que además queda con salto de línea final, para que el
+  banner del servicio se imprima sin caracteres sueltos.
+
 ## [0.8.0] - 2026-10-25
 
 ### Added
