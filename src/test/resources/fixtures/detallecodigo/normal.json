@@ -1,0 +1,16 @@
+{
+  "codigo": { "codigoId": 31, "nombre": "Antigüedad" },
+  "items": [
+    { "legajoId": 1001, "codigoId": 31, "anho": 2026, "mes": 9, "importe": 123456.78 },
+    { "legajoId": 1002, "codigoId": 31, "anho": 2026, "mes": 9, "importe": 5000.00 }
+  ],
+  "novedades": [
+    { "legajoId": 1001, "codigoId": 31, "anho": 2026, "mes": 9, "importe": 1000.50, "cantidad": 2 },
+    { "legajoId": 1003, "codigoId": 31, "anho": 2026, "mes": 9, "importe": 250.00, "cantidad": 1 }
+  ],
+  "personas": [
+    { "legajoId": 1001, "apellido": "Gómez", "nombre": "Ana" },
+    { "legajoId": 1002, "apellido": "Pérez", "nombre": "Juan" },
+    { "legajoId": 1003, "apellido": "López", "nombre": "María" }
+  ]
+}

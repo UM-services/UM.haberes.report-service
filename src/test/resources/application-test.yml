@@ -1,0 +1,28 @@
+spring:
+  cloud:
+    consul:
+      enabled: false
+      discovery:
+        enabled: false
+        catalog-services-watch:
+          enabled: false
+        register: false
+  main:
+    banner-mode: off
+  # Los tests cambian los stubs entre casos: la caché debe quedar desactivada.
+  cache:
+    type: none
+
+# Los reportes escriben en target; los tests no deben tocar /tmp del host.
+path:
+  files: target/test-output/
+
+# Clave que en produccion inyecta el gateway en /api/haberes/report/ui/**.
+app:
+  api-key: test-api-key
+
+logging:
+  level:
+    um.haberes.report: warn
+    org.springframework: warn
+    com.netflix: warn

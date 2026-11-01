@@ -1,0 +1,4 @@
+SHEET Liquidables
+R0:[0|STRING|Planilla de Liquidables]
+R1:[0|STRING|Legajo][1|STRING|Apellido, Nombre][2|STRING|Estado][3|STRING|Dependencia]
+R2:[0|STRING|Sin datos.]

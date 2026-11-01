@@ -1,0 +1,171 @@
+{
+  "persona": {
+    "legajoId": 120,
+    "documento": 30111222,
+    "apellido": "Gómez",
+    "nombre": "Ana"
+  },
+  "liquidadas": [
+    {
+      "cargoLiquidacionId": 9001,
+      "legajoId": 120,
+      "anho": 2026,
+      "mes": 8,
+      "dependenciaId": 10,
+      "categoriaId": 5,
+      "categoriaNombre": "Profesor Titular",
+      "categoriaBasico": 1250000.00,
+      "horasJornada": 20.00,
+      "jornada": 1,
+      "presentismo": 1,
+      "situacion": "Activo",
+      "dependencia": {
+        "dependenciaId": 10,
+        "nombre": "Ingeniería",
+        "acronimo": "FI",
+        "facultadId": 2,
+        "geograficaId": 1
+      },
+      "categoria": {
+        "categoriaId": 5,
+        "nombre": "Profesor Titular",
+        "basico": 1250000.00,
+        "docente": 1
+      }
+    },
+    {
+      "cargoLiquidacionId": 9002,
+      "legajoId": 120,
+      "anho": 2026,
+      "mes": 8,
+      "dependenciaId": 11,
+      "categoriaId": 7,
+      "categoriaNombre": "Jefe de Trabajos Prácticos",
+      "categoriaBasico": 850000.50,
+      "horasJornada": 10.00,
+      "jornada": 1,
+      "presentismo": 1,
+      "situacion": "Activo",
+      "dependencia": {
+        "dependenciaId": 11,
+        "nombre": "Ciencias Económicas",
+        "acronimo": "FCE",
+        "facultadId": 3,
+        "geograficaId": 2
+      },
+      "categoria": {
+        "categoriaId": 7,
+        "nombre": "Jefe de Trabajos Prácticos",
+        "basico": 850000.50,
+        "docente": 1
+      }
+    }
+  ],
+  "cursos": [
+    {
+      "cursoCargoId": 7001,
+      "cursoId": 301,
+      "anho": 2026,
+      "mes": 9,
+      "cargoTipoId": 1,
+      "legajoId": 120,
+      "horasSemanales": 10.00,
+      "horasTotales": 40.00,
+      "designacionTipoId": 1,
+      "categoriaId": 5,
+      "desarraigo": 0,
+      "curso": {
+        "cursoId": 301,
+        "nombre": "Análisis Matemático I",
+        "facultadId": 2,
+        "geograficaId": 1,
+        "anual": 1
+      },
+      "categoria": {
+        "categoriaId": 5,
+        "nombre": "Profesor Titular",
+        "basico": 1250000.00,
+        "docente": 1
+      }
+    },
+    {
+      "cursoCargoId": 7002,
+      "cursoId": 302,
+      "anho": 2026,
+      "mes": 9,
+      "cargoTipoId": 2,
+      "legajoId": 120,
+      "horasSemanales": 6.50,
+      "horasTotales": 26.00,
+      "designacionTipoId": 2,
+      "categoriaId": 7,
+      "desarraigo": 1,
+      "curso": {
+        "cursoId": 302,
+        "nombre": "Física II",
+        "facultadId": 3,
+        "geograficaId": 2,
+        "semestre1": 1
+      }
+    }
+  ],
+  "fusiones": [
+    {
+      "cursoFusionId": 8001,
+      "legajoId": 120,
+      "anho": 2026,
+      "mes": 9,
+      "facultadId": 2,
+      "geograficaId": 1,
+      "cargoTipoId": 1,
+      "designacionTipoId": 1,
+      "anual": 1,
+      "categoriaId": 5
+    }
+  ],
+  "novedad": {
+    "novedadId": 6001,
+    "legajoId": 120,
+    "anho": 2026,
+    "mes": 9,
+    "codigoId": 27,
+    "importe": 12345.67,
+    "observaciones": "Diferencia de designaciones del período"
+  },
+  "facultades": [
+    { "facultadId": 2, "nombre": "Facultad de Ingeniería", "reducido": "FI" },
+    { "facultadId": 3, "nombre": "Facultad de Ciencias Económicas", "reducido": "FCE" }
+  ],
+  "geograficas": [
+    { "geograficaId": 1, "nombre": "Campus Universitario", "reducido": "CU" },
+    { "geograficaId": 2, "nombre": "Sede San Rafael", "reducido": "SR" }
+  ],
+  "dependencias": [
+    {
+      "dependenciaId": 10,
+      "nombre": "Ingeniería",
+      "acronimo": "FI",
+      "facultadId": 2,
+      "geograficaId": 1
+    },
+    {
+      "dependenciaId": 11,
+      "nombre": "Ciencias Económicas",
+      "acronimo": "FCE",
+      "facultadId": 3,
+      "geograficaId": 2
+    }
+  ],
+  "categorias": [
+    { "categoriaId": 5, "nombre": "Profesor Titular", "basico": 1250000.00, "docente": 1 },
+    { "categoriaId": 7, "nombre": "Jefe de Trabajos Prácticos", "basico": 850000.50, "docente": 1 }
+  ],
+  "cargoTipos": [
+    { "cargoTipoId": 1, "acargo": 1, "nombre": "Profesor Titular", "precedencia": 1 },
+    { "cargoTipoId": 2, "acargo": 0, "nombre": "Jefe de Trabajos Prácticos", "precedencia": 2 }
+  ],
+  "designacionTipos": [
+    { "designacionTipoId": 1, "nombre": "Ordinaria", "horasSemanales": 10.00, "horasTotales": 40.00, "simples": 1 },
+    { "designacionTipoId": 2, "nombre": "Interina", "horasSemanales": 6.50, "horasTotales": 26.00, "simples": 1 }
+  ]
+}

@@ -1,0 +1,6 @@
+SHEET Liquidables
+R0:[0|STRING|Planilla de Liquidables]
+R1:[0|STRING|Legajo][1|STRING|Apellido, Nombre][2|STRING|Estado][3|STRING|Dependencia]
+R2:[0|NUMERIC|1001][1|STRING|Gómez, Ana][2|NUMERIC|1][3|STRING|Facultad de Ingeniería]
+R3:[0|NUMERIC|1002][1|STRING|Pérez, Juan][2|NUMERIC|1][3|STRING|Facultad de Ciencias Económicas]
+R4:[0|NUMERIC|1003][1|STRING|López, María][2|NUMERIC|0][3|BLANK|]

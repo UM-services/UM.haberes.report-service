@@ -1,0 +1,60 @@
+{
+  "liquidaciones": [
+    { "liquidacionId": 1, "legajoId": 1001, "anho": 2026, "mes": 9, "dependenciaId": 10 },
+    { "liquidacionId": 2, "legajoId": 1002, "anho": 2026, "mes": 9, "dependenciaId": 20 }
+  ],
+  "cargos": [
+    {
+      "legajoId": 1001,
+      "anho": 2026,
+      "mes": 9,
+      "dependenciaId": 10,
+      "dependencia": { "dependenciaId": 10, "nombre": "Facultad de Ingeniería" },
+      "categoriaId": 1,
+      "categoriaNombre": "Profesor Titular",
+      "categoriaBasico": 1234567.89,
+      "horasJornada": 0,
+      "jornada": 1
+    },
+    {
+      "legajoId": 1002,
+      "anho": 2026,
+      "mes": 9,
+      "dependenciaId": 20,
+      "dependencia": { "dependenciaId": 20, "nombre": "Facultad de Ciencias Económicas" },
+      "categoriaId": 2,
+      "categoriaNombre": "Jefe de Trabajos Prácticos",
+      "categoriaBasico": 900000.00,
+      "horasJornada": 20.00,
+      "jornada": 0
+    }
+  ],
+  "cargosClase": [
+    {
+      "legajoId": 1001,
+      "anho": 2026,
+      "mes": 9,
+      "dependenciaId": 10,
+      "dependencia": { "dependenciaId": 10, "nombre": "Facultad de Ingeniería" },
+      "cargoClase": { "cargoClaseId": 5, "nombre": "Ayudante", "clase": { "claseId": 3, "nombre": "Clase A" } },
+      "cargoClasePeriodo": { "cargoClasePeriodoId": 7, "descripcion": "Turno mañana" },
+      "valorHora": 5000.00,
+      "horas": 10
+    }
+  ],
+  "adicionales": [
+    {
+      "legajoId": 1002,
+      "anho": 2026,
+      "mes": 9,
+      "dependenciaId": 20,
+      "dependencia": { "dependenciaId": 20, "nombre": "Facultad de Ciencias Económicas" },
+      "adicional": 2500.00
+    }
+  ],
+  "codigo": { "codigoId": 981, "nombre": "Adicional" },
+  "personas": [
+    { "legajoId": 1001, "apellido": "Gómez", "nombre": "Ana" },
+    { "legajoId": 1002, "apellido": "Pérez", "nombre": "Juan" }
+  ]
+}

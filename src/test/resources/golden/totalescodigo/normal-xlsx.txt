@@ -1,0 +1,7 @@
+SHEET Totales por Código
+R0:[0|STRING|Totales Generales por Código]
+R1:[0|STRING|Período: 9/2026]
+R2:[0|STRING|Código][1|STRING|Descripción][2|STRING|Novedades][3|STRING|Liquidado][4|STRING|Diferencia]
+R3:[0|STRING|10][1|STRING|Sueldo Básico][2|STRING|1.500.000,5][3|STRING|1.499.999,5][4|STRING|1]
+R4:[0|STRING|20][1|STRING|Antigüedad][2|STRING|250.000,25][3|STRING|260.000][4|STRING|9.999,75]
+R5:[0|STRING|40][1|STRING|Sólo Novedad][2|STRING|1.000][3|STRING|0][4|STRING|1.000]

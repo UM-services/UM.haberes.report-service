@@ -1,0 +1,31 @@
+{
+  "personas": [
+    {
+      "legajoId": 1001,
+      "apellido": "Gómez",
+      "nombre": "Ana",
+      "cuil": "27-20111222-4",
+      "estado": 1,
+      "dependenciaId": 10,
+      "dependencia": { "dependenciaId": 10, "nombre": "Facultad de Ingeniería" }
+    },
+    {
+      "legajoId": 1002,
+      "apellido": "Pérez",
+      "nombre": "Juan",
+      "cuil": "20-25333444-9",
+      "estado": 1,
+      "dependenciaId": 20,
+      "dependencia": { "dependenciaId": 20, "nombre": "Facultad de Ciencias Económicas" }
+    },
+    {
+      "legajoId": 1003,
+      "apellido": "López",
+      "nombre": "María",
+      "cuil": "27-30555666-1",
+      "estado": 0,
+      "dependenciaId": null,
+      "dependencia": null
+    }
+  ]
+}

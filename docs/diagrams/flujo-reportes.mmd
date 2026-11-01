@@ -1,23 +1,34 @@
 sequenceDiagram
     participant Client as Cliente
-    participant ReportService as Report Service
-    participant CoreService as Core Service
-    participant DB as Base de Datos
-    participant Mail as Servidor SMTP
+    participant Web as infrastructure/web
+    participant UC as application/use case
+    participant Port as domain/ports/out
+    participant Adapter as infrastructure/client
+    participant Core as Core Service
+    participant Render as infrastructure/render
+    participant Mail as infrastructure/mail
 
-    Client->>+ReportService: Solicitar Reporte (PDF/Excel)
-    ReportService->>+CoreService: Obtener datos (OpenFeign)
-    CoreService->>+DB: Consultar información
-    DB-->>-CoreService: Datos solicitados
-    CoreService-->>-ReportService: Respuesta DTO
-    ReportService->>ReportService: Generar documento (OpenPDF / Apache POI)
-    alt Es Bono de Sueldo
-        ReportService->>ReportService: Aplicar firma digital
-    end
-    ReportService-->>-Client: Reporte generado
-    opt Envío por Email
-        Client->>ReportService: Enviar reporte por correo
-        ReportService->>+Mail: Enviar email con adjunto
-        Mail-->>-ReportService: Confirmación de envío
-        ReportService-->>Client: Resultado de envío
+    Client->>+Web: GET /ui/... (data, pdf o xlsx)
+    Web->>+UC: Ejecutar caso de uso
+    UC->>+Port: cargar datos del período
+    Port->>+Adapter: delegar
+    Adapter->>+Core: OpenFeign
+    Core-->>-Adapter: DTOs
+    Adapter-->>-Port: modelos de dominio
+    Port-->>-UC: fuente
+    UC->>UC: calcular contenido (sin frameworks)
+    UC->>+Render: render(content, path)
+    Render-->>-UC: archivo generado
+    UC->>+Port: efectos (letra, auditoría)
+    Port->>Adapter: delegar
+    Adapter->>Core: POST/PUT
+    UC-->>-Web: ReportFile
+    Web-->>-Client: JSON / attachment / inline
+
+    opt Envío por email
+        Client->>Web: sendBono
+        Web->>UC: SendBonoUseCase
+        UC->>Mail: enviar adjunto
+        Mail-->>UC: ok
+        UC->>Port: marcar bonoEnviado
     end

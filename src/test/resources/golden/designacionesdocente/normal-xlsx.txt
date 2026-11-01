@@ -1,0 +1,10 @@
+SHEET Designaciones Docente
+R0:[0|STRING|Designación de Docentes]
+R1:[0|STRING|Período: 9/2026]
+R2:[0|STRING|1001 - Gómez, Ana]
+R3:[0|STRING|Facultad][1|STRING|Sede][2|STRING|Espacio][3|STRING|Horas][4|STRING|Cargo][5|STRING|Designación][6|STRING|Horas designación][7|STRING|Dictado]
+R4:[0|STRING|Facultad de Ingeniería][1|STRING|Campus Universitario][2|STRING|Análisis Matemático I][3|STRING|10.0][4|STRING|Profesor Titular][5|STRING|Ordinaria][6|STRING|10.0][7|STRING|Anual]
+R5:[0|STRING|Facultad de Ingeniería][1|STRING|Campus Universitario][2|STRING|Física II][3|STRING|6.0][4|STRING|Jefe de Trabajos Prácticos][5|STRING|Interina][6|STRING|6.0][7|STRING|Semestral]
+R7:[0|STRING|1002 - Pérez, Juan]
+R8:[0|STRING|Facultad][1|STRING|Sede][2|STRING|Espacio][3|STRING|Horas][4|STRING|Cargo][5|STRING|Designación][6|STRING|Horas designación][7|STRING|Dictado]
+R9:[0|STRING|Facultad de Ciencias Económicas][1|STRING|Sede San Rafael][2|STRING|Contabilidad General][3|STRING|4.5][4|STRING|Ayudante de Primera][5|STRING|Suplente][6|STRING|4.5][7|STRING|Semestre 2]

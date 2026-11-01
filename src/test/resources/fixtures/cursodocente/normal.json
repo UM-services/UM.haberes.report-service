@@ -1,0 +1,96 @@
+{
+  "personas": [
+    { "legajoId": 1001, "apellido": "Gómez", "nombre": "Ana" },
+    { "legajoId": 1002, "apellido": "Pérez", "nombre": "Juan" },
+    { "legajoId": 1003, "apellido": "López", "nombre": "María" }
+  ],
+  "cursosCargo": [
+    {
+      "cursoCargoId": 7001,
+      "cursoId": 301,
+      "anho": 2026,
+      "mes": 9,
+      "legajoId": 1001,
+      "horasSemanales": 10.50,
+      "horasTotales": 42.00,
+      "categoriaId": 1,
+      "desarraigo": 0
+    },
+    {
+      "cursoCargoId": 7002,
+      "cursoId": 302,
+      "anho": 2026,
+      "mes": 9,
+      "legajoId": 1001,
+      "horasSemanales": 4.00,
+      "horasTotales": 16.00,
+      "categoriaId": 2,
+      "desarraigo": 1
+    },
+    {
+      "cursoCargoId": 7003,
+      "cursoId": 303,
+      "anho": 2026,
+      "mes": 9,
+      "legajoId": 1002,
+      "horasSemanales": 6.00,
+      "horasTotales": 24.00,
+      "categoriaId": null,
+      "desarraigo": 0
+    },
+    {
+      "cursoCargoId": 7004,
+      "cursoId": 301,
+      "anho": 2026,
+      "mes": 9,
+      "legajoId": 1002,
+      "horasSemanales": 3.00,
+      "horasTotales": 12.00,
+      "categoriaId": 1,
+      "desarraigo": 0
+    }
+  ],
+  "cursos": [
+    {
+      "cursoId": 301,
+      "nombre": "Análisis Matemático I",
+      "facultadId": 2,
+      "geograficaId": 1,
+      "anual": 1,
+      "semestre1": 0,
+      "semestre2": 0
+    },
+    {
+      "cursoId": 302,
+      "nombre": "Física II",
+      "facultadId": 2,
+      "geograficaId": 2,
+      "anual": 0,
+      "semestre1": 1,
+      "semestre2": 0
+    },
+    {
+      "cursoId": 303,
+      "nombre": "Álgebra Lineal",
+      "facultadId": 3,
+      "geograficaId": 1,
+      "anual": 0,
+      "semestre1": 0,
+      "semestre2": 1
+    }
+  ],
+  "categorias": [
+    { "categoriaId": 1, "nombre": "Profesor Titular", "basico": 1234567.89 },
+    { "categoriaId": 2, "nombre": "Ayudante de Primera", "basico": 456789.01 },
+    { "categoriaId": 3, "nombre": "Categoría sin uso", "basico": 1.00 }
+  ],
+  "facultades": [
+    { "facultadId": 2, "nombre": "Facultad de Ingeniería", "reducido": "FI" },
+    { "facultadId": 3, "nombre": "Facultad de Ciencias Económicas", "reducido": "FCE" },
+    { "facultadId": 4, "nombre": "Facultad de Derecho", "reducido": "FD" }
+  ],
+  "geograficas": [
+    { "geograficaId": 1, "nombre": "Campus Universitario", "reducido": "CU" },
+    { "geograficaId": 2, "nombre": "Sede San Rafael", "reducido": "SR" }
+  ]
+}

@@ -1,0 +1,11 @@
+SHEET Cursos por Docente
+R0:[0|STRING|Cursos por Docente]
+R1:[0|STRING|Período: 9/2026]
+R2:[0|STRING|1001 - Gómez, Ana]
+R3:[0|STRING|Facultad][1|STRING|Sede][2|STRING|Espacio][3|STRING|Horas][4|STRING|Cargo][5|STRING|Básico][6|STRING|Anual][7|STRING|Semestre 1][8|STRING|Semestre 2]
+R4:[0|STRING|Facultad de Ingeniería][1|STRING|Campus Universitario][2|STRING|Análisis Matemático I][3|STRING|10.5][4|STRING|Profesor Titular][5|STRING|1234567.89][6|STRING|1][7|STRING|][8|STRING|]
+R5:[0|STRING|Facultad de Ingeniería][1|STRING|Sede San Rafael][2|STRING|Física II][3|STRING|4.0][4|STRING|Ayudante de Primera][5|STRING|456789.01][6|STRING|][7|STRING|1][8|STRING|]
+R7:[0|STRING|1002 - Pérez, Juan]
+R8:[0|STRING|Facultad][1|STRING|Sede][2|STRING|Espacio][3|STRING|Horas][4|STRING|Cargo][5|STRING|Básico][6|STRING|Anual][7|STRING|Semestre 1][8|STRING|Semestre 2]
+R9:[0|STRING|Facultad de Ciencias Económicas][1|STRING|Campus Universitario][2|STRING|Álgebra Lineal][3|STRING|6.0][4|STRING|][5|STRING|0][6|STRING|][7|STRING|][8|STRING|1]
+R10:[0|STRING|Facultad de Ingeniería][1|STRING|Campus Universitario][2|STRING|Análisis Matemático I][3|STRING|3.0][4|STRING|Profesor Titular][5|STRING|1234567.89][6|STRING|1][7|STRING|][8|STRING|]

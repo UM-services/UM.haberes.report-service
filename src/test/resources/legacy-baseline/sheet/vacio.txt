@@ -1,0 +1,2 @@
+SHEET Cursos
+R0:[0|STRING|Legajo][1|STRING|Apellido, Nombre][2|STRING|Periodo][3|STRING|#Facultad][4|STRING|Facultad][5|STRING|#Sede][6|STRING|Sede][7|STRING|#Curso][8|STRING|Curso][9|STRING|#Cargo][10|STRING|Cargo][11|STRING|Horas][12|STRING|Dictado]

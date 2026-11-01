@@ -103,6 +103,17 @@ jobs:
           cat >> docs/index.html << 'EOF'
           <script src="data.js"></script>
           <script>
+              // Escape Mermaid source before injecting it with innerHTML. The HTML
+              // parser would otherwise turn annotations such as <<interface>> into
+              // real elements and corrupt the diagram. Mermaid decodes the entities
+              // back to the original text before parsing.
+              function escapeHtml(text) {
+                  return text
+                      .replace(/&/g, '&amp;')
+                      .replace(/</g, '&lt;')
+                      .replace(/>/g, '&gt;');
+              }
+
               // --- Dependency Tree ---
               fetch('dependency-tree.txt')
                   .then(response => response.text())
@@ -128,7 +139,7 @@ jobs:
                   .then(response => response.text())
                   .then(data => {
                       const architectureContainer = document.getElementById('architecture');
-                      architectureContainer.innerHTML = '<h2>🏛️ Arquitectura General del Servicio</h2><div class="mermaid">' + data + '</div>';
+                      architectureContainer.innerHTML = '<h2>🏛️ Arquitectura General del Servicio</h2><div class="mermaid">' + escapeHtml(data) + '</div>';
                       mermaid.init(undefined, architectureContainer.querySelector('.mermaid'));
                   });
 
@@ -137,7 +148,7 @@ jobs:
                   .then(response => response.text())
                   .then(data => {
                       const sequenceContainer = document.getElementById('sequence-diagram');
-                      sequenceContainer.innerHTML = '<h2>🔄 Diagrama de Secuencia: Flujo de Generación de Reportes</h2><div class="mermaid">' + data + '</div>';
+                      sequenceContainer.innerHTML = '<h2>🔄 Diagrama de Secuencia: Flujo de Generación de Reportes</h2><div class="mermaid">' + escapeHtml(data) + '</div>';
                       mermaid.init(undefined, sequenceContainer.querySelector('.mermaid'));
                   });
 
@@ -146,7 +157,7 @@ jobs:
                   .then(response => response.text())
                   .then(data => {
                       const erdContainer = document.getElementById('erd-diagram');
-                      erdContainer.innerHTML = '<h2>🗃️ Diagrama de Entidad-Relación (Simplificado)</h2><div class="mermaid">' + data + '</div>';
+                      erdContainer.innerHTML = '<h2>🗃️ Diagrama de Entidad-Relación (Simplificado)</h2><div class="mermaid">' + escapeHtml(data) + '</div>';
                       mermaid.init(undefined, erdContainer.querySelector('.mermaid'));
                   });
 
@@ -155,7 +166,7 @@ jobs:
                   .then(response => response.text())
                   .then(data => {
                       const deploymentContainer = document.getElementById('deployment-diagram');
-                      deploymentContainer.innerHTML = '<h2>🚀 Diagrama de Despliegue</h2><div class="mermaid">' + data + '</div>';
+                      deploymentContainer.innerHTML = '<h2>🚀 Diagrama de Despliegue</h2><div class="mermaid">' + escapeHtml(data) + '</div>';
                       mermaid.init(undefined, deploymentContainer.querySelector('.mermaid'));
                   });
           

@@ -1,0 +1,41 @@
+{
+  "cantidades": [
+    {
+      "uniqueId": "2026.9.1001.2.1",
+      "anho": 2026,
+      "mes": 9,
+      "legajoId": 1001,
+      "facultadId": 2,
+      "geograficaId": 1,
+      "anuales": 1,
+      "semestre1": 0,
+      "semestre2": 2
+    },
+    {
+      "uniqueId": "2026.9.1002.3.2",
+      "anho": 2026,
+      "mes": 9,
+      "legajoId": 1002,
+      "facultadId": 3,
+      "geograficaId": 2,
+      "anuales": 0,
+      "semestre1": 1,
+      "semestre2": 0
+    }
+  ],
+  "personas": [
+    { "legajoId": 1001, "apellido": "Gómez", "nombre": "Ana" },
+    { "legajoId": 1002, "apellido": "Pérez", "nombre": "Juan" }
+  ],
+  "items": [
+    { "legajoId": 1001, "codigoId": 96, "anho": 2026, "mes": 9, "importe": 1234567.89 }
+  ],
+  "facultades": [
+    { "facultadId": 2, "nombre": "Facultad de Ingeniería" },
+    { "facultadId": 3, "nombre": "Facultad de Ciencias Económicas" }
+  ],
+  "geograficas": [
+    { "geograficaId": 1, "nombre": "Campus Universitario" },
+    { "geograficaId": 2, "nombre": "Sede San Rafael" }
+  ]
+}

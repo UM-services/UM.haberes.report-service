@@ -1,0 +1,7 @@
+UNIVERSIDAD DE MENDOZA
+ Planilla de Liquidables
+ Legajo Apellido, NombreEstadoDependencia
+ 1001 Gómez, Ana1Facultad de Ingeniería
+ 1002 Pérez, Juan1Facultad de Ciencias Económicas
+ 1003 López, María0
+ Página 1

@@ -1,0 +1,10 @@
+SHEET Comparación Remuneraciones
+R0:[0|STRING|Comparación de Remuneraciones]
+R1:[0|STRING|Período: 9/2026  ·  Anterior: 8/2026]
+R2:[0|STRING|Rectorado]
+R3:[0|STRING|Legajo][1|STRING|Apellido, Nombre][2|STRING|Bruto Anterior][3|STRING|Bruto Actual][4|STRING|Diferencia Bruto][5|STRING|%][6|STRING|Neto Anterior][7|STRING|Neto Actual][8|STRING|Diferencia Neto]
+R4:[0|STRING|1001][1|STRING|Gómez, Ana][2|STRING|1.400.000][3|STRING|1.500.000][4|STRING|100.000][5|STRING|7,14%][6|STRING|1.100.000][7|STRING|1.200.000][8|STRING|100.000]
+R5:[0|STRING|1002][1|STRING|Pérez, Juan][2|STRING|780.000][3|STRING|800.000][4|STRING|20.000][5|STRING|2,56%][6|STRING|640.000][7|STRING|650.000][8|STRING|10.000]
+R7:[0|STRING|Facultad de Ingeniería]
+R8:[0|STRING|Legajo][1|STRING|Apellido, Nombre][2|STRING|Bruto Anterior][3|STRING|Bruto Actual][4|STRING|Diferencia Bruto][5|STRING|%][6|STRING|Neto Anterior][7|STRING|Neto Actual][8|STRING|Diferencia Neto]
+R9:[0|STRING|1003][1|STRING|López, María][2|STRING|0][3|STRING|950.000,5][4|STRING|950.000,5][5|STRING|0%][6|STRING|0][7|STRING|700.000,25][8|STRING|700.000,25]

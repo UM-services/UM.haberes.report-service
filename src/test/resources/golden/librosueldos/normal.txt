@@ -1,0 +1,7 @@
+UNIVERSIDAD DE MENDOZA
+ Periodo: 9/2026
+ Libro de Sueldos
+ Legajo Apellido, NombreCUILDependenciaRemunerativoNo remunerativoDeduccionesNeto
+ 1001 Gómez, Ana27-20111222-4Facultad de Ingeniería1.500.000,50100.000,00350.000,251.250.000,25
+ 1002 Pérez, Juan20-25333444-9900.000,000,00180.000,00720.000,00
+ Página 1

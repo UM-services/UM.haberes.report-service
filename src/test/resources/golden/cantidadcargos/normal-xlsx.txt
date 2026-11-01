@@ -1,0 +1,6 @@
+SHEET Cantidad de Cargos
+R0:[0|STRING|Cantidad de Cargos]
+R1:[0|STRING|Período: 9/2026]
+R2:[0|STRING|Facultad][1|STRING|Sede][2|STRING|Legajo][3|STRING|Apellido, Nombre][4|STRING|Anuales][5|STRING|Semestre 1][6|STRING|Semestre 2][7|STRING|Bruto]
+R3:[0|STRING|Facultad de Ingeniería][1|STRING|Campus Universitario][2|STRING|1001][3|STRING|Gómez, Ana][4|STRING|1][5|STRING|0][6|STRING|2][7|STRING|1.234.567,89]
+R4:[0|STRING|Facultad de Ciencias Económicas][1|STRING|Sede San Rafael][2|STRING|1002][3|STRING|Pérez, Juan][4|STRING|0][5|STRING|1][6|STRING|0][7|STRING|]

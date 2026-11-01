@@ -1,0 +1,10 @@
+UNIVERSIDAD DE MENDOZA
+ Periodo: 9/2026
+ Cursos por Período
+ Legajo Apellido, NombrePeríodoFacultadSedeCursoCargoHorasDictado
+ 1001 Gómez, Ana9/2026Facultad de IngenieríaCampus UniversitarioAnálisis Matemático IProfesor Titular10.5Anual
+ 1001 Gómez, Ana9/2026Facultad de Ciencias
+ Económicas
+ Sede San RafaelFísica IIJefe de Trabajos Prácticos6.51er Semestre
+ 1002 Pérez, Juan9/2026Facultad de IngenieríaCampus UniversitarioAnálisis Matemático IAyudante de Primera4.25Anual
+ Página 1

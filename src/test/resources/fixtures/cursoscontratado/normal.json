@@ -1,0 +1,59 @@
+{
+  "contratados": [
+    { "personaId": 5001, "documentoId": 1, "apellido": "Sosa", "nombre": "Luis", "cuit": "20-11111111-3" },
+    { "personaId": 5002, "documentoId": 1, "apellido": "Ruiz", "nombre": "Eva", "cuit": "27-22222222-4" },
+    { "personaId": 5003, "documentoId": 1, "apellido": "Díaz", "nombre": "Hugo", "cuit": "20-33333333-5" }
+  ],
+  "cursosContratados": [
+    {
+      "cursoCargoContratadoId": 1,
+      "cursoId": 301,
+      "anho": 2026,
+      "mes": 9,
+      "contratoId": 7,
+      "personaId": 5001,
+      "documentoId": 1,
+      "cargoTipoId": 2,
+      "horasSemanales": 6.50
+    },
+    {
+      "cursoCargoContratadoId": 2,
+      "cursoId": 302,
+      "anho": 2026,
+      "mes": 9,
+      "contratoId": 8,
+      "personaId": 5002,
+      "documentoId": 1,
+      "cargoTipoId": 1,
+      "horasSemanales": 4.00
+    }
+  ],
+  "cursos": [
+    {
+      "cursoId": 301,
+      "nombre": "Análisis Matemático I",
+      "facultadId": 2,
+      "geograficaId": 1,
+      "anual": 1
+    },
+    {
+      "cursoId": 302,
+      "nombre": "Física II",
+      "facultadId": 3,
+      "geograficaId": 2,
+      "semestre2": 1
+    }
+  ],
+  "facultades": [
+    { "facultadId": 2, "nombre": "Facultad de Ingeniería" },
+    { "facultadId": 3, "nombre": "Facultad de Ciencias Económicas" }
+  ],
+  "geograficas": [
+    { "geograficaId": 1, "nombre": "Campus Universitario" },
+    { "geograficaId": 2, "nombre": "Sede San Rafael" }
+  ],
+  "cargoTipos": [
+    { "cargoTipoId": 1, "nombre": "Profesor Titular" },
+    { "cargoTipoId": 2, "nombre": "Jefe de Trabajos Prácticos" }
+  ]
+}

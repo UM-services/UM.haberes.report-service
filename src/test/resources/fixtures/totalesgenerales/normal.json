@@ -1,0 +1,22 @@
+{
+  "totalMensuales": [
+    { "uniqueId": "tm-100-2026-9", "anho": 2026, "mes": 9, "codigoId": 100, "total": 1234567.89 },
+    { "uniqueId": "tm-200-2026-9", "anho": 2026, "mes": 9, "codigoId": 200, "total": 98765.43 },
+    { "uniqueId": "tm-300-2026-9", "anho": 2026, "mes": 9, "codigoId": 300, "total": -45678.90 },
+    { "uniqueId": "tm-400-2026-9", "anho": 2026, "mes": 9, "codigoId": 400, "total": 5432.10 }
+  ],
+  "codigos": [
+    { "codigoId": 100, "nombre": "Sueldo Básico", "docente": 1, "noDocente": 1 },
+    { "codigoId": 200, "nombre": "Presentismo", "docente": 1, "noDocente": 1 },
+    { "codigoId": 300, "nombre": "Aporte Jubilatorio", "docente": 1, "noDocente": 1 },
+    { "codigoId": 400, "nombre": "Asignación Familiar", "docente": 1 },
+    { "codigoId": 500, "nombre": "Código Sin Grupo", "docente": 1 }
+  ],
+  "codigoGrupos": [
+    { "codigoId": 100, "remunerativo": 1, "codigo": { "codigoId": 100, "nombre": "Sueldo Básico" } },
+    { "codigoId": 200, "remunerativo": 1, "codigo": { "codigoId": 200, "nombre": "Presentismo" } },
+    { "codigoId": 300, "deduccion": 1, "codigo": { "codigoId": 300, "nombre": "Aporte Jubilatorio" } },
+    { "codigoId": 400, "noRemunerativo": 1, "codigo": { "codigoId": 400, "nombre": "Asignación Familiar" } },
+    { "codigoId": 100, "total": 1, "codigo": { "codigoId": 100, "nombre": "Sueldo Básico" } }
+  ]
+}

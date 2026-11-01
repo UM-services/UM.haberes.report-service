@@ -1,0 +1,157 @@
+# Diferencias aprobadas entre el baseline legacy y el golden vigente.
+# Cada entrada debe corresponder a un ID del plan (REFACTOR_HEXAGONAL_PLAN.md §2).
+- id: C1-empty-cargosclase
+  report: cargosclase
+  scenario: vacio
+  reason: >-
+    El PDF sin datos ahora se cierra correctamente y agrega la leyenda
+    "Sin datos para el período." (C1). El resto del encabezado y el pie no cambian.
+- id: C1-empty-comparacioncodigos
+  report: comparacioncodigos
+  scenario: vacio
+  reason: >-
+    Antes el PDF quedaba en 0 bytes (return sin document.close()). Ahora se cierra y
+    agrega "Sin datos para el período." (C1). No existia baseline de texto para este caso.
+- id: C1-empty-totalescodigo
+  report: totalescodigo
+  scenario: vacio
+  reason: >-
+    Antes respondia 200 con 0 bytes (return sin document.close()). Ahora genera un PDF
+    valido con "Sin datos para el período." (C1).
+- id: C4-order-cargosclaseperiodo
+  report: cargosclaseperiodo
+  scenario: normal
+  reason: >-
+    Las sedes dejan de salir en el orden arbitrario del HashMap y se emiten
+    alfabeticamente por nombre (C4). El contenido de cada sede, las filas y el
+    encabezado no cambian.
+- id: C1-empty-cargosclaseperiodo
+  report: cargosclaseperiodo
+  scenario: vacio
+  reason: >-
+    Sin personas, antes el PDF quedaba en 0 bytes (return sin document.close());
+    ahora se cierra y agrega "Sin datos para el período." (C1).
+- id: C1-empty-totalesgenerales
+  report: totalesgenerales
+  scenario: vacio
+  reason: >-
+    Sin codigos en ningun grupo el PDF ahora agrega la leyenda
+    "Sin datos para el período." (C1). El encabezado y el pie no cambian.
+- id: C1-empty-comparacionremuneraciones
+  report: comparacionremuneraciones
+  scenario: vacio
+  reason: >-
+    Sin liquidaciones, antes el PDF quedaba en 0 bytes (return sin document.close());
+    ahora se cierra y agrega "Sin datos para el período." (C1). Tambien deja de
+    enmascarar errores runtime como 200 con PDF vacio (C20).
+- id: C1-empty-cursodocente
+  report: cursodocente
+  scenario: vacio
+  reason: >-
+    Sin personas o sin docentes con cursos, antes el PDF quedaba en 0 bytes
+    (return sin document.close()); ahora se cierra y agrega "Sin datos para el período." (C1).
+- id: C1-empty-designacionesdocente
+  report: designacionesdocente
+  scenario: vacio
+  reason: >-
+    Sin docentes o sin designaciones, antes el PDF quedaba en 0 bytes; ahora se
+    cierra y agrega "Sin datos para el período." (C1).
+- id: C1-empty-docentessede
+  report: docentessede
+  scenario: vacio
+  reason: >-
+    Sin cursos el encabezado ya era valido; ahora ademas agrega
+    "Sin datos para el período." (C1).
+- id: C1-empty-fusiondocente
+  report: fusiondocente
+  scenario: vacio
+  reason: >-
+    Sin categorias, antes el PDF quedaba en 0 bytes (return sin document.close());
+    ahora se cierra y agrega "Sin datos para el período." (C1).
+- id: C1-empty-novedadesdocentes
+  report: novedadesdocentes
+  scenario: vacio
+  reason: >-
+    Sin novedades el encabezado ya era valido; ahora ademas agrega
+    "Sin datos para el período." (C1).
+- id: C17-historico-typo-normal
+  report: historicoasignacioncargos
+  scenario: normal
+  reason: >-
+    Se corrige el typo del titulo: "Asignaión" -> "Asignación" (C17). El resto
+    del encabezado no cambia y el reporte sigue sin cuerpo (fuera de alcance).
+- id: C17-historico-typo-vacio
+  report: historicoasignacioncargos
+  scenario: vacio
+  reason: >-
+    Se corrige el typo del titulo: "Asignaión" -> "Asignación" (C17).
+- id: C15-C14-anotador-pendientes-facultad
+  report: anotador
+  scenario: pendientes-facultad-normal
+  reason: >-
+    created se formatea dd/MM/yyyy HH:mm y se separa del usuario (C15); anotacion y
+    respuesta nulas se imprimen vacias en lugar del literal "null" (C14).
+- id: C15-C14-anotador-pendientes-periodo
+  report: anotador
+  scenario: pendientes-periodo-normal
+  reason: >-
+    created se formatea dd/MM/yyyy HH:mm y se separa del usuario (C15); anotacion y
+    respuesta nulas se imprimen vacias en lugar del literal "null" (C14).
+- id: C15-anotador-revisados-facultad
+  report: anotador
+  scenario: autorizados-rechazados-facultad-normal
+  reason: >-
+    created se formatea dd/MM/yyyy HH:mm y se separa del usuario (C15).
+- id: C15-anotador-revisados-periodo
+  report: anotador
+  scenario: autorizados-rechazados-periodo-normal
+  reason: >-
+    created se formatea dd/MM/yyyy HH:mm y se separa del usuario (C15).
+- id: C1-C13-anotador-pendientes-facultad-vacio
+  report: anotador
+  scenario: pendientes-facultad-vacio
+  reason: >-
+    Sin registros se agrega la leyenda "Sin datos para el período." (C1).
+- id: C1-C13-anotador-pendientes-periodo-vacio
+  report: anotador
+  scenario: pendientes-periodo-vacio
+  reason: >-
+    Sin registros se agrega la leyenda "Sin datos para el período." (C1).
+- id: C13-C1-anotador-revisados-facultad-vacio
+  report: anotador
+  scenario: autorizados-rechazados-facultad-vacio
+  reason: >-
+    El titulo "Rechazados" solo se imprime si hay rechazados (C13) y sin registros
+    se agrega "Sin datos para el período." (C1).
+- id: C13-C1-anotador-revisados-periodo-vacio
+  report: anotador
+  scenario: autorizados-rechazados-periodo-vacio
+  reason: >-
+    El titulo "Rechazados" solo se imprime si hay rechazados (C13) y sin registros
+    se agrega "Sin datos para el período." (C1).
+- id: C12-bono-ui-generatePdf
+  report: bono
+  scenario: ui-generatePdf
+  reason: >-
+    La cabecera "Dep Cargo Básico" se agrega una sola vez (C12); antes se duplicaba
+    en las secciones Actividad Docente y Actividad No Docente.
+- id: C12-bono-generatePdf
+  report: bono
+  scenario: generatePdf
+  reason: >-
+    La cabecera "Dep Cargo Básico" se agrega una sola vez (C12).
+- id: C12-bono-letra-nueva
+  report: bono
+  scenario: generatePdf-letra-nueva
+  reason: >-
+    La cabecera "Dep Cargo Básico" se agrega una sola vez (C12).
+- id: C12-bono-dependencia
+  report: bono
+  scenario: dependencia
+  reason: >-
+    La cabecera "Dep Cargo Básico" se agrega una sola vez (C12) en cada recibo.
+- id: C12-bono-detalleCargos
+  report: bono
+  scenario: detalleCargos
+  reason: >-
+    La cabecera "Dep Cargo Básico" se agrega una sola vez (C12) en el detalle.

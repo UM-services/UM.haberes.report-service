@@ -1,0 +1,18 @@
+{
+  "geograficas": [
+    { "geograficaId": 1, "nombre": "Campus Universitario", "reducido": "CU" },
+    { "geograficaId": 2, "nombre": "Sede San Rafael", "reducido": "SR" }
+  ],
+  "categorias": [
+    { "categoriaId": 1, "nombre": "Profesor Titular", "basico": 1234567.89 },
+    { "categoriaId": 2, "nombre": "Jefe de Trabajos Prácticos", "basico": 987654.32 }
+  ],
+  "dependencias": [
+    { "dependenciaId": 10, "nombre": "Departamento de Matemática", "acronimo": "DM", "facultadId": 2, "geograficaId": 1 },
+    { "dependenciaId": 20, "nombre": "Departamento de Física", "acronimo": "DF", "facultadId": 2, "geograficaId": 2 }
+  ],
+  "facultades": [
+    { "facultadId": 2, "nombre": "Facultad de Ingeniería", "reducido": "FI" },
+    { "facultadId": 3, "nombre": "Facultad de Ciencias Económicas", "reducido": "FCE" }
+  ]
+}

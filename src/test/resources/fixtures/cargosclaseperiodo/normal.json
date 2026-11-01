@@ -1,0 +1,95 @@
+{
+  "facultad": { "facultadId": 2, "nombre": "Facultad de Ingeniería", "reducido": "FI" },
+  "personas": [
+    { "legajoId": 1001, "apellido": "Gómez", "nombre": "Ana" },
+    { "legajoId": 1002, "apellido": "Pérez", "nombre": "Juan" }
+  ],
+  "geograficas": [
+    { "geograficaId": 1, "nombre": "Campus Universitario", "reducido": "CU" },
+    { "geograficaId": 2, "nombre": "Sede Centro", "reducido": "SC" },
+    { "geograficaId": 3, "nombre": "Sede San Rafael", "reducido": "SR" }
+  ],
+  "clases": [
+    { "claseId": 1, "nombre": "Primera", "valorHora": 111.25 },
+    { "claseId": 2, "nombre": "Segunda", "valorHora": 222.50 }
+  ],
+  "cargoClases": [
+    { "cargoClaseId": 501, "nombre": "Profesor Titular", "claseId": 1 },
+    { "cargoClaseId": 502, "nombre": "Jefe de Trabajos Prácticos", "claseId": 2 },
+    { "cargoClaseId": 503, "nombre": "Ayudante de Primera", "claseId": 2 }
+  ],
+  "detalles1001": [
+    {
+      "cargoClaseDetalleId": 7001,
+      "legajoId": 1001,
+      "anho": 2026,
+      "mes": 9,
+      "cargoClaseId": 501,
+      "facultadId": 2,
+      "geograficaId": 1,
+      "horas": 10,
+      "valorHora": 111.25,
+      "liquidado": 1
+    },
+    {
+      "cargoClaseDetalleId": 7002,
+      "legajoId": 1001,
+      "anho": 2026,
+      "mes": 9,
+      "cargoClaseId": 502,
+      "facultadId": 2,
+      "geograficaId": 1,
+      "horas": 6,
+      "valorHora": 222.50,
+      "liquidado": 0
+    }
+  ],
+  "detalles1002": [
+    {
+      "cargoClaseDetalleId": 7003,
+      "legajoId": 1002,
+      "anho": 2026,
+      "mes": 9,
+      "cargoClaseId": 503,
+      "facultadId": 2,
+      "geograficaId": 3,
+      "horas": 4,
+      "valorHora": 222.50,
+      "liquidado": 1
+    }
+  ],
+  "periodos1001": [
+    {
+      "cargoClasePeriodoId": 9001,
+      "legajoId": 1001,
+      "cargoClaseId": 501,
+      "periodoDesde": 202601,
+      "periodoHasta": 202612,
+      "horas": 10,
+      "valorHora": 111.25,
+      "descripcion": "Cargo ordinario"
+    },
+    {
+      "cargoClasePeriodoId": 9002,
+      "legajoId": 1001,
+      "cargoClaseId": 502,
+      "periodoDesde": 202603,
+      "periodoHasta": 202609,
+      "horas": 6,
+      "valorHora": 222.50,
+      "descripcion": "Licencia parcial"
+    }
+  ],
+  "periodos1002": [
+    {
+      "cargoClasePeriodoId": 9003,
+      "legajoId": 1002,
+      "cargoClaseId": 503,
+      "periodoDesde": 202602,
+      "periodoHasta": 202612,
+      "horas": 4,
+      "valorHora": 222.50,
+      "descripcion": "Ayudante interino"
+    }
+  ]
+}

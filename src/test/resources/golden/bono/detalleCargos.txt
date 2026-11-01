@@ -1,0 +1,16 @@
+Detalle de Cargos
+ Apellido, Nombre: Gómez, Ana
+ Legajo: 120         Antigüedad: 10.8
+ Actividad Docente
+ Actividad No Docente
+ Actividad Académica
+ Universidad de Mendoza
+ Facultad de Ingeniería
+ Cargo Curso Ds An S1 S2 Hr
+ Profesor
+ Titular
+ Análisis Matemático I**6
+ FI Profesor Titular1,500,000.00
+ FI Administrativo Categoría 3900,000.00
+ Dep Cargo Básico
+ FI Primera / Jefe de Trabajos Prácticos / Primer Semestre / Mendoza / 12 horas150,000.00

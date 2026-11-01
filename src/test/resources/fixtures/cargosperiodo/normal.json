@@ -1,0 +1,30 @@
+{
+  "cargos": [
+    {
+      "cargoLiquidacionId": 1,
+      "legajoId": 1001,
+      "anho": 2026,
+      "mes": 9,
+      "dependenciaId": 10,
+      "dependencia": { "dependenciaId": 10, "nombre": "Facultad de Ingeniería" },
+      "categoriaId": 1,
+      "categoriaNombre": "Profesor Titular",
+      "situacion": "A"
+    },
+    {
+      "cargoLiquidacionId": 2,
+      "legajoId": 1002,
+      "anho": 2026,
+      "mes": 9,
+      "dependenciaId": 20,
+      "dependencia": { "dependenciaId": 20, "nombre": "Facultad de Ciencias Económicas" },
+      "categoriaId": 2,
+      "categoriaNombre": "Jefe de Trabajos Prácticos",
+      "situacion": "A"
+    }
+  ],
+  "personas": [
+    { "legajoId": 1001, "apellido": "Gómez", "nombre": "Ana" },
+    { "legajoId": 1002, "apellido": "Pérez", "nombre": "Juan" }
+  ]
+}

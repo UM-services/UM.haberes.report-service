@@ -1,0 +1,9 @@
+{
+  "facultad": { "facultadId": 2, "nombre": "Facultad de Ingeniería", "reducido": "FI" },
+  "geografica": { "geograficaId": 3, "nombre": "Sede San Rafael", "reducido": "SR" },
+  "cursos": [],
+  "cursoCargos": [],
+  "contratados": [],
+  "cargoTipos": [],
+  "personasTesoreria": []
+}

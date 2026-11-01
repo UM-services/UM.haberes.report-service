@@ -1,0 +1,5 @@
+SHEET Cursos
+R0:[0|STRING|Legajo][1|STRING|Apellido, Nombre][2|STRING|Periodo][3|STRING|#Facultad][4|STRING|Facultad][5|STRING|#Sede][6|STRING|Sede][7|STRING|#Curso][8|STRING|Curso][9|STRING|#Cargo][10|STRING|Cargo][11|STRING|Horas][12|STRING|Dictado]
+R1:[0|NUMERIC|1001][1|STRING|Gómez, Ana][2|STRING|9/2026][3|NUMERIC|2][4|STRING|Facultad de Ingeniería][5|NUMERIC|1][6|STRING|Campus Universitario][7|NUMERIC|301][8|STRING|Análisis Matemático I][9|NUMERIC|1][10|STRING|Profesor Titular][11|NUMERIC|10.5][12|STRING|Anual]
+R2:[0|NUMERIC|1001][1|STRING|Gómez, Ana][2|STRING|9/2026][3|NUMERIC|3][4|STRING|Facultad de Ciencias Económicas][5|NUMERIC|2][6|STRING|Sede San Rafael][7|NUMERIC|302][8|STRING|Física II][9|NUMERIC|2][10|STRING|Jefe de Trabajos Prácticos][11|NUMERIC|6.5][12|STRING|1er Semestre]
+R3:[0|NUMERIC|1002][1|STRING|Pérez, Juan][2|STRING|9/2026][3|NUMERIC|2][4|STRING|Facultad de Ingeniería][5|NUMERIC|1][6|STRING|Campus Universitario][7|NUMERIC|301][8|STRING|Análisis Matemático I][9|NUMERIC|3][10|STRING|Ayudante de Primera][11|NUMERIC|4.25][12|STRING|Anual]

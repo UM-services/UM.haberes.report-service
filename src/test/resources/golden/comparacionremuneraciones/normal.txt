@@ -1,0 +1,17 @@
+Rectorado
+
+
+ Facultad de Ingeniería
+
+ UNIVERSIDAD DE MENDOZA
+ Periodo: 9/2026
+ Comparación de Remuneraciones
+ Actual: 9/2026    Anterior: 8/2026
+ Bruto Neto
+ Leg Apellido, NombreAnteriorActualDifAnteriorActualDif
+ 1001 Gómez, Ana1.400.0001.500.000100.0007,14%1.100.0001.200.000100.000
+ 1002 Pérez, Juan780.000800.00020.0002,56%640.000650.00010.000
+ Bruto Neto
+ Leg Apellido, NombreAnteriorActualDifAnteriorActualDif
+ 1003 López, María0950.000,5950.000,50%0700.000,25700.000,25
+ Página 1

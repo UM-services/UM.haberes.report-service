@@ -1,0 +1,45 @@
+{
+  "categorias": [
+    { "categoriaId": 1, "nombre": "Profesor Titular", "basico": 1234567.89 },
+    { "categoriaId": 2, "nombre": "Jefe de Trabajos Prácticos", "basico": 987654.32 }
+  ],
+  "personas": [
+    { "legajoId": 1001, "apellido": "Gómez", "nombre": "Ana" },
+    { "legajoId": 1002, "apellido": "Pérez", "nombre": "Juan" },
+    { "legajoId": 1003, "apellido": "López", "nombre": "María" }
+  ],
+  "facultades": [
+    { "facultadId": 2, "nombre": "Facultad de Ingeniería", "reducido": "FI" },
+    { "facultadId": 3, "nombre": "Facultad de Ciencias Económicas", "reducido": "FCE" }
+  ],
+  "geograficas": [
+    { "geograficaId": 1, "nombre": "Campus Universitario", "reducido": "CU" },
+    { "geograficaId": 2, "nombre": "Sede San Rafael", "reducido": "SR" }
+  ],
+  "fusiones": [
+    {
+      "cursoFusionId": 4001,
+      "legajoId": 1001,
+      "anho": 2026,
+      "mes": 9,
+      "facultadId": 2,
+      "geograficaId": 1,
+      "cargoTipoId": 1,
+      "designacionTipoId": 1,
+      "anual": 1,
+      "categoriaId": 1
+    },
+    {
+      "cursoFusionId": 4002,
+      "legajoId": 1002,
+      "anho": 2026,
+      "mes": 9,
+      "facultadId": 3,
+      "geograficaId": 2,
+      "cargoTipoId": 3,
+      "designacionTipoId": 2,
+      "anual": 0,
+      "categoriaId": 2
+    }
+  ]
+}

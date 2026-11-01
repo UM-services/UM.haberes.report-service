@@ -1,0 +1,8 @@
+package um.haberes.report.reports.sheet.domain.ports.in;
+
+import um.haberes.report.shared.domain.model.ReportFile;
+
+public interface GenerateSheetCursosUseCase {
+
+    ReportFile generate(Integer anho, Integer mes);
+}

@@ -1,0 +1,112 @@
+{
+  "facultad": { "facultadId": 2, "nombre": "Facultad de Ingeniería", "reducido": "FI" },
+  "geografica": { "geograficaId": 3, "nombre": "Sede San Rafael", "reducido": "SR" },
+  "cursos": [
+    {
+      "cursoId": 501,
+      "nombre": "Análisis Matemático I",
+      "facultadId": 2,
+      "geograficaId": 3,
+      "anual": 1,
+      "semestre1": 0,
+      "semestre2": 0
+    },
+    {
+      "cursoId": 502,
+      "nombre": "Física II",
+      "facultadId": 2,
+      "geograficaId": 3,
+      "anual": 0,
+      "semestre1": 0,
+      "semestre2": 1
+    }
+  ],
+  "cursoCargos": [
+    {
+      "cursoCargoId": 8001,
+      "cursoId": 501,
+      "anho": 2026,
+      "mes": 9,
+      "cargoTipoId": 1,
+      "legajoId": 1001,
+      "horasSemanales": 10.00,
+      "horasTotales": 40.00,
+      "designacionTipoId": 1,
+      "categoriaId": 1,
+      "desarraigo": 1,
+      "cargoTipo": { "cargoTipoId": 1, "acargo": 1, "nombre": "Profesor Titular", "precedencia": 1 },
+      "persona": { "legajoId": 1001, "apellido": "Gómez", "nombre": "Ana" },
+      "designacionTipo": { "designacionTipoId": 1, "nombre": "Ordinaria", "horasSemanales": 10.00, "horasTotales": 40.00, "simples": 1 }
+    },
+    {
+      "cursoCargoId": 8002,
+      "cursoId": 502,
+      "anho": 2026,
+      "mes": 9,
+      "cargoTipoId": 3,
+      "legajoId": 1002,
+      "horasSemanales": 6.00,
+      "horasTotales": 24.00,
+      "designacionTipoId": 2,
+      "categoriaId": 2,
+      "desarraigo": 0,
+      "cargoTipo": { "cargoTipoId": 3, "acargo": 0, "nombre": "Jefe de Trabajos Prácticos", "precedencia": 3 },
+      "persona": { "legajoId": 1002, "apellido": "Pérez", "nombre": "Juan" },
+      "designacionTipo": { "designacionTipoId": 2, "nombre": "Interina", "horasSemanales": 6.00, "horasTotales": 24.00, "simples": 1 }
+    }
+  ],
+  "contratados": [
+    {
+      "cursoCargoContratadoId": 9001,
+      "cursoId": 501,
+      "anho": 2026,
+      "mes": 9,
+      "contratadoId": 50,
+      "contratoId": 7,
+      "cargoTipoId": 2,
+      "horasSemanales": 5.00,
+      "horasTotales": 20.00,
+      "designacionTipoId": 3,
+      "categoriaId": 2,
+      "acreditado": 1,
+      "contratadoPersona": {
+        "contratadoId": 50,
+        "personaId": 7001,
+        "documentoId": 12345678,
+        "apellido": "Díaz",
+        "nombre": "Carlos",
+        "cuit": "20-12345678-9"
+      }
+    },
+    {
+      "cursoCargoContratadoId": 9002,
+      "cursoId": 502,
+      "anho": 2026,
+      "mes": 9,
+      "contratadoId": 51,
+      "contratoId": 8,
+      "cargoTipoId": 4,
+      "horasSemanales": 8.00,
+      "horasTotales": 32.00,
+      "designacionTipoId": 3,
+      "categoriaId": 1,
+      "acreditado": 0,
+      "contratadoPersona": {
+        "contratadoId": 51,
+        "personaId": 7002,
+        "documentoId": 23456789,
+        "apellido": "Ruiz",
+        "nombre": "Lucía",
+        "cuit": "27-23456789-4"
+      }
+    }
+  ],
+  "cargoTipos": [
+    { "cargoTipoId": 2, "acargo": 0, "nombre": "Ayudante de Segunda", "precedencia": 4 },
+    { "cargoTipoId": 4, "acargo": 1, "nombre": "Profesor Adjunto", "precedencia": 2 }
+  ],
+  "personasTesoreria": [
+    { "uniqueId": 1, "personaId": 7001, "documentoId": 12345678, "apellido": "Díaz", "nombre": "Carlos", "cuit": "20-12345678-9" },
+    { "uniqueId": 2, "personaId": 7002, "documentoId": 23456789, "apellido": "Ruiz", "nombre": "Lucía", "cuit": "27-23456789-4" }
+  ]
+}
