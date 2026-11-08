@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import jakarta.mail.Session;
 import jakarta.mail.internet.MimeMessage;
 import um.haberes.report.shared.infrastructure.client.haberes.core.dto.AntiguedadDto;
+import um.haberes.report.shared.infrastructure.client.haberes.core.dto.BonoLoteDto;
 import um.haberes.report.shared.infrastructure.client.haberes.core.dto.CargoClaseDetalleDto;
 import um.haberes.report.shared.infrastructure.client.haberes.core.dto.CargoLiquidacionDto;
 import um.haberes.report.shared.infrastructure.client.haberes.core.dto.CodigoDto;
@@ -101,8 +102,21 @@ public final class BonoStubs {
                 .thenAnswer(invocation -> invocation.getArgument(0));
     }
 
-    public void stubMail() {
-        MimeMessage message = new MimeMessage(Session.getInstance(new Properties()));
+    /** Lote completo del core para la generación asincrónica. */
+    public void stubLote(BonoLoteDto lote) {
+        when(base.bonoLoteClient.cargar(lote.dependenciaId(), lote.anho(), lote.mes(), lote.salida()))
+                .thenReturn(lote);
+    }
+
+    /** Persistencia de la letra del recibo dentro del lote. */
+    public void stubLetra(long legajoId) {
+        when(base.letraClient.findByUnique(legajoId, ANHO, MES))
+                .thenReturn(new LetraDto(1L, legajoId, ANHO, MES, BigDecimal.ZERO, ""));
+        when(base.letraClient.update(any(), anyLong()))
+                .thenAnswer(invocation -> invocation.getArgument(0));
+    }
+
+    public void stubMail() {        MimeMessage message = new MimeMessage(Session.getInstance(new Properties()));
         when(base.javaMailSender.createMimeMessage()).thenReturn(message);
     }
 

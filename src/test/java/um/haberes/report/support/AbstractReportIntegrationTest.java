@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import um.haberes.report.shared.infrastructure.client.haberes.core.client.AnotadorClient;
 import um.haberes.report.shared.infrastructure.client.haberes.core.client.AntiguedadClient;
 import um.haberes.report.shared.infrastructure.client.haberes.core.client.BonoImpresionClient;
+import um.haberes.report.shared.infrastructure.client.haberes.core.client.BonoLoteClient;
 import um.haberes.report.shared.infrastructure.client.haberes.core.client.CargoClaseClient;
 import um.haberes.report.shared.infrastructure.client.haberes.core.client.CargoClaseDetalleClient;
 import um.haberes.report.shared.infrastructure.client.haberes.core.client.CargoClasePeriodoClient;
@@ -54,7 +55,7 @@ import um.haberes.report.shared.infrastructure.client.tesoreria.core.client.Curs
  * Base de la suite de caracterizacion.
  *
  * <p>Levanta el contexto real y reemplaza <b>solo</b> los adaptadores salientes por mocks:
- * los 39 {@code @FeignClient} y el {@link JavaMailSender}. De este modo se ejercita el
+ * todos los {@code @FeignClient} y el {@link JavaMailSender}. De este modo se ejercita el
  * controller, la orquestacion, el render y la escritura a disco tal como en produccion.
  *
  * <p>Los tests derivados no deben registrar mas beans: un unico contexto cacheado mantiene
@@ -82,6 +83,8 @@ public abstract class AbstractReportIntegrationTest {
     protected AntiguedadClient antiguedadClient;
     @MockitoBean
     protected BonoImpresionClient bonoImpresionClient;
+    @MockitoBean
+    protected BonoLoteClient bonoLoteClient;
     @MockitoBean
     protected CargoClaseClient cargoClaseClient;
     @MockitoBean

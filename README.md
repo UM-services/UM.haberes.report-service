@@ -4,6 +4,7 @@
 ![Java](https://img.shields.io/badge/Java-25-ED8B00?logo=openjdk&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.1.2-6DB33F?logo=springboot&logoColor=white)
 ![Spring Cloud](https://img.shields.io/badge/Spring%20Cloud-2025.1.4-6DB33F?logo=spring&logoColor=white)
+![SpringDoc OpenAPI](https://img.shields.io/badge/SpringDoc%20OpenAPI-3.1.1-85EA2D?logo=swagger&logoColor=black)
 ![Consul](https://img.shields.io/badge/Consul-Service%20Discovery-blue?logo=consul)
 ![Apache Maven](https://img.shields.io/badge/Apache%20Maven-3.8.8%2B-C71A36?logo=apachemaven&logoColor=white)
 ![Apache POI](https://img.shields.io/badge/Apache%20POI-6.0.0-D22128?logo=apache&logoColor=white)
@@ -109,7 +110,7 @@ renombra sin actualizarla, el build falla.
 | `totalesGenerales`, `totalesCodigo`, `comparacionCodigos`, `comparacionRemuneraciones` | ✓ | ✓ | ✓ | |
 | `detalleCodigo`, `docentesSede`, `designacionesDocente`, `cursoDocente`, `cursosContratado`, `fusionDocente`, `liquidables`, `cargosPeriodo`, `cursosPeriodo`, `basicosPeriodo`, `cantidadCargos`, `cargosClasePeriodo` | ✓ | ✓ | ✓ | |
 | `libroSueldos` | ✓ | ✓ (propio) | ✓ | `POST /lsd/{anho}/{mes}` → ZIP del Libro de Sueldos Digital (lo genera haberes-core) |
-| `bonoDependencia` | ✓ | ✓ (consolidado) | — | `sendBono/{legajoId}/{anho}/{mes}` (envío unitario del masivo) |
+| `bonoDependencia` | ✓ | ✓ (consolidado) | — | `sendBono/{legajoId}/{anho}/{mes}` (envío unitario del masivo); el PDF se genera en un job (`POST /pdf/...` + `GET /pdf/job/{jobId}` y `/file`) y la descarga directa sigue disponible |
 | `historicoCargos` | ✓ (sólo aviso) | ✓ (sólo encabezado) | — | El cuerpo nunca se implementó en el sistema previo |
 | `bono` (individual) | — | ✓ inline | — | `sendBono/{legajoId}/{anho}/{mes}` |
 
@@ -121,8 +122,8 @@ aporta) y `historicoCargos` no tiene cuerpo hasta que exista una spec de product
 | Grupo | Cantidad | Consumidor | Estado |
 |---|---|---|---|
 | Rutas legacy (`/api/haberes/report/<slice>/...`) | 24 | `bonos.vb6` (`Bonos.exe`) | Se mantienen intactas hasta dar de baja el cliente de escritorio |
-| Namespace `/ui/**` | 59 | `haberes-frontend` (`feature-consultas`, `feature-bonos`) | Detrás de la API key del gateway |
-| Endpoints de lectura agregados en `haberes-core` para reportes (`persona/liquidado`, `novedadacumulado/codigo`, `legajocursoCantidad/periodo`, `cargoliquidacion/periodo` y `/todos`, `cargoclasedetalle/periodo`, `liquidacion-adicional/periodo`, `bono/dependencia/.../print-prepare`) | 8 | Sólo este servicio (Feign) | Internos: no se exponen al navegador |
+| Namespace `/ui/**` | 62 | `haberes-frontend` (`feature-consultas`, `feature-bonos`) | Detrás de la API key del gateway |
+| Endpoints de lectura agregados en `haberes-core` para reportes (`persona/liquidado`, `novedadacumulado/codigo`, `legajocursoCantidad/periodo`, `cargoliquidacion/periodo` y `/todos`, `cargoclasedetalle/periodo`, `liquidacion-adicional/periodo`, `bono/dependencia/.../print-prepare` y `bono/dependencia/.../lote`) | 9 | Sólo este servicio (Feign) | Internos: no se exponen al navegador |
 | `cursocargocontratado/periodo/{anho}/{mes}` (tesoreria-core) | 1 | Sólo este servicio (Feign) | Interno |
 
 - La lógica legacy de planillas (`SheetService`, `ContratadoService`, `LibroSueldoService`) sigue
