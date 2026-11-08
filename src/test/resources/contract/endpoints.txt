@@ -80,4 +80,7 @@ GET /api/haberes/report/ui/historicoCargos/data/{categoriaId}
 GET /api/haberes/report/ui/historicoCargos/pdf/{categoriaId}
 GET /api/haberes/report/ui/bonoDependencia/data/{anho}/{mes}/{dependenciaId}/{salida}
 GET /api/haberes/report/ui/bonoDependencia/pdf/{anho}/{mes}/{dependenciaId}/{salida}
+POST /api/haberes/report/ui/bonoDependencia/pdf/{anho}/{mes}/{dependenciaId}/{salida}
+GET /api/haberes/report/ui/bonoDependencia/pdf/job/{jobId}
+GET /api/haberes/report/ui/bonoDependencia/pdf/job/{jobId}/file
 GET /api/haberes/report/ui/bonoDependencia/sendBono/{legajoId}/{anho}/{mes}

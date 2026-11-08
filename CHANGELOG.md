@@ -5,6 +5,24 @@ Todos los cambios notables en este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.0] - 2026-11-08
+
+### Added
+- **Bonos por Dependencia con generación asincrónica.** El PDF consolidado ya no se arma dentro
+  de la request: `POST /ui/bonoDependencia/pdf/{anho}/{mes}/{dependenciaId}/{salida}` encola el
+  trabajo y devuelve un `jobId`; `GET /ui/bonoDependencia/pdf/job/{jobId}` informa estado y
+  avance (`procesados`/`total`, fallidos por legajo) y `GET /ui/bonoDependencia/pdf/job/{jobId}/file`
+  entrega el PDF terminado. La descarga directa por `GET /ui/bonoDependencia/pdf/...` se mantiene
+  para los consumidores existentes. Los temporales de cada job se borran al terminar, los jobs
+  vencen a los 30 minutos y dos corridas simultáneas no comparten archivos
+  (`reports/bono/infrastructure/job/**`, `GenerateBonosDependenciaLoteUseCaseImpl`).
+
+### Changed
+- El lote se lee del core con una sola llamada (`POST /bono/dependencia/.../lote`), que devuelve
+  los catálogos una vez y trae todos los legajos juntos: para Ingeniería Sede Mendoza (230
+  legajos) la lectura pasa de minutos a ~15 s y el PDF completo a ~30 s, con tolerancia a legajos
+  fallidos en lugar de abortar todo el lote.
+
 ## [0.8.1] - 2026-10-29
 
 ### Fixed
