@@ -3,10 +3,12 @@ package um.haberes.report.reports.bono.infrastructure.client;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import um.haberes.report.reports.bono.domain.model.BonoDependenciaItem;
 import um.haberes.report.reports.bono.domain.model.BonoFuente;
 import um.haberes.report.reports.bono.domain.ports.out.BonoDataPort;
 import um.haberes.report.shared.infrastructure.client.haberes.core.client.AntiguedadClient;
 import um.haberes.report.shared.infrastructure.client.haberes.core.client.BonoImpresionClient;
+import um.haberes.report.shared.infrastructure.client.haberes.core.client.BonoLoteClient;
 import um.haberes.report.shared.infrastructure.client.haberes.core.client.CargoClaseDetalleClient;
 import um.haberes.report.shared.infrastructure.client.haberes.core.client.CargoLiquidacionClient;
 import um.haberes.report.shared.infrastructure.client.haberes.core.client.CodigoClient;
@@ -27,6 +29,7 @@ import um.haberes.report.shared.infrastructure.client.haberes.core.client.Liquid
 import um.haberes.report.shared.infrastructure.client.haberes.core.client.PersonaClient;
 import um.haberes.report.shared.infrastructure.client.haberes.core.dto.AntiguedadDto;
 import um.haberes.report.shared.infrastructure.client.haberes.core.dto.BonoImpresionDto;
+import um.haberes.report.shared.infrastructure.client.haberes.core.dto.BonoLoteDto;
 import um.haberes.report.shared.infrastructure.client.haberes.core.dto.CargoClaseDetalleDto;
 import um.haberes.report.shared.infrastructure.client.haberes.core.dto.CargoLiquidacionDto;
 import um.haberes.report.shared.infrastructure.client.haberes.core.dto.CodigoDto;
@@ -74,6 +77,7 @@ public class FeignBonoDataAdapter implements BonoDataPort {
     private final CodigoGrupoClient codigoGrupoClient;
     private final LetraClient letraClient;
     private final BonoImpresionClient bonoImpresionClient;
+    private final BonoLoteClient bonoLoteClient;
     private final ContactoClient contactoClient;
     private final LegajoControlClient legajoControlClient;
 
@@ -245,6 +249,160 @@ public class FeignBonoDataAdapter implements BonoDataPort {
                 .filter(Objects::nonNull)
                 .map(liquidacion -> new BonoFuente.Liquidacion(liquidacion.getLegajoId()))
                 .toList();
+    }
+
+    @Override
+    public List<BonoDependenciaItem> cargarDependencia(Integer anho, Integer mes,
+                                                      Integer dependenciaId, String salida) {
+        BonoLoteDto lote = bonoLoteClient.cargar(dependenciaId, anho, mes, salida);
+        if (lote == null) {
+            return List.of();
+        }
+        BonoLoteDto.Catalogo catalogo = lote.catalogo();
+        Map<Integer, String> acronimos = acronimos(catalogo);
+        List<BonoFuente.Dependencia> dependencias = acronimos.entrySet().stream()
+                .map(entry -> new BonoFuente.Dependencia(entry.getKey(), entry.getValue()))
+                .toList();
+        BonoFuente.Codigo codigo981 = catalogo == null || catalogo.codigo981() == null ? null
+                : new BonoFuente.Codigo(catalogo.codigo981().codigoId(),
+                        catalogo.codigo981().nombre());
+        List<BonoFuente.Grupo> remunerativos = gruposLote(catalogo == null ? null
+                : catalogo.remunerativos());
+        List<BonoFuente.Grupo> noRemunerativos = gruposLote(catalogo == null ? null
+                : catalogo.noRemunerativos());
+        List<BonoFuente.Grupo> deducciones = gruposLote(catalogo == null ? null : catalogo.deducciones());
+        BonoFuente.Control control = control(lote.control());
+
+        List<BonoDependenciaItem> items = new java.util.ArrayList<>(safe(lote.legajos()).size());
+        for (BonoLoteDto.Legajo legajo : safe(lote.legajos())) {
+            if (legajo == null) {
+                continue;
+            }
+            items.add(new BonoDependenciaItem(legajo.legajoId(),
+                    fuente(legajo, control, acronimos, dependencias, codigo981, remunerativos,
+                            noRemunerativos, deducciones)));
+        }
+        return items;
+    }
+
+    private BonoFuente fuente(BonoLoteDto.Legajo legajo, BonoFuente.Control control,
+                              Map<Integer, String> acronimos,
+                              List<BonoFuente.Dependencia> dependencias,
+                              BonoFuente.Codigo codigo981, List<BonoFuente.Grupo> remunerativos,
+                              List<BonoFuente.Grupo> noRemunerativos,
+                              List<BonoFuente.Grupo> deducciones) {
+        return new BonoFuente(
+                persona(legajo.persona(), acronimos),
+                control,
+                antiguedad(legajo.antiguedad()),
+                safe(legajo.indices()),
+                new BonoFuente.Banco(legajo.cbu()),
+                safe(legajo.items()).stream()
+                        .filter(Objects::nonNull)
+                        .map(item -> new BonoFuente.Item(item.codigoId(), item.importe()))
+                        .toList(),
+                cursos(legajo.cursos()),
+                cursos(legajo.cursosEtec()),
+                cargos(legajo.docentes()),
+                cargos(legajo.noDocentes()),
+                clases(legajo.clases()),
+                adicionales(legajo.adicionales()),
+                dependencias,
+                codigo981,
+                remunerativos,
+                noRemunerativos,
+                deducciones,
+                null,
+                legajo.porcentajeAntiguedadEtec() == null ? BigDecimal.ZERO
+                        : legajo.porcentajeAntiguedadEtec(),
+                legajo.mailInstitucional() == null ? null
+                        : new BonoFuente.Contacto(legajo.mailInstitucional()),
+                legajo.legajoControlId(),
+                legajo.bonoEnviado(),
+                null);
+    }
+
+    private BonoFuente.Control control(BonoLoteDto.Control control) {
+        if (control == null) {
+            return null;
+        }
+        return new BonoFuente.Control(control.fechaDesde(), control.fechaHasta(),
+                control.fechaPago(), control.fechaDeposito(), control.aporteJubilatorio(),
+                control.horaReferenciaEtec());
+    }
+
+    private BonoFuente.Persona persona(BonoLoteDto.Persona persona, Map<Integer, String> acronimos) {
+        if (persona == null) {
+            return null;
+        }
+        return new BonoFuente.Persona(persona.legajoId(), persona.apellido(), persona.nombre(),
+                persona.documento(), persona.cuil(),
+                persona.dependenciaId() == null ? null : acronimos.get(persona.dependenciaId()),
+                persona.altaAdministrativa(), persona.directivoEtec());
+    }
+
+    private BonoFuente.Antiguedad antiguedad(BonoLoteDto.Antiguedad antiguedad) {
+        if (antiguedad == null) {
+            return null;
+        }
+        return new BonoFuente.Antiguedad(antiguedad.mesesDocentes(),
+                antiguedad.mesesAdministrativos());
+    }
+
+    private List<BonoFuente.CursoCargo> cursos(List<BonoLoteDto.CursoCargo> cursos) {
+        return safe(cursos).stream()
+                .filter(Objects::nonNull)
+                .map(curso -> new BonoFuente.CursoCargo(curso.cargo(), curso.curso(),
+                        curso.desarraigo(), curso.anual(), curso.semestre1(), curso.semestre2(),
+                        curso.horasSemanales()))
+                .toList();
+    }
+
+    private List<BonoFuente.CargoLiquidado> cargos(List<BonoLoteDto.CargoLiquidado> cargos) {
+        return safe(cargos).stream()
+                .filter(Objects::nonNull)
+                .map(cargo -> new BonoFuente.CargoLiquidado(cargo.dependencia(), cargo.categoria(),
+                        cargo.basico(), cargo.horasJornada(), cargo.jornada()))
+                .toList();
+    }
+
+    private List<BonoFuente.Clase> clases(List<BonoLoteDto.Clase> clases) {
+        return safe(clases).stream()
+                .filter(Objects::nonNull)
+                .map(clase -> new BonoFuente.Clase(clase.dependencia(), clase.clase(),
+                        clase.cargoClase(), clase.descripcion(), clase.geografica(), clase.horas(),
+                        clase.valorHora()))
+                .toList();
+    }
+
+    private List<BonoFuente.Adicional> adicionales(List<BonoLoteDto.Adicional> adicionales) {
+        return safe(adicionales).stream()
+                .filter(Objects::nonNull)
+                .map(adicional -> new BonoFuente.Adicional(adicional.dependenciaId(),
+                        adicional.adicional()))
+                .toList();
+    }
+
+    private List<BonoFuente.Grupo> gruposLote(List<BonoLoteDto.Grupo> grupos) {
+        return safe(grupos).stream()
+                .filter(Objects::nonNull)
+                .map(grupo -> new BonoFuente.Grupo(grupo.codigoId(), grupo.nombre()))
+                .toList();
+    }
+
+    private Map<Integer, String> acronimos(BonoLoteDto.Catalogo catalogo) {
+        if (catalogo == null) {
+            return Map.of();
+        }
+        return safe(catalogo.dependencias()).stream()
+                .filter(Objects::nonNull)
+                .filter(dependencia -> dependencia.dependenciaId() != null)
+                .collect(Collectors.toMap(BonoLoteDto.Dependencia::dependenciaId,
+                        dependencia -> text(dependencia.acronimo()), (a, b) -> a));
+    }
+
+    private String text(Object value) {
+        return value == null ? "" : value.toString();
     }
 
     private BonoFuente.Persona persona(PersonaDto persona, Map<Integer, String> dependencias) {
