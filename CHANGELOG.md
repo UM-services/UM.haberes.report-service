@@ -5,6 +5,14 @@ Todos los cambios notables en este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.1] - 2026-11-12
+
+### Added
+- `ControlDto` incorpora el campo `valorPuntoEtec` con valor por defecto `BigDecimal.ZERO`, para
+  reflejar el atributo homónimo que expone el control de haberes-core
+  (`shared/infrastructure/client/haberes/core/dto/ControlDto.java`). Ningún reporte consume
+  todavía el valor, por lo que no cambia el comportamiento de los PDF/XLSX generados.
+
 ## [0.9.0] - 2026-11-08
 
 ### Added
