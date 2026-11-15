@@ -5,6 +5,20 @@ Todos los cambios notables en este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Changed
+- El recibo de bono deja de desglosar el concepto 29 (DOCENTE ETEC) en cuatro líneas calculadas
+  con `hora_referencia_etec`: ahora imprime la línea real del concepto con su importe y el
+  «Básico» muestra sólo el ítem 1. El total del recibo no cambia. Se elimina
+  `horaReferenciaEtec` de `ControlDto`, `BonoLoteDto.Control` y `BonoFuente.Control`, y
+  `directivoEtec` de `BonoLoteDto.Persona`/`BonoFuente.Persona`; también se quita
+  `porcentajeAntiguedadEtec` del legajo y la llamada a
+  `liquidacionEtecClient.calcularPorcentajeAntiguedad`.
+### Fixed
+- `BonosDependenciaUiTest` y el fixture `fixtures/bono/normal.json` se ajustan al contrato sin
+  `horaReferenciaEtec`; suite completa en 236 tests verdes.
+
 ## [0.9.1] - 2026-11-12
 
 ### Added
