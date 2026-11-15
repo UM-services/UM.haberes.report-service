@@ -110,10 +110,6 @@ public class ControlDto {
 
     private BigDecimal estadoDocenteAuxiliar = BigDecimal.ZERO;
 
-    private BigDecimal horaReferenciaEtec = BigDecimal.ZERO;
-
-    private BigDecimal valorPuntoEtec = BigDecimal.ZERO;
-
     private Integer modoLiquidacionId;
 
     private ModoLiquidacionDto modoLiquidacion;

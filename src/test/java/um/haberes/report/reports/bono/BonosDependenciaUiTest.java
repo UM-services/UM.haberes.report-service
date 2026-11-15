@@ -188,8 +188,7 @@ class BonosDependenciaUiTest extends AbstractReportIntegrationTest {
     private BonoLoteDto lote() {
         return new BonoLoteDto(ANHO, MES, DEPENDENCIA, SALIDA,
                 new BonoLoteDto.Control(fecha("2026-09-01"), fecha("2026-09-30"),
-                        fecha("2026-09-30"), fecha("2026-10-01"), "11%",
-                        new BigDecimal("1000")),
+                        fecha("2026-09-30"), fecha("2026-10-01"), "11%"),
                 new BonoLoteDto.Catalogo(
                         List.of(new BonoLoteDto.Dependencia(DEPENDENCIA, "ACRO")),
                         new BonoLoteDto.Codigo(981, "Adicional"),
@@ -199,13 +198,13 @@ class BonosDependenciaUiTest extends AbstractReportIntegrationTest {
                         List.of(new BonoLoteDto.Grupo(99, "Neto"))),
                 List.of(new BonoLoteDto.Legajo(120L,
                         new BonoLoteDto.Persona(120L, "Gómez", "Ana", "30111222",
-                                "20-30111222-3", DEPENDENCIA, null, (byte) 0),
+                                "20-30111222-3", DEPENDENCIA, null),
                         new BonoLoteDto.Antiguedad(10, 0),
                         List.of(BigDecimal.ONE), "0000000000000000000000",
                         List.of(new BonoLoteDto.Item(1, new BigDecimal("1000")),
                                 new BonoLoteDto.Item(99, new BigDecimal("800"))),
                         List.of(), List.of(), List.of(), List.of(), List.of(), List.of(),
-                        new BigDecimal("0.10"), "ana.gomez@um.edu.ar", 1L, false)));
+                        "ana.gomez@um.edu.ar", 1L, false)));
     }
 
     private OffsetDateTime fecha(String valor) {
