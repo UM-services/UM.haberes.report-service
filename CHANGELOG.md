@@ -5,7 +5,17 @@ Todos los cambios notables en este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.10.0] - 2026-11-17
+
+### Added
+- Nuevo slice `reports/excluidos` con el listado de legajos excluidos de la acreditación del período
+  (legacy `rptExcluidos`): `GET /api/haberes/report/ui/excluidos/data|pdf|xlsx/{anho}/{mes}`.
+  Ordena por legajo, agrega el apellido y nombre de la persona y el importe del código 99 con
+  formato es-AR, e incluye observaciones y fecha de alta. El PDF es provisorio porque el diseño del
+  `.rpt` original no está en el repositorio. Se agrega `ExcluidoClient` (Feign) y sus DTO/mapper.
+- `EndpointContractManifestTest`, `EndpointCoverageTest` y `UiFormatMatrixTest` incorporan los
+  endpoints de excluidos; `ExcluidosUiTest` cubre data, período vacío, PDF y XLSX con goldens
+  nuevos (`golden/excluidos/**`).
 
 ### Changed
 - El recibo de bono deja de desglosar el concepto 29 (DOCENTE ETEC) en cuatro líneas calculadas
