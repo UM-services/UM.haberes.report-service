@@ -1,0 +1,7 @@
+UNIVERSIDAD DE MENDOZA
+ Periodo: 9/2026
+ Excluidos
+ Legajo Apellido, NombreImporteObservacionesFecha
+ 1001 Gómez, Ana1.234.567,89No percibe por banco20/09/2026
+ 1002 Pérez, Juan50.000,5021/09/2026
+ Página 1

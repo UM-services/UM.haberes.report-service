@@ -76,6 +76,9 @@ GET /api/haberes/report/ui/basicosPeriodo/xlsx/{anho}/{mes}
 GET /api/haberes/report/ui/cursosContratado/data/{anho}/{mes}
 GET /api/haberes/report/ui/cursosContratado/pdf/{anho}/{mes}
 GET /api/haberes/report/ui/cursosContratado/xlsx/{anho}/{mes}
+GET /api/haberes/report/ui/excluidos/data/{anho}/{mes}
+GET /api/haberes/report/ui/excluidos/pdf/{anho}/{mes}
+GET /api/haberes/report/ui/excluidos/xlsx/{anho}/{mes}
 GET /api/haberes/report/ui/historicoCargos/data/{categoriaId}
 GET /api/haberes/report/ui/historicoCargos/pdf/{categoriaId}
 GET /api/haberes/report/ui/bonoDependencia/data/{anho}/{mes}/{dependenciaId}/{salida}

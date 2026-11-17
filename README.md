@@ -72,10 +72,11 @@ reports/<reporte>/
 - Los slices no se importan entre sí y la aplicación no importa infraestructura. Lo verifica
   `HexagonalRulesTest` (`src/test/java/.../contract`).
 
-Los 24 reportes migrados son: `anotador`, `basicosperiodo`, `bono`, `cantidadcargos`,
+Los 25 reportes migrados son: `anotador`, `basicosperiodo`, `bono`, `cantidadcargos`,
 `cargosclase`, `cargosclaseperiodo`, `cargosperiodo`, `comparacioncodigos`,
 `comparacionremuneraciones`, `cursocargonovedad`, `cursodocente`, `cursoscontratado`,
-`designacionesdetalle`, `designacionesdocente`, `detallecodigo`, `docentessede`, `fusiondocente`,
+`designacionesdetalle`, `designacionesdocente`, `detallecodigo`, `docentessede`, `excluidos`,
+`fusiondocente`,
 `historicoasignacioncargos`, `librosueldos`, `liquidables`, `novedadesdocentes`, `sheet`,
 `totalescodigo` y `totalesgenerales`. El detalle de la migración y el mapa bug→corrección están en
 [`REFACTOR_HEXAGONAL_PLAN.md`](REFACTOR_HEXAGONAL_PLAN.md) y
@@ -110,6 +111,7 @@ renombra sin actualizarla, el build falla.
 | `totalesGenerales`, `totalesCodigo`, `comparacionCodigos`, `comparacionRemuneraciones` | ✓ | ✓ | ✓ | |
 | `detalleCodigo`, `docentesSede`, `designacionesDocente`, `cursoDocente`, `cursosContratado`, `fusionDocente`, `liquidables`, `cargosPeriodo`, `cursosPeriodo`, `basicosPeriodo`, `cantidadCargos`, `cargosClasePeriodo` | ✓ | ✓ | ✓ | |
 | `libroSueldos` | ✓ | ✓ (propio) | ✓ | `POST /lsd/{anho}/{mes}` → ZIP del Libro de Sueldos Digital (lo genera haberes-core) |
+| `excluidos` | ✓ | ✓ | ✓ | |
 | `bonoDependencia` | ✓ | ✓ (consolidado) | — | `sendBono/{legajoId}/{anho}/{mes}` (envío unitario del masivo); el PDF se genera en un job (`POST /pdf/...` + `GET /pdf/job/{jobId}` y `/file`) y la descarga directa sigue disponible |
 | `historicoCargos` | ✓ (sólo aviso) | ✓ (sólo encabezado) | — | El cuerpo nunca se implementó en el sistema previo |
 | `bono` (individual) | — | ✓ inline | — | `sendBono/{legajoId}/{anho}/{mes}` |
@@ -122,7 +124,7 @@ aporta) y `historicoCargos` no tiene cuerpo hasta que exista una spec de product
 | Grupo | Cantidad | Consumidor | Estado |
 |---|---|---|---|
 | Rutas legacy (`/api/haberes/report/<slice>/...`) | 24 | `bonos.vb6` (`Bonos.exe`) | Se mantienen intactas hasta dar de baja el cliente de escritorio |
-| Namespace `/ui/**` | 62 | `haberes-frontend` (`feature-consultas`, `feature-bonos`) | Detrás de la API key del gateway |
+| Namespace `/ui/**` | 65 | `haberes-frontend` (`feature-consultas`, `feature-bonos`) | Detrás de la API key del gateway |
 | Endpoints de lectura agregados en `haberes-core` para reportes (`persona/liquidado`, `novedadacumulado/codigo`, `legajocursoCantidad/periodo`, `cargoliquidacion/periodo` y `/todos`, `cargoclasedetalle/periodo`, `liquidacion-adicional/periodo`, `bono/dependencia/.../print-prepare` y `bono/dependencia/.../lote`) | 9 | Sólo este servicio (Feign) | Internos: no se exponen al navegador |
 | `cursocargocontratado/periodo/{anho}/{mes}` (tesoreria-core) | 1 | Sólo este servicio (Feign) | Interno |
 
