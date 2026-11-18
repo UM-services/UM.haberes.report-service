@@ -31,6 +31,7 @@ import um.haberes.report.shared.infrastructure.client.haberes.core.client.Depend
 import um.haberes.report.shared.infrastructure.client.haberes.core.client.DesignacionTipoClient;
 import um.haberes.report.shared.infrastructure.client.haberes.core.client.DesignacionToolClient;
 import um.haberes.report.shared.infrastructure.client.haberes.core.client.DocenteDesignacionClient;
+import um.haberes.report.shared.infrastructure.client.haberes.core.client.ExcluidoClient;
 import um.haberes.report.shared.infrastructure.client.haberes.core.client.FacultadClient;
 import um.haberes.report.shared.infrastructure.client.haberes.core.client.FormularioImprimirClient;
 import um.haberes.report.shared.infrastructure.client.haberes.core.client.GeograficaClient;
@@ -127,6 +128,8 @@ public abstract class AbstractReportIntegrationTest {
     protected DesignacionToolClient designacionToolClient;
     @MockitoBean
     protected DocenteDesignacionClient docenteDesignacionClient;
+    @MockitoBean
+    protected ExcluidoClient excluidoClient;
     @MockitoBean
     protected FacultadClient facultadClient;
     @MockitoBean

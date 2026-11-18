@@ -121,13 +121,6 @@ public class FeignBonoDataAdapter implements BonoDataPort {
         } catch (Exception e) {
             log.debug("Sin letra previa para el legajo {}: {}", legajoId, e.getMessage());
         }
-        BigDecimal porcentajeEtec = BigDecimal.ZERO;
-        try {
-            porcentajeEtec = liquidacionEtecClient.calcularPorcentajeAntiguedad(legajoId, anho, mes,
-                    15, 1);
-        } catch (Exception e) {
-            log.debug("Sin porcentaje ETEC para el legajo {}: {}", legajoId, e.getMessage());
-        }
         ContactoDto contacto = null;
         try {
             contacto = contactoClient.findByLegajoId(legajoId);
@@ -152,8 +145,7 @@ public class FeignBonoDataAdapter implements BonoDataPort {
                         control == null ? null : control.getFechaHasta(),
                         control == null ? null : control.getFechaPago(),
                         control == null ? null : control.getFechaDeposito(),
-                        control == null ? null : control.getAporteJubilatorio(),
-                        control == null ? null : control.getHoraReferenciaEtec()),
+                        control == null ? null : control.getAporteJubilatorio()),
                 antiguedad == null ? null : new BonoFuente.Antiguedad(
                         antiguedad.getMesesDocentes(), antiguedad.getMesesAdministrativos()),
                 indices,
@@ -180,7 +172,6 @@ public class FeignBonoDataAdapter implements BonoDataPort {
                 grupos(codigoGrupoClient.findAllByDeduccion((byte) 1)),
                 letra == null ? null : new BonoFuente.Letra(letra.getLetraId(), letra.getNeto(),
                         letra.getCadena()),
-                porcentajeEtec,
                 contacto == null ? null : new BonoFuente.Contacto(
                         contacto.getMailInstitucional()),
                 legajoControl == null ? null : legajoControl.getLegajoControlId(),
@@ -313,8 +304,6 @@ public class FeignBonoDataAdapter implements BonoDataPort {
                 noRemunerativos,
                 deducciones,
                 null,
-                legajo.porcentajeAntiguedadEtec() == null ? BigDecimal.ZERO
-                        : legajo.porcentajeAntiguedadEtec(),
                 legajo.mailInstitucional() == null ? null
                         : new BonoFuente.Contacto(legajo.mailInstitucional()),
                 legajo.legajoControlId(),
@@ -327,8 +316,7 @@ public class FeignBonoDataAdapter implements BonoDataPort {
             return null;
         }
         return new BonoFuente.Control(control.fechaDesde(), control.fechaHasta(),
-                control.fechaPago(), control.fechaDeposito(), control.aporteJubilatorio(),
-                control.horaReferenciaEtec());
+                control.fechaPago(), control.fechaDeposito(), control.aporteJubilatorio());
     }
 
     private BonoFuente.Persona persona(BonoLoteDto.Persona persona, Map<Integer, String> acronimos) {
@@ -338,7 +326,7 @@ public class FeignBonoDataAdapter implements BonoDataPort {
         return new BonoFuente.Persona(persona.legajoId(), persona.apellido(), persona.nombre(),
                 persona.documento(), persona.cuil(),
                 persona.dependenciaId() == null ? null : acronimos.get(persona.dependenciaId()),
-                persona.altaAdministrativa(), persona.directivoEtec());
+                persona.altaAdministrativa());
     }
 
     private BonoFuente.Antiguedad antiguedad(BonoLoteDto.Antiguedad antiguedad) {
@@ -413,7 +401,7 @@ public class FeignBonoDataAdapter implements BonoDataPort {
                 persona.getNombre(),
                 persona.getDocumento() == null ? null : persona.getDocumento().toString(),
                 persona.getCuil(), dependencias.get(persona.getDependenciaId()),
-                persona.getAltaAdministrativa(), persona.getDirectivoEtec());
+                persona.getAltaAdministrativa());
     }
 
     private BonoFuente.CursoCargo curso(CursoCargoDto dto) {

@@ -13,7 +13,7 @@ public record BonoFuente(Persona persona, Control control, Antiguedad antiguedad
                          List<Dependencia> dependencias, Codigo codigo981,
                          List<Grupo> remunerativos, List<Grupo> noRemunerativos,
                          List<Grupo> deducciones, Letra letra,
-                         BigDecimal porcentajeAntiguedadEtec, Contacto contacto,
+                         Contacto contacto,
                          Long legajoControlId, boolean bonoEnviado, String facultadNombre) {
 
     public BonoFuente {
@@ -32,13 +32,12 @@ public record BonoFuente(Persona persona, Control control, Antiguedad antiguedad
     }
 
     public record Persona(Long legajoId, String apellido, String nombre, String documento,
-                          String cuil, String dependenciaAcronimo, OffsetDateTime altaAdministrativa,
-                          byte directivoEtec) {
+                          String cuil, String dependenciaAcronimo, OffsetDateTime altaAdministrativa) {
     }
 
     public record Control(OffsetDateTime fechaDesde, OffsetDateTime fechaHasta,
                           OffsetDateTime fechaPago, OffsetDateTime fechaDeposito,
-                          String aporteJubilatorio, BigDecimal horaReferenciaEtec) {
+                          String aporteJubilatorio) {
     }
 
     public record Antiguedad(int mesesDocentes, int mesesAdministrativos) {

@@ -35,6 +35,7 @@ class UiFormatMatrixTest {
             Map.entry("detalleCodigo", Set.of("data", "pdf", "xlsx")),
             Map.entry("libroSueldos", Set.of("data", "pdf", "xlsx", "lsd")),
             Map.entry("docentesSede", Set.of("data", "pdf", "xlsx")),
+            Map.entry("excluidos", Set.of("data", "pdf", "xlsx")),
             Map.entry("designacionesDocente", Set.of("data", "pdf", "xlsx")),
             Map.entry("cursoDocente", Set.of("data", "pdf", "xlsx")),
             Map.entry("cursosContratado", Set.of("data", "pdf", "xlsx")),
