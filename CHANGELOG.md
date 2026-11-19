@@ -5,6 +5,56 @@ Todos los cambios notables en este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.10.0] - 2026-11-17
+
+### Added
+- Nuevo slice `reports/excluidos` con el listado de legajos excluidos de la acreditación del período
+  (legacy `rptExcluidos`): `GET /api/haberes/report/ui/excluidos/data|pdf|xlsx/{anho}/{mes}`.
+  Ordena por legajo, agrega el apellido y nombre de la persona y el importe del código 99 con
+  formato es-AR, e incluye observaciones y fecha de alta. El PDF es provisorio porque el diseño del
+  `.rpt` original no está en el repositorio. Se agrega `ExcluidoClient` (Feign) y sus DTO/mapper.
+- `EndpointContractManifestTest`, `EndpointCoverageTest` y `UiFormatMatrixTest` incorporan los
+  endpoints de excluidos; `ExcluidosUiTest` cubre data, período vacío, PDF y XLSX con goldens
+  nuevos (`golden/excluidos/**`).
+
+### Changed
+- El recibo de bono deja de desglosar el concepto 29 (DOCENTE ETEC) en cuatro líneas calculadas
+  con `hora_referencia_etec`: ahora imprime la línea real del concepto con su importe y el
+  «Básico» muestra sólo el ítem 1. El total del recibo no cambia. Se elimina
+  `horaReferenciaEtec` de `ControlDto`, `BonoLoteDto.Control` y `BonoFuente.Control`, y
+  `directivoEtec` de `BonoLoteDto.Persona`/`BonoFuente.Persona`; también se quita
+  `porcentajeAntiguedadEtec` del legajo y la llamada a
+  `liquidacionEtecClient.calcularPorcentajeAntiguedad`.
+### Fixed
+- `BonosDependenciaUiTest` y el fixture `fixtures/bono/normal.json` se ajustan al contrato sin
+  `horaReferenciaEtec`; suite completa en 236 tests verdes.
+
+## [0.9.1] - 2026-11-12
+
+### Added
+- `ControlDto` incorpora el campo `valorPuntoEtec` con valor por defecto `BigDecimal.ZERO`, para
+  reflejar el atributo homónimo que expone el control de haberes-core
+  (`shared/infrastructure/client/haberes/core/dto/ControlDto.java`). Ningún reporte consume
+  todavía el valor, por lo que no cambia el comportamiento de los PDF/XLSX generados.
+
+## [0.9.0] - 2026-11-08
+
+### Added
+- **Bonos por Dependencia con generación asincrónica.** El PDF consolidado ya no se arma dentro
+  de la request: `POST /ui/bonoDependencia/pdf/{anho}/{mes}/{dependenciaId}/{salida}` encola el
+  trabajo y devuelve un `jobId`; `GET /ui/bonoDependencia/pdf/job/{jobId}` informa estado y
+  avance (`procesados`/`total`, fallidos por legajo) y `GET /ui/bonoDependencia/pdf/job/{jobId}/file`
+  entrega el PDF terminado. La descarga directa por `GET /ui/bonoDependencia/pdf/...` se mantiene
+  para los consumidores existentes. Los temporales de cada job se borran al terminar, los jobs
+  vencen a los 30 minutos y dos corridas simultáneas no comparten archivos
+  (`reports/bono/infrastructure/job/**`, `GenerateBonosDependenciaLoteUseCaseImpl`).
+
+### Changed
+- El lote se lee del core con una sola llamada (`POST /bono/dependencia/.../lote`), que devuelve
+  los catálogos una vez y trae todos los legajos juntos: para Ingeniería Sede Mendoza (230
+  legajos) la lectura pasa de minutos a ~15 s y el PDF completo a ~30 s, con tolerancia a legajos
+  fallidos en lugar de abortar todo el lote.
+
 ## [0.8.1] - 2026-10-29
 
 ### Fixed

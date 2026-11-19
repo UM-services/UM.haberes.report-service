@@ -25,6 +25,16 @@ sequenceDiagram
     UC-->>-Web: ReportFile
     Web-->>-Client: JSON / attachment / inline
 
+    opt Generación asíncrona de PDF (bonoDependencia)
+        Client->>Web: POST /ui/bonoDependencia/pdf/...
+        Web->>UC: iniciar job en segundo plano
+        Web-->>Client: 202 + jobId
+        Client->>Web: GET /pdf/job/{jobId}
+        Web-->>Client: estado, procesados/total y legajos fallidos
+        Client->>Web: GET /pdf/job/{jobId}/file
+        Web-->>Client: PDF consolidado terminado
+    end
+
     opt Envío por email
         Client->>Web: sendBono
         Web->>UC: SendBonoUseCase

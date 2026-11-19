@@ -7,8 +7,7 @@
     "fechaHasta": "2026-09-30T00:00:00Z",
     "fechaPago": "2026-10-05T00:00:00Z",
     "fechaDeposito": "2026-10-06T00:00:00Z",
-    "aporteJubilatorio": "11%",
-    "horaReferenciaEtec": 12500.00
+    "aporteJubilatorio": "11%"
   },
   "dependencias": [
     { "dependenciaId": 4, "nombre": "Facultad de Ingeniería", "acronimo": "FI" },

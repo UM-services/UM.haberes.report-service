@@ -1,6 +1,7 @@
 package um.haberes.report.reports.bono.domain.ports.out;
 
 import um.haberes.report.reports.bono.domain.model.BonoFuente;
+import um.haberes.report.reports.bono.domain.model.BonoDependenciaItem;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -27,4 +28,11 @@ public interface BonoDataPort {
 
     List<BonoFuente.Liquidacion> liquidacionesDependencia(Integer dependenciaId, Integer anho,
                                                           Integer mes, String salida);
+
+    /**
+     * Lote completo de la dependencia en una sola lectura al core (catálogos compartidos
+     * incluidos), en el mismo orden en que salen las liquidaciones.
+     */
+    List<BonoDependenciaItem> cargarDependencia(Integer anho, Integer mes, Integer dependenciaId,
+                                                String salida);
 }

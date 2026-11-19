@@ -26,7 +26,6 @@ public class BonoContentAssembler {
     private static final DecimalFormat MONTO = new DecimalFormat("#,##0.00");
     private static final DecimalFormat HORAS = new DecimalFormat("#0");
     private static final DateTimeFormatter FECHA = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    private static final Integer CODIGO_ETEC = 29;
 
     public record Calculado(BonoContent content, BigDecimal neto, String cadena) {
     }
@@ -39,28 +38,6 @@ public class BonoContentAssembler {
                 fuente.antiguedad().mesesAdministrativos());
         Map<Integer, BigDecimal> items = items(fuente.items());
         BigDecimal item1 = items.getOrDefault(1, BigDecimal.ZERO);
-        BigDecimal porcentajeEtec = fuente.porcentajeAntiguedadEtec() == null
-                ? BigDecimal.ZERO : fuente.porcentajeAntiguedadEtec();
-
-        BigDecimal horasEtec = BigDecimal.ZERO;
-        BigDecimal basicoEtec = BigDecimal.ZERO;
-        BigDecimal antiguedadEtec = BigDecimal.ZERO;
-        BigDecimal presentismoEtec = BigDecimal.ZERO;
-        BigDecimal adicionalEtec = BigDecimal.ZERO;
-        if (items.containsKey(CODIGO_ETEC) && persona.directivoEtec() == 0) {
-            for (BonoFuente.CursoCargo curso : fuente.cursosEtec()) {
-                horasEtec = horasEtec.add(seguro(curso.horasSemanales()));
-            }
-            basicoEtec = horasEtec.multiply(seguro(control.horaReferenciaEtec()))
-                    .setScale(2, RoundingMode.HALF_UP);
-            BigDecimal indice = fuente.indices().isEmpty()
-                    ? BigDecimal.ZERO : fuente.indices().getFirst();
-            antiguedadEtec = basicoEtec.multiply(seguro(indice)).setScale(2, RoundingMode.HALF_UP);
-            presentismoEtec = basicoEtec.multiply(porcentajeEtec).setScale(2, RoundingMode.HALF_UP);
-            adicionalEtec = seguro(items.get(CODIGO_ETEC)).subtract(basicoEtec)
-                    .subtract(antiguedadEtec).subtract(presentismoEtec)
-                    .setScale(2, RoundingMode.HALF_UP);
-        }
 
         List<BonoContent.Curso> cursos = fuente.cursos().stream()
                 .map(curso -> new BonoContent.Curso(text(curso.cargo()), text(curso.curso()),
@@ -78,20 +55,17 @@ public class BonoContentAssembler {
         BigDecimal[] totalNoRemunerativo = {BigDecimal.ZERO};
         BigDecimal[] totalDeduccion = {BigDecimal.ZERO};
         List<BonoContent.Concepto> remunerativos = conceptos(fuente.remunerativos(), items,
-                persona, basicoEtec, antiguedadEtec, presentismoEtec, adicionalEtec,
                 totalRemunerativo);
         List<BonoContent.Concepto> noRemunerativos = conceptos(fuente.noRemunerativos(), items,
-                persona, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO,
                 totalNoRemunerativo);
-        List<BonoContent.Concepto> deducciones = conceptos(fuente.deducciones(), items, persona,
-                BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, totalDeduccion);
+        List<BonoContent.Concepto> deducciones = conceptos(fuente.deducciones(), items, totalDeduccion);
 
         BigDecimal neto = seguro(items.get(99));
         String cadena = NumerosEnLetras.convertir(neto);
         BonoContent content = new BonoContent(anho, mes, persona.legajoId(),
                 persona.apellido() + ", " + persona.nombre(), text(persona.documento()),
                 text(persona.cuil()), text(persona.dependenciaAcronimo()),
-                MONTO.format(item1.add(basicoEtec).setScale(2, RoundingMode.HALF_UP)),
+                MONTO.format(item1.setScale(2, RoundingMode.HALF_UP)),
                 persona.altaAdministrativa() == null ? "" : FECHA.format(
                         persona.altaAdministrativa().withOffsetSameInstant(ZoneOffset.UTC)),
                 meses / 12 + "." + meses % 12, text(fuente.banco() == null ? null : fuente.banco().cbu()),
@@ -180,24 +154,14 @@ public class BonoContentAssembler {
 
     private List<BonoContent.Concepto> conceptos(List<BonoFuente.Grupo> grupos,
                                                  Map<Integer, BigDecimal> items,
-                                                 BonoFuente.Persona persona,
-                                                 BigDecimal basicoEtec, BigDecimal antiguedadEtec,
-                                                 BigDecimal presentismoEtec, BigDecimal adicionalEtec,
                                                  BigDecimal[] total) {
         List<BonoContent.Concepto> conceptos = new ArrayList<>();
         for (BonoFuente.Grupo grupo : grupos) {
             if (grupo == null || grupo.codigoId() == null || !items.containsKey(grupo.codigoId())) {
                 continue;
             }
-            if (CODIGO_ETEC.equals(grupo.codigoId()) && persona.directivoEtec() == 0) {
-                conceptos.add(concepto(grupo.codigoId(), "BASICO ETEC", basicoEtec, total));
-                conceptos.add(concepto(grupo.codigoId(), "ANTIGUEDAD ETEC", antiguedadEtec, total));
-                conceptos.add(concepto(grupo.codigoId(), "PRESENTISMO ETEC", presentismoEtec, total));
-                conceptos.add(concepto(grupo.codigoId(), "ADICIONAL ETEC", adicionalEtec, total));
-            } else {
-                conceptos.add(concepto(grupo.codigoId(), text(grupo.nombre()),
-                        items.get(grupo.codigoId()), total));
-            }
+            conceptos.add(concepto(grupo.codigoId(), text(grupo.nombre()),
+                    items.get(grupo.codigoId()), total));
         }
         return conceptos;
     }
