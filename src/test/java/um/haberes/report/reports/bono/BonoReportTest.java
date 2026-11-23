@@ -130,6 +130,20 @@ class BonoReportTest extends AbstractReportIntegrationTest {
                 .isEqualTo("un millon seiscientos cincuenta mil con 00/100");
     }
 
+    /** Sólo los cursos ETEC (facultad 15) muestran horas; el caso mezclado conserva la columna. */
+    @Test
+    void generaPdfConHorasSoloEnLosCursosEtec() throws Exception {
+        JsonNode fixture = Fixtures.node("bono", "etec");
+        stubs.stubComun(fixture);
+        stubs.stubLegajo(fixture, LEGAJO);
+
+        MvcResult result = mockMvc.perform(get(BASE_UI + "/generatePdf/120/2026/9")
+                .header(HEADER, API_KEY)).andReturn();
+
+        byte[] pdf = ReportHttp.assertInlinePdf(result, "Gómez.Ana.120.2026.9.pdf");
+        GoldenFiles.assertPdf("bono", "ui-generatePdf-etec", pdf);
+    }
+
     @Test
     void generaDetalleDeCargos() throws Exception {
         JsonNode fixture = Fixtures.node("bono", "normal");
