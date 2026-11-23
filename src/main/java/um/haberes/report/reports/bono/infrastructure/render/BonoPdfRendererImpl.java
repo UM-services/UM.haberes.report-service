@@ -123,13 +123,22 @@ public class BonoPdfRendererImpl implements BonoPdfRenderer {
         if (cursos.isEmpty()) {
             return;
         }
-        PdfPTable table = new PdfPTable(new float[]{4, 24, 1.5f, 1.5f, 1.5f, 1.5f, 1.5f});
+        boolean conHoras = cursos.stream().anyMatch(curso -> !curso.horas().isBlank());
+        PdfPTable table = new PdfPTable(conHoras
+                ? new float[]{4, 24, 1.5f, 1.5f, 1.5f, 1.5f, 1.5f}
+                : new float[]{4, 24, 1.5f, 1.5f, 1.5f, 1.5f});
         table.setWidthPercentage(90);
         table.setHorizontalAlignment(Element.ALIGN_CENTER);
-        header(table, "Cargo", Element.ALIGN_RIGHT, "Curso", Element.ALIGN_LEFT,
-                "Ds", Element.ALIGN_CENTER, "An", Element.ALIGN_CENTER,
-                "S1", Element.ALIGN_CENTER, "S2", Element.ALIGN_CENTER,
-                "Hr", Element.ALIGN_CENTER);
+        if (conHoras) {
+            header(table, "Cargo", Element.ALIGN_RIGHT, "Curso", Element.ALIGN_LEFT,
+                    "Ds", Element.ALIGN_CENTER, "An", Element.ALIGN_CENTER,
+                    "S1", Element.ALIGN_CENTER, "S2", Element.ALIGN_CENTER,
+                    "Hr", Element.ALIGN_CENTER);
+        } else {
+            header(table, "Cargo", Element.ALIGN_RIGHT, "Curso", Element.ALIGN_LEFT,
+                    "Ds", Element.ALIGN_CENTER, "An", Element.ALIGN_CENTER,
+                    "S1", Element.ALIGN_CENTER, "S2", Element.ALIGN_CENTER);
+        }
         for (BonoContent.Curso curso : cursos) {
             row(table, curso.cargo(), Element.ALIGN_RIGHT, true);
             row(table, curso.curso(), Element.ALIGN_LEFT, false);
@@ -137,7 +146,9 @@ public class BonoPdfRendererImpl implements BonoPdfRenderer {
             row(table, curso.anual(), Element.ALIGN_CENTER, true);
             row(table, curso.semestre1(), Element.ALIGN_CENTER, true);
             row(table, curso.semestre2(), Element.ALIGN_CENTER, true);
-            row(table, curso.horas(), Element.ALIGN_CENTER, true);
+            if (conHoras) {
+                row(table, curso.horas(), Element.ALIGN_CENTER, true);
+            }
         }
         document.add(table);
     }

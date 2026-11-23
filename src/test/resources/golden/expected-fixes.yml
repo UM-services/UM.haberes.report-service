@@ -155,3 +155,26 @@
   scenario: detalleCargos
   reason: >-
     La cabecera "Dep Cargo Básico" se agrega una sola vez (C12) en el detalle.
+- id: BONO-HORAS-ETEC-generatePdf
+  report: bono
+  scenario: generatePdf
+  reason: >-
+    La tabla de cursos deja de imprimir las horas semanales de los cursos que no son de
+    la facultad 15 (Escuela Técnica): el fixture trae un curso de facultad 2, así que
+    desaparecen la columna "Hr" y su valor. Pedido del usuario (2026-11-23).
+- id: BONO-HORAS-ETEC-ui-generatePdf
+  report: bono
+  scenario: ui-generatePdf
+  reason: >-
+    Mismo cambio que generatePdf: sin cursos de facultad 15 no se imprime la columna "Hr".
+- id: BONO-HORAS-ETEC-letra-nueva
+  report: bono
+  scenario: generatePdf-letra-nueva
+  reason: >-
+    Mismo cambio que generatePdf: sin cursos de facultad 15 no se imprime la columna "Hr".
+- id: BONO-HORAS-ETEC-dependencia
+  report: bono
+  scenario: dependencia
+  reason: >-
+    Mismo cambio que generatePdf en cada recibo del lote por dependencia: los cursos de
+    facultad distinta de 15 no muestran horas.
