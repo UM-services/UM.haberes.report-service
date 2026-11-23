@@ -49,8 +49,9 @@ public record BonoFuente(Persona persona, Control control, Antiguedad antiguedad
     public record Item(Integer codigoId, BigDecimal importe) {
     }
 
-    public record CursoCargo(String cargo, String curso, byte desarraigo, byte anual,
-                             byte semestre1, byte semestre2, BigDecimal horasSemanales) {
+    public record CursoCargo(String cargo, String curso, Integer facultadId, byte desarraigo,
+                             byte anual, byte semestre1, byte semestre2,
+                             BigDecimal horasSemanales) {
     }
 
     public record CargoLiquidado(String dependencia, String categoria, BigDecimal basico,

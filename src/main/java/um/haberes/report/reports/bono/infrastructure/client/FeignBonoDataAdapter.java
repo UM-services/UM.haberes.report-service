@@ -341,8 +341,8 @@ public class FeignBonoDataAdapter implements BonoDataPort {
         return safe(cursos).stream()
                 .filter(Objects::nonNull)
                 .map(curso -> new BonoFuente.CursoCargo(curso.cargo(), curso.curso(),
-                        curso.desarraigo(), curso.anual(), curso.semestre1(), curso.semestre2(),
-                        curso.horasSemanales()))
+                        curso.facultadId(), curso.desarraigo(), curso.anual(), curso.semestre1(),
+                        curso.semestre2(), curso.horasSemanales()))
                 .toList();
     }
 
@@ -408,6 +408,7 @@ public class FeignBonoDataAdapter implements BonoDataPort {
         return new BonoFuente.CursoCargo(
                 dto.getCargoTipo() == null ? null : dto.getCargoTipo().getNombre(),
                 dto.getCurso() == null ? null : dto.getCurso().getNombre(),
+                dto.getCurso() == null ? null : dto.getCurso().getFacultadId(),
                 dto.getDesarraigo(), dto.getCurso() == null ? 0 : dto.getCurso().getAnual(),
                 dto.getCurso() == null ? 0 : dto.getCurso().getSemestre1(),
                 dto.getCurso() == null ? 0 : dto.getCurso().getSemestre2(),
