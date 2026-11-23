@@ -5,6 +5,26 @@ Todos los cambios notables en este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.10.1] - 2026-11-23
+
+### Changed
+- La tabla de cursos del recibo de bono imprime la columna «Hr» y las horas semanales sólo en
+  los cursos de la Escuela Técnica (facultad 15). Si ninguno de los cursos del recibo es ETEC,
+  la tabla se arma con seis columnas y sin «Hr». El detalle de cargos (`DetalleCargosContent`)
+  mantiene las horas de todas las facultades. `BonoFuente.CursoCargo` y `BonoLoteDto.CursoCargo`
+  incorporan `facultadId`, que `FeignBonoDataAdapter` toma del curso del core.
+
+### Added
+- `BonoContentAssemblerTest` cubre la regla de facultad 15, el caso de otra facultad, el curso
+  sin `facultadId` y el detalle de cargos. Se agrega el fixture `fixtures/bono/etec.json` con un
+  recibo que mezcla un curso ETEC y uno de otra facultad, junto con su golden
+  `golden/bono/ui-generatePdf-etec.txt`.
+
+### Fixed
+- Los goldens `generatePdf`, `generatePdf-letra-nueva`, `ui-generatePdf` y `dependencia` de bono
+  dejan de mostrar la columna «Hr» para cursos de facultades distintas de 15; las diferencias
+  aprobadas se documentan en `src/test/resources/golden/expected-fixes.yml`.
+
 ## [0.10.0] - 2026-11-17
 
 ### Added

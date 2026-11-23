@@ -27,6 +27,9 @@ public class BonoContentAssembler {
     private static final DecimalFormat HORAS = new DecimalFormat("#0");
     private static final DateTimeFormatter FECHA = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
+    /** Escuela Técnica (facultad 15): sus horas semanales de curso son un dato de liquidación. */
+    private static final Integer FACULTAD_ETEC = 15;
+
     public record Calculado(BonoContent content, BigDecimal neto, String cadena) {
     }
 
@@ -40,9 +43,7 @@ public class BonoContentAssembler {
         BigDecimal item1 = items.getOrDefault(1, BigDecimal.ZERO);
 
         List<BonoContent.Curso> cursos = fuente.cursos().stream()
-                .map(curso -> new BonoContent.Curso(text(curso.cargo()), text(curso.curso()),
-                        marca(curso.desarraigo()), marca(curso.anual()), marca(curso.semestre1()),
-                        marca(curso.semestre2()), HORAS.format(seguro(curso.horasSemanales()))))
+                .map(cursoFuente -> curso(cursoFuente, true))
                 .toList();
         List<BonoContent.Cargo> docentes = cargos(fuente.docentes(), false);
         List<BonoContent.Cargo> noDocentes = cargos(fuente.noDocentes(), true);
@@ -96,15 +97,28 @@ public class BonoContentAssembler {
         int meses = Math.max(fuente.antiguedad().mesesDocentes(),
                 fuente.antiguedad().mesesAdministrativos());
         List<BonoContent.Curso> cursos = fuente.cursos().stream()
-                .map(curso -> new BonoContent.Curso(text(curso.cargo()), text(curso.curso()),
-                        marca(curso.desarraigo()), marca(curso.anual()), marca(curso.semestre1()),
-                        marca(curso.semestre2()), HORAS.format(seguro(curso.horasSemanales()))))
+                .map(cursoFuente -> curso(cursoFuente, false))
                 .toList();
         return new DetalleCargosContent(legajoId,
                 fuente.persona().apellido() + ", " + fuente.persona().nombre(),
                 meses / 12 + "." + meses % 12, text(fuente.facultadNombre()), cursos,
                 cargos(fuente.docentes(), false), cargos(fuente.noDocentes(), true),
                 fuente.clases().stream().map(this::clase).toList());
+    }
+
+    /**
+     * Cursos de la tabla del recibo y del detalle de cargos.
+     *
+     * <p>En el recibo ({@code horasSoloEtec}) las horas semanales sólo se muestran en los cursos
+     * de la Escuela Técnica (facultad 15): en el resto el dato no aplica a la liquidación. El
+     * detalle de cargos conserva el comportamiento histórico y muestra las horas siempre.
+     */
+    private BonoContent.Curso curso(BonoFuente.CursoCargo curso, boolean horasSoloEtec) {
+        boolean conHoras = !horasSoloEtec || FACULTAD_ETEC.equals(curso.facultadId());
+        return new BonoContent.Curso(text(curso.cargo()), text(curso.curso()),
+                marca(curso.desarraigo()), marca(curso.anual()), marca(curso.semestre1()),
+                marca(curso.semestre2()),
+                conHoras ? HORAS.format(seguro(curso.horasSemanales())) : "");
     }
 
     private BonoContent.Cargo clase(BonoFuente.Clase clase) {
