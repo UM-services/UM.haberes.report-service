@@ -21,7 +21,6 @@ public class PersonaMapper {
                 .dependenciaId(dto.getDependenciaId())
                 .dependenciaNombre(dto.getDependencia() == null
                         ? null : dto.getDependencia().getNombre())
-                .directivoEtec(dto.getDirectivoEtec())
                 .altaAdministrativa(dto.getAltaAdministrativa())
                 .build();
     }

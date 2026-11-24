@@ -5,6 +5,19 @@ Todos los cambios notables en este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.10.2] - 2026-11-24
+
+### Fixed
+- La impresión del bono individual y por dependencia vuelve a generar el PDF: `PersonaDto` ya
+  no declara `directivoEtec`, atributo que haberes-core no envía en
+  `/antiguedad/unique`. Con Jackson 3 (Spring Boot 4.1) un primitivo faltante abortaba la
+  deserialización (`Cannot map null into type byte`) y el endpoint respondía `502`. Se elimina
+  también de `PersonaResumen`, `PersonaMapper`, los fixtures de bono y el plan de refactor.
+  Nuevo `PersonaDtoTest` fija la deserialización del payload real de core (sin
+  `directivoEtec`, con `created`/`updated` y `apellidoNombre`) usando el mapper por defecto de
+  Jackson 3 (basado en `PersonaDto.java`, `PersonaResumen.java`, `PersonaMapper.java`,
+  `fixtures/bono/*.json` y `PersonaDtoTest.java`).
+
 ## [0.10.1] - 2026-11-23
 
 ### Changed
