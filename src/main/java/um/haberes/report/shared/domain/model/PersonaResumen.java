@@ -25,7 +25,6 @@ public class PersonaResumen {
     private Integer estado;
     private Integer dependenciaId;
     private String dependenciaNombre;
-    private byte directivoEtec;
     private OffsetDateTime altaAdministrativa;
 
     public String apellidoNombre() {

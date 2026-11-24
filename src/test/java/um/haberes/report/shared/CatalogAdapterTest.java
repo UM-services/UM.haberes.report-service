@@ -99,7 +99,6 @@ class CatalogAdapterTest {
         dto.setNombre("Ana");
         dto.setCuil("27-30111222-4");
         dto.setDependenciaId(4);
-        dto.setDirectivoEtec((byte) 1);
         dto.setAltaAdministrativa(OffsetDateTime.parse("2015-03-01T00:00:00Z"));
 
         PersonaResumen persona = new PersonaMapper().toDomain(dto);
@@ -109,7 +108,6 @@ class CatalogAdapterTest {
         assertThat(persona.apellidoNombre()).isEqualTo("Gómez, Ana");
         assertThat(persona.getCuil()).isEqualTo("27-30111222-4");
         assertThat(persona.getDependenciaId()).isEqualTo(4);
-        assertThat(persona.getDirectivoEtec()).isEqualTo((byte) 1);
         assertThat(persona.getAltaAdministrativa()).isEqualTo(OffsetDateTime.parse("2015-03-01T00:00:00Z"));
         assertThat(new PersonaMapper().toDomain(null)).isNull();
     }

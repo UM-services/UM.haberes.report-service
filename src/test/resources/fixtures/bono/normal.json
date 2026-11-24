@@ -24,8 +24,7 @@
       "nombre": "Ana",
       "cuil": "27-30111222-4",
       "altaAdministrativa": "2015-03-01T00:00:00Z",
-      "dependenciaId": 4,
-      "directivoEtec": 0
+      "dependenciaId": 4
     },
     "121": {
       "legajoId": 121,
@@ -34,8 +33,7 @@
       "nombre": "Juan",
       "cuil": "20-27888999-6",
       "altaAdministrativa": "2012-08-15T00:00:00Z",
-      "dependenciaId": 4,
-      "directivoEtec": 0
+      "dependenciaId": 4
     }
   },
   "antiguedades": {
