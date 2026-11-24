@@ -66,8 +66,6 @@ public class PersonaDto {
 
     private Integer modeloContratacionAfip;
 
-    private byte directivoEtec = 0;
-
     private DependenciaDto dependencia;
 
     private AfipSituacionDto afipSituacion;

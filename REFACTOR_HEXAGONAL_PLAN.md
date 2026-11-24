@@ -229,8 +229,7 @@ um.haberes.report
 
 Sólo lo que usan **2 o más** slices, con los campos que esos slices necesitan:
 
-`PersonaResumen` (legajoId, documento, apellido, nombre, cuil, dependenciaId, altaAdministrativa,
-directivoEtec), `FacultadResumen` (facultadId, nombre), `GeograficaResumen` (geograficaId, nombre),
+`PersonaResumen` (legajoId, documento, apellido, nombre, cuil, dependenciaId, altaAdministrativa), `FacultadResumen` (facultadId, nombre), `GeograficaResumen` (geograficaId, nombre),
 `DependenciaResumen` (dependenciaId, nombre, acronimo), `CategoriaResumen` (categoriaId, nombre,
 basico), `CargoTipoResumen` (cargoTipoId, nombre), `ClaseResumen` (claseId, nombre, valorHora),
 `CodigoResumen` (codigoId, nombre), `CursoResumen` (cursoId, nombre, facultadId, geograficaId,
