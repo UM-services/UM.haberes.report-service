@@ -181,6 +181,14 @@ management:
       show-details: never
 ```
 
+### Token de servicio hacia haberes-core
+
+Si `haberes-core` corre con `app.seguridad.token-required=true`, definir la variable de entorno
+`HABERES_SERVICE_TOKEN` con el mismo valor que core declara en `HABERES_SERVICE_TOKENS` para este
+servicio (`report:<token>`). `FeignServiceTokenConfig` lo envía como `Authorization: Bearer` en
+cada llamada Feign que no traiga su propio header; si la variable está vacía, las requests salen
+sin cambios.
+
 ## Desarrollo
 
 ### Requisitos Previos
