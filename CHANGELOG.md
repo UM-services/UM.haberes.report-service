@@ -5,6 +5,16 @@ Todos los cambios notables en este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.10.3] - 2026-11-25
+
+### Fixed
+- Las llamadas Feign a haberes-core propagan el token de servicio: el nuevo
+  `FeignServiceTokenConfig` agrega `Authorization: Bearer <token>` a cada request que no traiga
+  su propio header, tomando el valor de `HABERES_SERVICE_TOKEN` (el mismo que core declara en
+  `HABERES_SERVICE_TOKENS` como `report:<token>`). Cubre el caso en que core corre con
+  `app.seguridad.token-required=true`. Si la variable no está definida, el interceptor no
+  modifica las requests y el comportamiento previo se mantiene.
+
 ## [0.10.2] - 2026-11-24
 
 ### Fixed
